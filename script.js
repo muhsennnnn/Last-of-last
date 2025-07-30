@@ -1,34 +1,42 @@
+function copyOrderToClipboard() {
+  const name = document.getElementById('customer-name').value.trim();
+  const phone = document.getElementById('customer-phone').value.trim();
+  const city = document.getElementById('customer-city').value.trim();
+  const location = document.getElementById('customer-location').value.trim();
 
-const cart = [];
-
-function addToCart(product, price) {
-  cart.push({ product, price });
-  alert(`${product} تمت إضافته إلى السلة.`);
-}
-
-document.getElementById("order-form").addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  const name = document.getElementById("customer-name").value.trim();
-  const phone = document.getElementById("customer-phone").value.trim();
-  const city = document.getElementById("customer-city").value.trim();
-  const location = document.getElementById("customer-location").value.trim();
-
-  if (!name || !phone || !city || !location || cart.length === 0) {
-    alert("يرجى ملء جميع الحقول وإضافة منتجات إلى السلة.");
+  if (!name || !phone || !city || !location) {
+    alert('يرجى ملء جميع الحقول قبل إرسال الطلب.');
+    return;
+  }
+  if (cart.length === 0) {
+    alert('السلة فارغة.');
     return;
   }
 
   let message = `🛒 طلب جديد من أعلاف السالم\n`;
   message += `👤 الاسم: ${name}\n📞 الهاتف: ${phone}\n🏙️ المحافظة/المدينة: ${city}\n📍 أقرب نقطة دالة: ${location}\n\n`;
   message += `📦 المنتجات المطلوبة:\n`;
-  cart.forEach((item, index) => {
-    message += `${index + 1}. ${item.product} - ${item.price}\n`;
+
+  let total = 0;
+  cart.forEach((item, i) => {
+    const lineTotal = item.price * item.qty;
+    total += lineTotal;
+    message += `${i+1}. ${item.name} — ${item.qty} × ${item.price} = ${lineTotal} دينار\n`;
   });
 
-  const encodedMsg = encodeURIComponent(message);
-  const phoneNumber = "9647704159475"; // ← ضع رقمك هنا
-  const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMsg}`;
+  message += `\n💰 الإجمالي: ${total.toLocaleString()} دينار`;
 
-  window.open(whatsappURL, "_blank");
-});
+  // نسخ النص إلى الحافظة
+  navigator.clipboard.writeText(message).then(() => {
+    document.getElementById("copy-message").style.display = "block";
+
+    // افتح رابط ماسنجر بعد النسخ
+    const facebookPageUsername = "a.laf.alsalm?"; // ← ← ← غيّر هذا إلى اسم صفحتك
+    const messengerURL = `https://m.me/${a.laf.alsalm?}`;
+    window.open(messengerURL, "_blank");
+
+    setTimeout(() => {
+      document.getElementById("copy-message").style.display = "none";
+    }, 4000);
+  });
+}
