@@ -1,112 +1,73 @@
-const products = [
-  { name: "حنطة", price: 600, image: "https://upload.wikimedia.org/wikipedia/commons/8/86/Wheat_grain.jpg" },
-  { name: "شعير", price: 900, image: "https://upload.wikimedia.org/wikipedia/commons/6/61/Barley_close-up.jpg" },
-  { name: "خلطة كوكتيل", price: 45000, image: "https://i.imgur.com/dJeUQmy.jpg" },
-  { name: "خلطة غندورة", price: 45000, image: "https://i.imgur.com/FgMZKgO.jpg" },
-  { name: "خلطة طيور الحب صيفية", price: 35000, image: "https://i.imgur.com/lkkVLM3.jpg" },
-  { name: "خلطة طيور الحب شتوية", price: 37000, image: "https://i.imgur.com/utl3NYB.jpg" },
-  { name: "بروتين دجاج و افراخ", price: 800, image: "https://i.imgur.com/JuT7kgL.jpg" }
-];
-
-const productList = document.getElementById("product-list");
-const cartItems = document.getElementById("cart-items");
-const cartTotal = document.getElementById("cart-total");
-let cart = [];
-
-products.forEach((product, i) => {
-  const card = document.createElement("div");
-  card.className = "product-card";
-  card.innerHTML = `
-    <img src="${product.image}" alt="${product.name}">
-    <h3>${product.name}</h3>
-    <p>${product.price} دينار</p>
-    <input type="number" id="qty-${i}" value="1" min="1">
-    <button onclick="addToCart(${i})">أضف إلى السلة</button>
-  `;
-  productList.appendChild(card);
-});
-
-function addToCart(index) {
-  const qty = parseInt(document.getElementById(`qty-${index}`).value);
-  const product = products[index];
-  const existing = cart.find(p => p.name === product.name);
-  if (existing) {
-    existing.qty += qty;
-  } else {
-    cart.push({ ...product, qty });
-  }
-  renderCart();
+body {
+  font-family: 'Arial', sans-serif;
+  background: #f5f5f5;
+  margin: 0;
+  padding: 0;
 }
 
-function renderCart() {
-  cartItems.innerHTML = "";
-  let total = 0;
-  cart.forEach(item => {
-    const line = item.qty * item.price;
-    total += line;
-    const li = document.createElement("li");
-    li.textContent = `${item.name}: ${item.qty} × ${item.price} = ${line} دينار`;
-    cartItems.appendChild(li);
-  });
-  cartTotal.textContent = `الإجمالي: ${total.toLocaleString()} دينار`;
+header {
+  background-color: #4CAF50;
+  color: white;
+  text-align: center;
+  padding: 15px;
 }
 
-document.getElementById("order-form").addEventListener("submit", function(e) {
-  e.preventDefault();
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 15px;
+  padding: 20px;
+}
 
-  const name = document.getElementById("customer-name").value;
-  const phone = document.getElementById("customer-phone").value;
-  const city = document.getElementById("customer-city").value;
-  const location = document.getElementById("customer-location").value;
+.product-card {
+  background: white;
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  text-align: center;
+}
 
-  if (!name || !phone || !city || !location || cart.length === 0) {
-    alert("يرجى تعبئة كافة الحقول وإضافة منتجات.");
-    return;
-  }
+.product-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 4px;
+}
 
-  let message = `🛒 طلب جديد من أعلاف السالم\\n`;
-  message += `👤 الاسم: ${name}\\n📞 الهاتف: ${phone}\\n🏙️ المدينة: ${city}\\n📍 الموقع: ${location}\\n\\n`;
-  message += `📦 المنتجات:\\n`;
-  let total = 0;
-  cart.forEach((item, i) => {
-    const subtotal = item.qty * item.price;
-    total += subtotal;
-    message += `${i+1}. ${item.name} — ${item.qty} × ${item.price} = ${subtotal} دينار\\n`;
-  });
-  message += `\\n💰 الإجمالي: ${total.toLocaleString()} دينار`;
+.cart, .order-form {
+  background: white;
+  margin: 20px;
+  padding: 15px;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
 
-  const whatsappNumber = "9647704159475"; // ← ضع رقمك هنا
-  const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-  window.open(url, "_blank");
-});
+input {
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+  width: 90%;
+  max-width: 400px;
+}
 
-function copyOrderToClipboard() {
-  const name = document.getElementById("customer-name").value;
-  const phone = document.getElementById("customer-phone").value;
-  const city = document.getElementById("customer-city").value;
-  const location = document.getElementById("customer-location").value;
+button {
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  margin: 10px auto;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 90%;
+  max-width: 400px;
+}
 
-  if (!name || !phone || !city || !location || cart.length === 0) {
-    alert("يرجى تعبئة كافة الحقول وإضافة منتجات.");
-    return;
-  }
+button:hover {
+  background-color: #388e3c;
+}
 
-  let message = `🛒 طلب جديد من أعلاف السالم\\n`;
-  message += `👤 الاسم: ${name}\\n📞 الهاتف: ${phone}\\n🏙️ المدينة: ${city}\\n📍 الموقع: ${location}\\n\\n`;
-  message += `📦 المنتجات:\\n`;
-  let total = 0;
-  cart.forEach((item, i) => {
-    const subtotal = item.qty * item.price;
-    total += subtotal;
-    message += `${i+1}. ${item.name} — ${item.qty} × ${item.price} = ${subtotal} دينار\\n`;
-  });
-  message += `\\n💰 الإجمالي: ${total.toLocaleString()} دينار`;
-
-  navigator.clipboard.writeText(message).then(() => {
-    document.getElementById("copy-message").style.display = "block";
-    window.open("https://m.me/a.laf.alsalm?", "_blank");
-    setTimeout(() => {
-      document.getElementById("copy-message").style.display = "none";
-    }, 4000);
-  });
+.button-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
