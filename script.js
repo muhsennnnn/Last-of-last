@@ -1,3 +1,80 @@
+const products = [
+  { name: "حنطة", price: 600, image: "https://upload.wikimedia.org/wikipedia/commons/8/86/Wheat_grain.jpg" },
+  { name: "شعير", price: 900, image: "https://upload.wikimedia.org/wikipedia/commons/6/61/Barley_close-up.jpg" },
+  { name: "خلطة كوكتيل", price: 45000, image: "https://i.imgur.com/dJeUQmy.jpg" },
+  { name: "خلطة غندورة", price: 45000, image: "https://i.imgur.com/FgMZKgO.jpg" },
+  { name: "خلطة طيور الحب صيفية", price: 35000, image: "https://i.imgur.com/lkkVLM3.jpg" },
+  { name: "خلطة طيور الحب شتوية", price: 37000, image: "https://i.imgur.com/utl3NYB.jpg" },
+  { name: "بروتين دجاج و افراخ", price: 800, image: "https://i.imgur.com/JuT7kgL.jpg" }
+];
+
+const productList = document.getElementById("product-list");
+let cart = [];
+
+products.forEach((product, i) => {
+  const card = document.createElement("div");
+  card.className = "product-card";
+  card.innerHTML = `
+    <img src="${product.image}" alt="${product.name}">
+    <h3>${product.name}</h3>
+    <p>${product.price} دينار</p>
+    <input type="number" id="qty-${i}" value="1" min="1">
+    <button onclick="addToCart(${i})">أضف إلى السلة</button>
+  `;
+  productList.appendChild(card);
+});
+
+function addToCart(index) {
+  const qty = parseInt(document.getElementById(`qty-${index}`).value);
+  const product = products[index];
+  const existing = cart.find(p => p.name === product.name);
+  if (existing) {
+    existing.qty += qty;
+  } else {
+    cart.push({ ...product, qty });
+  }
+  renderCart();
+}
+
+function renderCart() {
+  const cartContainer = document.getElementById("cart-items");
+  cartContainer.innerHTML = "";
+
+  let total = 0;
+  cart.forEach((item, index) => {
+    const subtotal = item.qty * item.price;
+    total += subtotal;
+
+    const cartCard = document.createElement("div");
+    cartCard.className = "cart-item";
+
+    cartCard.innerHTML = `
+      <img src="${item.image}" alt="${item.name}">
+      <div class="cart-item-details">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-price">${subtotal} دينار</div>
+      </div>
+      <div class="cart-item-actions">
+        <input type="number" value="${item.qty}" min="1" onchange="updateQty(${index}, this.value)">
+        <button onclick="removeFromCart(${index})">🗑</button>
+      </div>
+    `;
+    cartContainer.appendChild(cartCard);
+  });
+
+  document.getElementById("cart-total").textContent = `الإجمالي: ${total.toLocaleString()} دينار`;
+}
+
+function updateQty(index, newQty) {
+  cart[index].qty = parseInt(newQty);
+  renderCart();
+}
+
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  renderCart();
+}
+
 function generateOrderMessage() {
   const name = document.getElementById("customer-name").value;
   const phone = document.getElementById("customer-phone").value;
