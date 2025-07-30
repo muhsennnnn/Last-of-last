@@ -104,7 +104,7 @@ function copyOrderToClipboard() {
 
   navigator.clipboard.writeText(message).then(() => {
     document.getElementById("copy-message").style.display = "block";
-    window.open("https://m.me/asalem.feed", "_blank");
+    window.open("https://m.me/a.laf.alsalm?", "_blank");
     setTimeout(() => {
       document.getElementById("copy-message").style.display = "none";
     }, 4000);
