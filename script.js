@@ -27,7 +27,7 @@ document.getElementById("order-form").addEventListener("submit", function (e) {
   });
 
   const encodedMsg = encodeURIComponent(message);
-  const phoneNumber = "964XXXXXXXXXX"; // ← ضع رقمك هنا
+  const phoneNumber = "9647704159475"; // ← ضع رقمك هنا
   const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMsg}`;
 
   window.open(whatsappURL, "_blank");
