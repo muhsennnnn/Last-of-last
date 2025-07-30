@@ -12,25 +12,37 @@
     <p>أفضل الأعلاف لطيورك</p>
   </header>
 
+  <!-- قائمة المنتجات -->
   <section class="products" id="product-list"></section>
 
+  <!-- السلة -->
   <section class="cart">
     <h2>سلة التسوق</h2>
-    <ul id="cart-items"></ul>
+    <div id="cart-items" class="cart-list"></div>
     <p id="cart-total">الإجمالي: 0 دينار</p>
   </section>
 
+  <!-- الفورم -->
   <section class="order-form">
     <h2>إرسال الطلب</h2>
     <form id="order-form">
-      <input type="text" id="customer-name" placeholder="الاسم الكامل" required />
-      <input type="tel" id="customer-phone" placeholder="رقم الهاتف" required />
-      <input type="text" id="customer-city" placeholder="المحافظة / المدينة" required />
-      <input type="text" id="customer-location" placeholder="أقرب نقطة دالة" required />
+      <label for="customer-name">الاسم الكامل</label>
+      <input type="text" id="customer-name" placeholder="مثال: أحمد علي" required />
+
+      <label for="customer-phone">رقم الهاتف</label>
+      <input type="tel" id="customer-phone" placeholder="07xxxxxxxx" required />
+
+      <label for="customer-city">المحافظة / المدينة</label>
+      <input type="text" id="customer-city" placeholder="مثال: بغداد" required />
+
+      <label for="customer-location">أقرب نقطة دالة</label>
+      <input type="text" id="customer-location" placeholder="مثال: قرب سوق البياع" required />
+
       <div class="button-group">
-        <button type="submit">إرسال عبر واتساب</button>
-        <button type="button" onclick="copyOrderToClipboard()">إرسال عبر فيسبوك</button>
+        <button type="submit">📱 إرسال عبر واتساب</button>
+        <button type="button" onclick="copyOrderToClipboard()">💬 إرسال عبر فيسبوك</button>
       </div>
+
       <p id="copy-message" style="display:none; color:green;">✅ تم نسخ الطلب! الصقه في ماسنجر.</p>
     </form>
   </section>
