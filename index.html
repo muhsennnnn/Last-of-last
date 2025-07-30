@@ -1,89 +1,37 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>أعلاف السالم</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="hero">
+  <header>
     <h1>أعلاف السالم</h1>
-    <p>أفضل الأعلاف لطيورك، جودة وتوصيل مضمون</p>
-    <a href="#products" class="btn">تسوق الآن</a>
+    <p>أفضل الأعلاف لطيورك</p>
   </header>
 
-  <section class="products" id="products">
-    <h2>منتجاتنا</h2>
-    <div class="product-grid">
+  <section class="products" id="product-list"></section>
 
-      <div class="product-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/8/86/Wheat_grain.jpg" alt="حنطة">
-        <h3>حنطة</h3>
-        <p>علف طبيعي غني بالألياف</p>
-        <span>600 دينار / كيلو</span>
-        <button onclick="addToCart('حنطة', '600 دينار / كيلو')">أضف إلى السلة</button>
-      </div>
-
-      <div class="product-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Barley_in_spike.jpg" alt="شعير">
-        <h3>شعير</h3>
-        <p>غذاء مثالي للطاقة والنمو</p>
-        <span>900 دينار / كيلو</span>
-        <button onclick="addToCart('شعير', '900 دينار / كيلو')">أضف إلى السلة</button>
-      </div>
-
-      <div class="product-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Mixture_of_seeds.jpg" alt="خلطة كوكتيل">
-        <h3>خلطة كوكتيل</h3>
-        <p>25 كغم + توصيل</p>
-        <span>45,000 دينار</span>
-        <button onclick="addToCart('خلطة كوكتيل', '45,000 دينار')">أضف إلى السلة</button>
-      </div>
-
-      <div class="product-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Bird_food.jpg" alt="خلطة غندورة">
-        <h3>خلطة غندورة</h3>
-        <p>25 كغم + توصيل</p>
-        <span>45,000 دينار</span>
-        <button onclick="addToCart('خلطة غندورة', '45,000 دينار')">أضف إلى السلة</button>
-      </div>
-
-      <div class="product-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Lovebird.jpg" alt="خلطة طيور الحب صيفية">
-        <h3>خلطة طيور الحب (صيفية)</h3>
-        <p>25 كغم + توصيل</p>
-        <span>35,000 دينار</span>
-        <button onclick="addToCart('خلطة طيور الحب صيفية', '35,000 دينار')">أضف إلى السلة</button>
-      </div>
-
-      <div class="product-card">
-        <img src="https://m.facebook.com/story.php?story_fbid=pfbid02UQikpqxexQQasw73iUydNsmAKCWGVur9bMAj6hFLw4scRHfVQAy5YaqPDgWbkmBVl&id=100022033611668" alt="خلطة طيور الحب شتوية">
-        <h3>خلطة طيور الحب (شتوية)</h3>
-        <p>25 كغم + توصيل</p>
-        <span>37,000 دينار</span>
-        <button onclick="addToCart('خلطة طيور الحب شتوية', '37,000 دينار')">أضف إلى السلة</button>
-      </div>
-
-      <div class="product-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Chicken_feed_in_bucket.jpg" alt="بروتين دجاج وأفراخ">
-        <h3>بروتين دجاج وأفراخ</h3>
-        <p>غني بالأحماض الأمينية للنمو</p>
-        <span>800 دينار / كيلو</span>
-        <button onclick="addToCart('بروتين دجاج وأفراخ', '800 دينار / كيلو')">أضف إلى السلة</button>
-      </div>
-
-    </div>
+  <section class="cart">
+    <h2>سلة التسوق</h2>
+    <ul id="cart-items"></ul>
+    <p id="cart-total">الإجمالي: 0 دينار</p>
   </section>
 
-  <section class="order">
-    <h2>إتمام الطلب</h2>
+  <section class="order-form">
+    <h2>إرسال الطلب</h2>
     <form id="order-form">
-      <input type="text" id="customer-name" placeholder="الاسم الكامل" required>
-      <input type="tel" id="customer-phone" placeholder="رقم الهاتف" required>
-      <input type="text" id="customer-city" placeholder="المحافظة / المدينة" required>
-      <input type="text" id="customer-location" placeholder="أقرب نقطة دالة" required>
-      <button type="submit">إرسال الطلب عبر واتساب</button>
+      <input type="text" id="customer-name" placeholder="الاسم الكامل" required />
+      <input type="tel" id="customer-phone" placeholder="رقم الهاتف" required />
+      <input type="text" id="customer-city" placeholder="المحافظة / المدينة" required />
+      <input type="text" id="customer-location" placeholder="أقرب نقطة دالة" required />
+      <div class="button-group">
+        <button type="submit">إرسال عبر واتساب</button>
+        <button type="button" onclick="copyOrderToClipboard()">إرسال عبر فيسبوك</button>
+      </div>
+      <p id="copy-message" style="display:none; color:green;">✅ تم نسخ الطلب! الصقه في ماسنجر.</p>
     </form>
   </section>
 
