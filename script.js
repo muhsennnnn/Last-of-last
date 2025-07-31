@@ -109,19 +109,6 @@ document.getElementById("order-form").addEventListener("submit", function(e) {
   window.open(url, "_blank");
 });
 
-function sendOrderToFacebook() {
-  if (!validateForm()) return;
-  
-  const message = generateOrderMessage();
-  const encodedMessage = encodeURIComponent(message);
-  
-  // معرف الصفحة على فيسبوك (غيره لصفحتك)
-  const facebookPageId = "a.laf.alsalm";
-  const url = `https://m.me/${facebookPageId}?ref=${encodedMessage}`;
-
-  window.open(url, "_blank");
-}
-
 function validateForm() {
   const name = document.getElementById("customer-name").value;
   const phone = document.getElementById("customer-phone").value;
