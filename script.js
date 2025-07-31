@@ -1,7 +1,7 @@
 const products = [
   { name: "حنطة", price: 600, image: "https://upload.wikimedia.org/wikipedia/commons/8/86/Wheat_grain.jpg" },
   { name: "شعير", price: 900, image: "https://upload.wikimedia.org/wikipedia/commons/6/61/Barley_close-up.jpg" },
-  { name: "خلطة كوكتيل", price: 45000, image: "https://www2.0zz0.com/2025/07/31/00/459655962.jpeg" },
+  { name: "خلطة كوكتيل", price: 45000, image: "https://www2.0zz0.com/2025/07/31/00/459655962.jpeg" }, // رابطك
   { name: "خلطة غندورة", price: 45000, image: "https://i.imgur.com/FgMZKgO.jpg" },
   { name: "خلطة طيور الحب صيفية", price: 35000, image: "https://i.imgur.com/lkkVLM3.jpg" },
   { name: "خلطة طيور الحب شتوية", price: 37000, image: "https://i.imgur.com/utl3NYB.jpg" },
@@ -9,11 +9,8 @@ const products = [
 ];
 
 const productList = document.getElementById("product-list");
-const cartItems = document.getElementById("cart-items");
-const cartTotal = document.getElementById("cart-total");
 let cart = [];
 
-// عرض المنتجات
 products.forEach((product, i) => {
   const card = document.createElement("div");
   card.className = "product-card";
@@ -40,43 +37,87 @@ function addToCart(index) {
 }
 
 function renderCart() {
-  cartItems.innerHTML = "";
+  const cartContainer = document.getElementById("cart-items");
+  cartContainer.innerHTML = "";
+
   let total = 0;
-  cart.forEach(item => {
-    const line = item.qty * item.price;
-    total += line;
-    const li = document.createElement("li");
-    li.textContent = `${item.name}: ${item.qty} × ${item.price} = ${line} دينار`;
-    cartItems.appendChild(li);
+  cart.forEach((item, index) => {
+    const subtotal = item.qty * item.price;
+    total += subtotal;
+
+    const cartCard = document.createElement("div");
+    cartCard.className = "cart-item";
+
+    cartCard.innerHTML = `
+      <img src="${item.image}" alt="${item.name}">
+      <div class="cart-item-details">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-price">${subtotal} دينار</div>
+      </div>
+      <div class="cart-item-actions">
+        <input type="number" value="${item.qty}" min="1" onchange="updateQty(${index}, this.value)">
+        <button onclick="removeFromCart(${index})">🗑</button>
+      </div>
+    `;
+    cartContainer.appendChild(cartCard);
   });
-  cartTotal.textContent = `الإجمالي: ${total.toLocaleString()} دينار`;
+
+  document.getElementById("cart-total").textContent = `الإجمالي: ${total.toLocaleString()} دينار`;
 }
 
-document.getElementById("order-form").addEventListener("submit", function(e) {
-  e.preventDefault();
+function updateQty(index, newQty) {
+  cart[index].qty = parseInt(newQty);
+  renderCart();
+}
 
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  renderCart();
+}
+
+function generateOrderMessage() {
   const name = document.getElementById("customer-name").value;
   const phone = document.getElementById("customer-phone").value;
   const city = document.getElementById("customer-city").value;
   const location = document.getElementById("customer-location").value;
 
-  if (!name || !phone || !city || !location || cart.length === 0) {
-    alert("يرجى تعبئة كافة الحقول وإضافة منتجات.");
-    return;
-  }
-
-  let message = `🛒 طلب جديد من أعلاف السالم\n`;
-  message += `👤 الاسم: ${name}\n📞 الهاتف: ${phone}\n🏙️ المدينة: ${city}\n📍 الموقع: ${location}\n\n`;
-  message += `📦 المنتجات:\n`;
   let total = 0;
-  cart.forEach((item, i) => {
+  let productsList = cart.map((item, i) => {
     const subtotal = item.qty * item.price;
     total += subtotal;
-    message += `${i+1}. ${item.name} — ${item.qty} × ${item.price} = ${subtotal} دينار\n`;
-  });
-  message += `\n💰 الإجمالي: ${total.toLocaleString()} دينار`;
+    return `${i+1}. ${item.name} — ${item.qty} × ${item.price} = ${subtotal} دينار`;
+  }).join("\n");
 
+  return `🛒 طلب جديد من أعلاف السالم
+👤 الاسم: ${name}
+📞 الهاتف: ${phone}
+🏙️ المدينة: ${city}
+📍 الموقع: ${location}
+
+📦 المنتجات:
+${productsList}
+
+💰 الإجمالي: ${total.toLocaleString()} دينار`;
+}
+
+document.getElementById("order-form").addEventListener("submit", function(e) {
+  e.preventDefault();
+  if (!validateForm()) return;
+  
   const whatsappNumber = "9647704159475";
-  const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+  const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(generateOrderMessage())}`;
   window.open(url, "_blank");
 });
+
+function validateForm() {
+  const name = document.getElementById("customer-name").value;
+  const phone = document.getElementById("customer-phone").value;
+  const city = document.getElementById("customer-city").value;
+  const location = document.getElementById("customer-location").value;
+  
+  if (!name || !phone || !city || !location || cart.length === 0) {
+    alert("يرجى تعبئة كافة الحقول وإضافة منتجات.");
+    return false;
+  }
+  return true;
+}
