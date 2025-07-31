@@ -4,7 +4,89 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>أعلاف السالم</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(135deg, #4CAF50, #2e7d32);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    }
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      padding: 20px;
+    }
+    .product-card {
+      background: white;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 240px;
+    }
+    .product-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+    .cart, .order-form {
+      background: white;
+      margin: 20px;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+    input {
+      display: block;
+      margin: 10px auto;
+      padding: 12px;
+      width: 90%;
+      max-width: 400px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      padding: 12px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      margin: 10px auto;
+      cursor: pointer;
+      border-radius: 6px;
+      width: 90%;
+      max-width: 400px;
+    }
+    button:hover {
+      background: #388e3c;
+    }
+    footer {
+      background: #2e7d32;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 20px;
+    }
+    footer a {
+      color: #ffeb3b;
+      text-decoration: none;
+    }
+    @media (max-width: 600px) {
+      .product-card {
+        width: 90%;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -42,6 +124,89 @@
     📞 للاستفسار: <a href="tel:07704159475">0770 415 9475</a>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- ====== سكربت المنتجات ====== -->
+  <script>
+    const products = [
+      { name: "حنطة", price: 600, image: "https://upload.wikimedia.org/wikipedia/commons/8/86/Wheat_grain.jpg" },
+      { name: "شعير", price: 900, image: "https://upload.wikimedia.org/wikipedia/commons/6/61/Barley_close-up.jpg" },
+      { name: "خلطة كوكتيل", price: 45000, image: "https://www2.0zz0.com/2025/07/31/00/459655962.jpeg" },
+      { name: "خلطة غندورة", price: 45000, image: "https://i.imgur.com/FgMZKgO.jpg" },
+      { name: "خلطة طيور الحب صيفية", price: 35000, image: "https://i.imgur.com/lkkVLM3.jpg" },
+      { name: "خلطة طيور الحب شتوية", price: 37000, image: "https://i.imgur.com/utl3NYB.jpg" },
+      { name: "بروتين دجاج و افراخ", price: 800, image: "https://i.imgur.com/JuT7kgL.jpg" }
+    ];
+
+    const productList = document.getElementById("product-list");
+    const cartItems = document.getElementById("cart-items");
+    const cartTotal = document.getElementById("cart-total");
+    let cart = [];
+
+    // عرض المنتجات
+    products.forEach((product, i) => {
+      const card = document.createElement("div");
+      card.className = "product-card";
+      card.innerHTML = `
+        <img src="${product.image}" alt="${product.name}">
+        <h3>${product.name}</h3>
+        <p>${product.price} دينار</p>
+        <input type="number" id="qty-${i}" value="1" min="1">
+        <button onclick="addToCart(${i})">أضف إلى السلة</button>
+      `;
+      productList.appendChild(card);
+    });
+
+    function addToCart(index) {
+      const qty = parseInt(document.getElementById(`qty-${index}`).value);
+      const product = products[index];
+      const existing = cart.find(p => p.name === product.name);
+      if (existing) {
+        existing.qty += qty;
+      } else {
+        cart.push({ ...product, qty });
+      }
+      renderCart();
+    }
+
+    function renderCart() {
+      cartItems.innerHTML = "";
+      let total = 0;
+      cart.forEach(item => {
+        const line = item.qty * item.price;
+        total += line;
+        const li = document.createElement("li");
+        li.textContent = `${item.name}: ${item.qty} × ${item.price} = ${line} دينار`;
+        cartItems.appendChild(li);
+      });
+      cartTotal.textContent = `الإجمالي: ${total.toLocaleString()} دينار`;
+    }
+
+    document.getElementById("order-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const name = document.getElementById("customer-name").value;
+      const phone = document.getElementById("customer-phone").value;
+      const city = document.getElementById("customer-city").value;
+      const location = document.getElementById("customer-location").value;
+
+      if (!name || !phone || !city || !location || cart.length === 0) {
+        alert("يرجى تعبئة كافة الحقول وإضافة منتجات.");
+        return;
+      }
+
+      let message = `🛒 طلب جديد من أعلاف السالم\n`;
+      message += `👤 الاسم: ${name}\n📞 الهاتف: ${phone}\n🏙️ المدينة: ${city}\n📍 الموقع: ${location}\n\n`;
+      message += `📦 المنتجات:\n`;
+      let total = 0;
+      cart.forEach((item, i) => {
+        const subtotal = item.qty * item.price;
+        total += subtotal;
+        message += `${i+1}. ${item.name} — ${item.qty} × ${item.price} = ${subtotal} دينار\n`;
+      });
+      message += `\n💰 الإجمالي: ${total.toLocaleString()} دينار`;
+
+      const whatsappNumber = "9647704159475";
+      const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+      window.open(url, "_blank");
+    });
+  </script>
 </body>
 </html>
