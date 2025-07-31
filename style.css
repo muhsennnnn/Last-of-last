@@ -100,8 +100,18 @@ header {
 }
 
 .cart-item-actions input {
-  width: 40px;
+  width: 50px;
   text-align: center;
+}
+
+/* تحسين الأسهم */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  opacity: 1;
+  height: 20px;
 }
 
 .cart-item-actions button {
@@ -112,7 +122,6 @@ header {
   border-radius: 4px;
   cursor: pointer;
 }
-
 .cart-item-actions button:hover {
   background: #c62828;
 }
@@ -126,7 +135,6 @@ input {
   border: 1px solid #ccc;
   border-radius: 6px;
   outline: none;
-  transition: border-color 0.2s ease;
 }
 input:focus {
   border-color: #4CAF50;
@@ -143,7 +151,6 @@ button {
   width: 90%;
   max-width: 400px;
   font-size: 16px;
-  transition: background 0.2s ease;
 }
 button:hover {
   background: #388e3c;
