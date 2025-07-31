@@ -47,6 +47,29 @@ header {
   transform: scale(1.05);
 }
 
+.qty-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin: 10px 0;
+}
+.qty-control button {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.qty-control button:hover {
+  background: #388e3c;
+}
+.qty-control span {
+  min-width: 30px;
+  text-align: center;
+}
+
 .cart, .order-form {
   background: white;
   margin: 20px;
@@ -99,23 +122,8 @@ header {
   gap: 5px;
 }
 
-.cart-item-actions input {
-  width: 50px;
-  text-align: center;
-}
-
-/* تحسين الأسهم */
-input[type=number] {
-  -moz-appearance: textfield;
-}
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-  opacity: 1;
-  height: 20px;
-}
-
 .cart-item-actions button {
-  background: #e53935;
+  background: #4CAF50;
   border: none;
   color: white;
   padding: 5px 8px;
@@ -123,6 +131,13 @@ input[type=number]::-webkit-outer-spin-button {
   cursor: pointer;
 }
 .cart-item-actions button:hover {
+  background: #388e3c;
+}
+
+.cart-item-actions .remove-btn {
+  background: #e53935;
+}
+.cart-item-actions .remove-btn:hover {
   background: #c62828;
 }
 
@@ -154,12 +169,6 @@ button {
 }
 button:hover {
   background: #388e3c;
-}
-
-.button-group {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 footer {
