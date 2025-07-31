@@ -8,6 +8,7 @@ body {
   color: #333;
 }
 
+/* ====== العنوان ====== */
 header {
   background: linear-gradient(135deg, #4CAF50, #2e7d32);
   color: white;
@@ -16,10 +17,12 @@ header {
   box-shadow: 0 3px 6px rgba(0,0,0,0.2);
 }
 
+/* ====== المنتجات ====== */
 .products {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 15px;
+  justify-content: center;
   padding: 20px;
 }
 
@@ -30,6 +33,7 @@ header {
   box-shadow: 0 3px 8px rgba(0,0,0,0.1);
   text-align: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 240px; /* عرض البطاقة */
 }
 .product-card:hover {
   transform: translateY(-5px);
@@ -47,6 +51,7 @@ header {
   transform: scale(1.05);
 }
 
+/* ====== أزرار الكمية ====== */
 .qty-control {
   display: flex;
   justify-content: center;
@@ -70,6 +75,7 @@ header {
   text-align: center;
 }
 
+/* ====== السلة ====== */
 .cart, .order-form {
   background: white;
   margin: 20px;
@@ -141,6 +147,7 @@ header {
   background: #c62828;
 }
 
+/* ====== الحقول والأزرار ====== */
 input {
   display: block;
   margin: 10px auto;
@@ -171,6 +178,7 @@ button:hover {
   background: #388e3c;
 }
 
+/* ====== التذييل ====== */
 footer {
   background: #2e7d32;
   color: white;
@@ -181,4 +189,31 @@ footer {
 footer a {
   color: #ffeb3b;
   text-decoration: none;
+}
+
+/* ====== تصميم الموبايل ====== */
+@media (max-width: 600px) {
+  .products {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .product-card {
+    width: 90%; /* البطاقة تاخذ تقريباً كل الشاشة */
+  }
+
+  .cart, .order-form {
+    margin: 10px;
+    padding: 15px;
+  }
+
+  header {
+    font-size: 14px;
+    padding: 15px;
+  }
+
+  footer {
+    font-size: 14px;
+    padding: 10px;
+  }
 }
