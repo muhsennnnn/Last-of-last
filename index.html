@@ -7,47 +7,39 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
+  <!-- ====== الهيدر ====== -->
   <header>
     <h1>أعلاف السالم</h1>
     <p>أفضل الأعلاف لطيورك</p>
   </header>
 
-  <!-- المنتجات -->
+  <!-- ====== المنتجات ====== -->
   <section class="products" id="product-list"></section>
 
-  <!-- السلة -->
+  <!-- ====== السلة ====== -->
   <section class="cart">
     <h2>سلة التسوق</h2>
-    <div id="cart-items" class="cart-list"></div>
+    <ul id="cart-items"></ul>
     <p id="cart-total">الإجمالي: 0 دينار</p>
   </section>
 
-  <!-- نموذج الطلب -->
+  <!-- ====== نموذج الطلب ====== -->
   <section class="order-form">
     <h2>إرسال الطلب</h2>
     <form id="order-form">
-      <label for="customer-name">الاسم الكامل</label>
-      <input type="text" id="customer-name" placeholder="مثال: أحمد علي" required />
-
-      <label for="customer-phone">رقم الهاتف</label>
-      <input type="tel" id="customer-phone" placeholder="07xxxxxxxx" required />
-
-      <label for="customer-city">المحافظة / المدينة</label>
-      <input type="text" id="customer-city" placeholder="مثال: بغداد" required />
-
-      <label for="customer-location">أقرب نقطة دالة</label>
-      <input type="text" id="customer-location" placeholder="مثال: قرب سوق البياع" required />
-
-      <div class="button-group">
-        <button type="submit">📱 إرسال عبر واتساب</button>
-      </div>
+      <input type="text" id="customer-name" placeholder="الاسم الكامل" required />
+      <input type="tel" id="customer-phone" placeholder="رقم الهاتف" required />
+      <input type="text" id="customer-city" placeholder="المحافظة / المدينة" required />
+      <input type="text" id="customer-location" placeholder="أقرب نقطة دالة" required />
+      <button type="submit">إرسال عبر واتساب</button>
     </form>
   </section>
 
-  <!-- معلومات المتجر -->
+  <!-- ====== الفوتر ====== -->
   <footer>
-    <p>📞 للاستفسار: <a href="tel:07704159475">0770 415 9475</a></p>
-    <p>📍 عنوان المتجر: بغداد - سوق الطيور، قرب سوق البياع</p>
+    📍 العنوان: بغداد - شارع النخيل  
+    📞 للاستفسار: <a href="tel:07704159475">0770 415 9475</a>
   </footer>
 
   <script src="script.js"></script>
