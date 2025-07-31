@@ -154,3 +154,15 @@ button:hover {
   flex-direction: column;
   align-items: center;
 }
+
+footer {
+  background: #2e7d32;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin-top: 20px;
+}
+footer a {
+  color: #ffeb3b;
+  text-decoration: none;
+}
