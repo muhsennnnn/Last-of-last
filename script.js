@@ -109,15 +109,17 @@ document.getElementById("order-form").addEventListener("submit", function(e) {
   window.open(url, "_blank");
 });
 
-function copyOrderToClipboard() {
+function sendOrderToFacebook() {
   if (!validateForm()) return;
-  navigator.clipboard.writeText(generateOrderMessage()).then(() => {
-    document.getElementById("copy-message").style.display = "block";
-    window.open("https://m.me/a.laf.alsalm", "_blank");
-    setTimeout(() => {
-      document.getElementById("copy-message").style.display = "none";
-    }, 4000);
-  });
+  
+  const message = generateOrderMessage();
+  const encodedMessage = encodeURIComponent(message);
+  
+  // معرف الصفحة على فيسبوك (غيره لصفحتك)
+  const facebookPageId = "a.laf.alsalm";
+  const url = `https://m.me/${facebookPageId}?ref=${encodedMessage}`;
+
+  window.open(url, "_blank");
 }
 
 function validateForm() {
