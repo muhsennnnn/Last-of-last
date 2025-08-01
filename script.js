@@ -1,96 +1,89 @@
-// ===== بيانات المنتجات =====
-const products = [
-  { name: "حنطة", price: 600, image: "https://upload.wikimedia.org/wikipedia/commons/8/86/Wheat_grain.jpg" },
-  { name: "شعير", price: 900, image: "https://upload.wikimedia.org/wikipedia/commons/6/61/Barley_close-up.jpg" },
-  { name: "خلطة كوكتيل", price: 45000, image: "https://www2.0zz0.com/2025/07/31/00/459655962.jpeg" },
-  { name: "خلطة غندورة", price: 45000, image: "https://i.imgur.com/FgMZKgO.jpg" },
-  { name: "خلطة طيور الحب صيفية", price: 35000, image: "https://i.imgur.com/lkkVLM3.jpg" },
-  { name: "خلطة طيور الحب شتوية", price: 37000, image: "https://i.imgur.com/utl3NYB.jpg" },
-  { name: "بروتين دجاج و افراخ", price: 800, image: "https://i.imgur.com/JuT7kgL.jpg" }
+// ===== المنتجات مع أماكن الصور =====
+const pigeonFeed = [
+  { name: "حنطة", price: 600, image: "PUT_IMAGE_URL_HERE" },
+  { name: "شعير", price: 800, image: "PUT_IMAGE_URL_HERE" },
+  { name: "خلطة حنطة خشنة", price: 600, image: "PUT_IMAGE_URL_HERE" },
+  { name: "خلطة حنطة ناعمة", price: 700, image: "PUT_IMAGE_URL_HERE" },
+  { name: "خلطة ناعمة بدون حنطة", price: 900, image: "PUT_IMAGE_URL_HERE" },
+  { name: "خلطة خشنة بدون حنطة", price: 900, image: "PUT_IMAGE_URL_HERE" },
+  { name: "دخن", price: 1000, image: "PUT_IMAGE_URL_HERE" }
 ];
 
-const productList = document.getElementById("product-list");
+const ornamentalBirds = [
+  { name: "دخن", price: 1000, image: "PUT_IMAGE_URL_HERE" },
+  { name: "خلطة طيور حب", price: 1500, image: "PUT_IMAGE_URL_HERE" },
+  { name: "خلطة كوكتيل", price: 2000, image: "PUT_IMAGE_URL_HERE" },
+  { name: "خلطة كناري", price: 2500, image: "PUT_IMAGE_URL_HERE" },
+  { name: "حب اسود ناعم", price: 2000, image: "PUT_IMAGE_URL_HERE" },
+  { name: "حب اسود خشن", price: 1500, image: "PUT_IMAGE_URL_HERE" },
+  { name: "خلطة بلبل", price: 8000, image: "PUT_IMAGE_URL_HERE" }
+];
+
+const specialOffer = [
+  { name: "دخن", price: 16000, image: "PUT_IMAGE_URL_HERE" },
+  { name: "خلطة كوكتيل 25 كغ توصيل مجاني", price: 45000, image: "PUT_IMAGE_URL_HERE" },
+  { name: "خلطة طيور حب صيفية 25 كغ توصيل مجاني", price: 35000, image: "PUT_IMAGE_URL_HERE" },
+  { name: "خلطة طيور حب شتوية 25 كغ توصيل مجاني", price: 37000, image: "PUT_IMAGE_URL_HERE" }
+];
+
+function renderProducts(products, containerId) {
+  const container = document.getElementById(containerId);
+  products.forEach((product, i) => {
+    const card = document.createElement("div");
+    card.className = "product-card";
+    card.innerHTML = `
+      <img src="${product.image}" alt="${product.name}">
+      <h3>${product.name}</h3>
+      <p>${product.price.toLocaleString()} دينار</p>
+      <input type="number" id="${containerId}-qty-${i}" value="1" min="1">
+      <button onclick="addToCart('${containerId}', ${i})">أضف إلى السلة</button>
+    `;
+    container.appendChild(card);
+  });
+}
+
+renderProducts(pigeonFeed, "pigeon-feed");
+renderProducts(ornamentalBirds, "ornamental-birds");
+renderProducts(specialOffer, "special-offer");
+
+// ===== السلة =====
+let cart = [];
 const cartItems = document.getElementById("cart-items");
 const cartTotal = document.getElementById("cart-total");
 
-// تحميل السلة من LocalStorage
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+function addToCart(category, index) {
+  const productsMap = {
+    "pigeon-feed": pigeonFeed,
+    "ornamental-birds": ornamentalBirds,
+    "special-offer": specialOffer
+  };
+  const product = productsMap[category][index];
+  const qty = parseInt(document.getElementById(`${category}-qty-${index}`).value);
 
-// ===== عرض المنتجات =====
-products.forEach((product, i) => {
-  const card = document.createElement("div");
-  card.className = "product-card";
-  card.innerHTML = `
-    <img src="${product.image}" alt="${product.name}">
-    <h3>${product.name}</h3>
-    <p>${product.price.toLocaleString()} دينار</p>
-    <input type="number" id="qty-${i}" value="1" min="1">
-    <button onclick="addToCart(${i})">أضف إلى السلة</button>
-  `;
-  productList.appendChild(card);
-});
-
-// ===== إضافة منتج للسلة =====
-function addToCart(index) {
-  const qty = parseInt(document.getElementById(`qty-${index}`).value);
-  const product = products[index];
   const existing = cart.find(p => p.name === product.name);
-
   if (existing) {
     existing.qty += qty;
   } else {
     cart.push({ ...product, qty });
   }
-
-  saveCart();
   renderCart();
 }
 
-// ===== عرض السلة =====
 function renderCart() {
   cartItems.innerHTML = "";
   let total = 0;
-
   cart.forEach((item, i) => {
     const subtotal = item.qty * item.price;
     total += subtotal;
-
     const li = document.createElement("li");
-    li.innerHTML = `
-      ${item.name}: 
-      <input type="number" value="${item.qty}" min="1" onchange="updateQty(${i}, this.value)">
-      × ${item.price.toLocaleString()} = ${subtotal.toLocaleString()} دينار
-      <button onclick="removeItem(${i})" style="background:red;color:white;border:none;padding:2px 6px;border-radius:4px;">🗑</button>
-    `;
+    li.textContent = `${item.name}: ${item.qty} × ${item.price} = ${subtotal} دينار`;
     cartItems.appendChild(li);
   });
-
   cartTotal.textContent = `الإجمالي: ${total.toLocaleString()} دينار`;
 }
 
-// ===== تحديث كمية منتج =====
-function updateQty(index, newQty) {
-  cart[index].qty = parseInt(newQty);
-  saveCart();
-  renderCart();
-}
-
-// ===== حذف منتج =====
-function removeItem(index) {
-  cart.splice(index, 1);
-  saveCart();
-  renderCart();
-}
-
-// ===== حفظ السلة =====
-function saveCart() {
-  localStorage.setItem("cart", JSON.stringify(cart));
-}
-
-// ===== إرسال الطلب عبر واتساب =====
 document.getElementById("order-form").addEventListener("submit", function(e) {
   e.preventDefault();
-  
   const name = document.getElementById("customer-name").value;
   const phone = document.getElementById("customer-phone").value;
   const city = document.getElementById("customer-city").value;
@@ -104,20 +97,15 @@ document.getElementById("order-form").addEventListener("submit", function(e) {
   let message = `🛒 طلب جديد من أعلاف السالم\n`;
   message += `👤 الاسم: ${name}\n📞 الهاتف: ${phone}\n🏙️ المدينة: ${city}\n📍 الموقع: ${location}\n\n`;
   message += `📦 المنتجات:\n`;
-
   let total = 0;
   cart.forEach((item, i) => {
     const subtotal = item.qty * item.price;
     total += subtotal;
-    message += `${i+1}. ${item.name} — ${item.qty} × ${item.price.toLocaleString()} = ${subtotal.toLocaleString()} دينار\n`;
+    message += `${i+1}. ${item.name} — ${item.qty} × ${item.price} = ${subtotal} دينار\n`;
   });
-
   message += `\n💰 الإجمالي: ${total.toLocaleString()} دينار`;
 
   const whatsappNumber = "9647704159475";
   const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
   window.open(url, "_blank");
 });
-
-// ===== عرض السلة عند تحميل الصفحة =====
-renderCart();
