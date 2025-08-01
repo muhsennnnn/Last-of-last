@@ -4,7 +4,6 @@ body {
   margin: 0;
   padding: 0;
   color: #333;
-  line-height: 1.6;
 }
 
 /* ===== الهيدر ===== */
@@ -16,14 +15,14 @@ header {
   box-shadow: 0 3px 6px rgba(0,0,0,0.2);
 }
 
-header h1 {
-  margin: 0;
-  font-size: 28px;
-}
-
-header p {
-  margin: 5px 0 0;
-  font-size: 16px;
+.section-title {
+  text-align: center;
+  background: #e8f5e9;
+  padding: 10px;
+  border-radius: 6px;
+  margin: 15px;
+  font-size: 20px;
+  color: #2e7d32;
 }
 
 /* ===== المنتجات ===== */
@@ -32,7 +31,7 @@ header p {
   flex-wrap: wrap;
   gap: 15px;
   justify-content: center;
-  padding: 20px;
+  padding: 10px;
 }
 
 .product-card {
@@ -41,30 +40,24 @@ header p {
   border-radius: 8px;
   box-shadow: 0 3px 8px rgba(0,0,0,0.1);
   text-align: center;
-  width: 240px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  width: 220px;
 }
 
 .product-card img {
   width: 100%;
-  height: 160px;
+  height: 150px;
   object-fit: cover;
   border-radius: 6px;
 }
 
 .product-card h3 {
   margin: 10px 0;
-  font-size: 18px;
+  font-size: 16px;
   color: #2e7d32;
 }
 
 .product-card p {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
   color: #555;
 }
@@ -72,18 +65,12 @@ header p {
 /* ===== السلة ونموذج الطلب ===== */
 .cart, .order-form {
   background: white;
-  margin: 20px;
-  padding: 20px;
+  margin: 15px;
+  padding: 15px;
   border-radius: 8px;
   box-shadow: 0 3px 8px rgba(0,0,0,0.1);
 }
 
-.cart h2, .order-form h2 {
-  margin-top: 0;
-  color: #2e7d32;
-}
-
-/* ===== الحقول ===== */
 input {
   display: block;
   margin: 10px auto;
@@ -92,15 +79,8 @@ input {
   max-width: 400px;
   border: 1px solid #ccc;
   border-radius: 6px;
-  transition: border-color 0.2s;
 }
 
-input:focus {
-  border-color: #4CAF50;
-  outline: none;
-}
-
-/* ===== الأزرار ===== */
 button {
   padding: 12px;
   background: #4CAF50;
@@ -111,8 +91,6 @@ button {
   border-radius: 6px;
   width: 90%;
   max-width: 400px;
-  font-size: 16px;
-  transition: background 0.2s;
 }
 
 button:hover {
@@ -124,9 +102,8 @@ footer {
   background: #2e7d32;
   color: white;
   text-align: center;
-  padding: 15px;
+  padding: 10px;
   margin-top: 20px;
-  font-size: 14px;
 }
 
 footer a {
@@ -134,11 +111,7 @@ footer a {
   text-decoration: none;
 }
 
-footer a:hover {
-  text-decoration: underline;
-}
-
-/* ===== أزرار التواصل العائمة ===== */
+/* ===== أزرار التواصل ===== */
 .floating-buttons {
   position: fixed;
   bottom: 20px;
@@ -146,7 +119,6 @@ footer a:hover {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  z-index: 1000;
 }
 
 .floating-buttons a {
@@ -155,14 +127,9 @@ footer a:hover {
   border-radius: 50%;
   background: white;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  transition: transform 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.floating-buttons a:hover {
-  transform: scale(1.1);
 }
 
 .floating-buttons img {
