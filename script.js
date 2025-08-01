@@ -13,7 +13,7 @@ const productList = document.getElementById("product-list");
 const cartItems = document.getElementById("cart-items");
 const cartTotal = document.getElementById("cart-total");
 
-// تحميل السلة من LocalStorage إذا كانت موجودة
+// تحميل السلة من LocalStorage
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 // ===== عرض المنتجات =====
@@ -75,14 +75,14 @@ function updateQty(index, newQty) {
   renderCart();
 }
 
-// ===== حذف منتج من السلة =====
+// ===== حذف منتج =====
 function removeItem(index) {
   cart.splice(index, 1);
   saveCart();
   renderCart();
 }
 
-// ===== حفظ السلة في LocalStorage =====
+// ===== حفظ السلة =====
 function saveCart() {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
