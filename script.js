@@ -1,4 +1,3 @@
-// ===== المنتجات =====
 const pigeonFeed = [
   { name: "حنطة", price: 600, image: "https://www2.0zz0.com/2025/08/03/15/847553061.jpeg" },
   { name: "شعير", price: 800, image: "https://www2.0zz0.com/2025/08/03/15/576922852.jpeg" },
@@ -20,13 +19,12 @@ const ornamentalBirds = [
 ];
 
 const specialOffer = [
-  { name: "دخن للكيس الواحد", price: 16000, image: "https://www2.0zz0.com/2025/08/03/15/867668577.jpeg" },
+  { name: "كيس دخن 25 كيلو", price: 16000, image: "https://www2.0zz0.com/2025/08/03/15/867668577.jpeg" },
   { name: "خلطة كوكتيل 25 كغ توصيل مجاني", price: 45000, image: "https://www2.0zz0.com/2025/08/03/15/629820578.jpeg" },
   { name: "خلطة طيور حب صيفية 25 كغ توصيل مجاني", price: 35000, image: "https://www2.0zz0.com/2025/08/03/15/397332263.jpeg" },
   { name: "خلطة طيور حب شتوية 25 كغ توصيل مجاني", price: 37000, image: "https://www2.0zz0.com/2025/08/03/15/249540109.jpeg" }
 ];
 
-// ===== عرض المنتجات =====
 function renderProducts(products, containerId) {
   const container = document.getElementById(containerId);
   products.forEach((product, i) => {
@@ -47,7 +45,6 @@ renderProducts(pigeonFeed, "pigeon-feed");
 renderProducts(ornamentalBirds, "ornamental-birds");
 renderProducts(specialOffer, "special-offer");
 
-// ===== السلة =====
 let cart = [];
 const cartItems = document.getElementById("cart-items");
 const cartTotal = document.getElementById("cart-total");
@@ -79,11 +76,16 @@ function renderCart() {
 
     const row = document.createElement("tr");
     row.innerHTML = `
-      <td>${item.name}</td>
+      <td class="cart-product">
+        <img src="${item.image}" alt="${item.name}">
+        <span>${item.name}</span>
+      </td>
       <td>
-        <button class="qty-btn" onclick="changeQty(${i}, -1)">➖</button>
-        ${item.qty}
-        <button class="qty-btn" onclick="changeQty(${i}, 1)">➕</button>
+        <div class="qty-control">
+          <button class="qty-btn minus" onclick="changeQty(${i}, -1)">−</button>
+          <span class="qty-value">${item.qty}</span>
+          <button class="qty-btn plus" onclick="changeQty(${i}, 1)">+</button>
+        </div>
       </td>
       <td>${item.price}</td>
       <td>${subtotal}</td>
@@ -107,7 +109,6 @@ function removeFromCart(index) {
   renderCart();
 }
 
-// ===== إرسال الطلب =====
 document.getElementById("order-form").addEventListener("submit", function(e) {
   e.preventDefault();
   const name = document.getElementById("customer-name").value;
