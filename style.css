@@ -163,18 +163,21 @@ footer a {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
+  gap: 10px;
 }
 
 .qty-btn {
-  width: 28px;
-  height: 28px;
+  width: 35px;
+  height: 35px;
   border: none;
   border-radius: 50%;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
   cursor: pointer;
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .qty-btn.plus {
@@ -194,12 +197,12 @@ footer a {
 }
 
 .qty-value {
-  width: 30px;
+  width: 35px;
   text-align: center;
   font-weight: bold;
   background: #f0f0f0;
-  border-radius: 4px;
-  padding: 2px;
+  border-radius: 6px;
+  padding: 5px;
 }
 
 .remove-btn {
