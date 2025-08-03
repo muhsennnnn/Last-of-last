@@ -1,31 +1,32 @@
-// ===== المنتجات مع أماكن الصور =====
+// ===== المنتجات =====
 const pigeonFeed = [
-  { name: "حنطة", price: 600, image: "https://www2.0zz0.com/2025/08/03/14/511679825.jpeg" },
-  { name: "شعير", price: 800, image: "https://www2.0zz0.com/2025/08/03/14/735542040.jpeg" },
-  { name: "خلطة حنطة خشنة", price: 600, image: "https://www2.0zz0.com/2025/08/03/14/331574489.jpeg" },
-  { name: "خلطة حنطة ناعمة", price: 700, image: "PUT_IMAGE_URL_HERE" },
-  { name: "خلطة ناعمة بدون حنطة", price: 900, image: "PUT_IMAGE_URL_HERE" },
-  { name: "خلطة خشنة بدون حنطة", price: 900, image: "PUT_IMAGE_URL_HERE" },
-  { name: "دخن", price: 1000, image: "https://www2.0zz0.com/2025/08/03/14/270033331.jpeg" }
+  { name: "حنطة", price: 600, image: "https://www2.0zz0.com/2025/08/03/15/847553061.jpeg" },
+  { name: "شعير", price: 800, image: "https://www2.0zz0.com/2025/08/03/15/576922852.jpeg" },
+  { name: "خلطة حنطة خشنة", price: 600, image: "https://www2.0zz0.com/2025/08/03/15/492413115.jpeg" },
+  { name: "خلطة حنطة ناعمة", price: 700, image: "PUT_IMAGE_URL" },
+  { name: "خلطة ناعمة بدون حنطة", price: 900, image: "PUT_IMAGE_URL" },
+  { name: "خلطة خشنة بدون حنطة", price: 900, image: "PUT_IMAGE_URL" },
+  { name: "دخن", price: 1000, image: "https://www2.0zz0.com/2025/08/03/15/867668577.jpeg" }
 ];
 
 const ornamentalBirds = [
-  { name: "دخن", price: 1000, image: "https://www2.0zz0.com/2025/08/03/14/270033331.jpeg" },
-  { name: "خلطة طيور حب", price: 1500, image: "https://www2.0zz0.com/2025/08/03/15/700179324.jpeg" },
-  { name: "خلطة كوكتيل", price: 2000, image: "https://www2.0zz0.com/2025/08/03/14/271367435.jpeg" },
-  { name: "خلطة كناري", price: 2500, image: "https://www2.0zz0.com/2025/08/03/14/807076462.jpeg" },
-  { name: "حب اسود ناعم", price: 2000, image: "https://www2.0zz0.com/2025/08/03/15/530509867.jpeg" },
-  { name: "حب اسود خشن", price: 2000, image: "PUT_IMAGE_URL_HERE" },
-  { name: "خلطة بلبل", price: 8000, image: "https://www2.0zz0.com/2025/08/03/15/613116872.jpeg" }
+  { name: "دخن", price: 1000, image: "https://www2.0zz0.com/2025/08/03/15/867668577.jpeg" },
+  { name: "خلطة طيور حب", price: 1500, image: "https://www2.0zz0.com/2025/08/03/15/397332263.jpeg" },
+  { name: "خلطة كوكتيل", price: 2000, image: "https://www2.0zz0.com/2025/08/03/15/629820578.jpeg" },
+  { name: "خلطة كناري", price: 2500, image: "https://www2.0zz0.com/2025/08/03/15/851081915.jpeg" },
+  { name: "حب اسود ناعم", price: 2000, image: "https://www2.0zz0.com/2025/08/03/15/313777410.jpeg" },
+  { name: "حب اسود خشن", price: 1500, image: "PUT_IMAGE_URL" },
+  { name: "خلطة بلبل", price: 8000, image: "https://www2.0zz0.com/2025/08/03/15/701115346.jpeg" }
 ];
 
 const specialOffer = [
-  { name: "دخن الكيس ٢٥ كيلو", price: 16000, image: "https://www2.0zz0.com/2025/08/03/14/270033331.jpeg" },
-  { name: "خلطة كوكتيل 25 كغ توصيل مجاني", price: 45000, image: "https://www2.0zz0.com/2025/08/03/14/271367435.jpeg" },
-  { name: "خلطة طيور حب صيفية 25 كغ توصيل مجاني", price: 35000, image: "https://www2.0zz0.com/2025/08/03/15/700179324.jpeg" },
-  { name: "خلطة طيور حب شتوية 25 كغ توصيل مجاني", price: 37000, image: "https://www2.0zz0.com/2025/08/03/14/185871672.jpeg" }
+  { name: "دخن", price: 16000, image: "https://www2.0zz0.com/2025/08/03/15/867668577.jpeg" },
+  { name: "خلطة كوكتيل 25 كغ توصيل مجاني", price: 45000, image: "https://www2.0zz0.com/2025/08/03/15/629820578.jpeg" },
+  { name: "خلطة طيور حب صيفية 25 كغ توصيل مجاني", price: 35000, image: "https://www2.0zz0.com/2025/08/03/15/397332263.jpeg" },
+  { name: "خلطة طيور حب شتوية 25 كغ توصيل مجاني", price: 37000, image: "https://www2.0zz0.com/2025/08/03/15/249540109.jpeg" }
 ];
 
+// ===== عرض المنتجات =====
 function renderProducts(products, containerId) {
   const container = document.getElementById(containerId);
   products.forEach((product, i) => {
@@ -72,7 +73,7 @@ function addToCart(category, index) {
 function renderCart() {
   cartItems.innerHTML = "";
   let total = 0;
-  cart.forEach((item, i) => {
+  cart.forEach(item => {
     const subtotal = item.qty * item.price;
     total += subtotal;
     const li = document.createElement("li");
@@ -82,6 +83,7 @@ function renderCart() {
   cartTotal.textContent = `الإجمالي: ${total.toLocaleString()} دينار`;
 }
 
+// ===== إرسال الطلب =====
 document.getElementById("order-form").addEventListener("submit", function(e) {
   e.preventDefault();
   const name = document.getElementById("customer-name").value;
