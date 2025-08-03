@@ -20,7 +20,7 @@ const ornamentalBirds = [
 ];
 
 const specialOffer = [
-  { name: "دخن", price: 16000, image: "https://www2.0zz0.com/2025/08/03/15/867668577.jpeg" },
+  { name: "دخن للكيس الواحد", price: 16000, image: "https://www2.0zz0.com/2025/08/03/15/867668577.jpeg" },
   { name: "خلطة كوكتيل 25 كغ توصيل مجاني", price: 45000, image: "https://www2.0zz0.com/2025/08/03/15/629820578.jpeg" },
   { name: "خلطة طيور حب صيفية 25 كغ توصيل مجاني", price: 35000, image: "https://www2.0zz0.com/2025/08/03/15/397332263.jpeg" },
   { name: "خلطة طيور حب شتوية 25 كغ توصيل مجاني", price: 37000, image: "https://www2.0zz0.com/2025/08/03/15/249540109.jpeg" }
