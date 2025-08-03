@@ -120,12 +120,17 @@ footer a {
 }
 
 .delivery-note {
-  background: #fff8dc; /* لون فاتح مريح */
+  background: #fff8dc;
   border: 1px solid #f0c36d;
-  color: #8b6a00;
+  color: #5a4500;
   padding: 12px;
   margin-top: 10px;
   border-radius: 6px;
-  font-size: 14px;
-  line-height: 1.4;
+  font-size: 15px;
+  line-height: 1.6;
+  direction: rtl;
+}
+
+.delivery-note strong {
+  color: #d35400;
 }
