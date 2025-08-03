@@ -6,7 +6,6 @@ body {
   color: #333;
 }
 
-/* ===== الهيدر ===== */
 header {
   background: linear-gradient(135deg, #4CAF50, #2e7d32);
   color: white;
@@ -15,14 +14,34 @@ header {
   box-shadow: 0 3px 6px rgba(0,0,0,0.2);
 }
 
-.section-title {
-  text-align: center;
-  background: #e8f5e9;
-  padding: 10px;
-  border-radius: 6px;
+/* ===== التبويبات ===== */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
   margin: 15px;
-  font-size: 20px;
+}
+
+.tab-button {
+  background: #e8f5e9;
+  border: 1px solid #4CAF50;
   color: #2e7d32;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.tab-button.active {
+  background: #4CAF50;
+  color: white;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
 }
 
 /* ===== المنتجات ===== */
@@ -50,18 +69,6 @@ header {
   border-radius: 6px;
 }
 
-.product-card h3 {
-  margin: 10px 0;
-  font-size: 16px;
-  color: #2e7d32;
-}
-
-.product-card p {
-  font-size: 14px;
-  font-weight: bold;
-  color: #555;
-}
-
 /* ===== السلة ونموذج الطلب ===== */
 .cart, .order-form {
   background: white;
@@ -76,7 +83,6 @@ input {
   margin: 10px auto;
   padding: 12px;
   width: 90%;
-  max-width: 400px;
   border: 1px solid #ccc;
   border-radius: 6px;
 }
@@ -89,8 +95,6 @@ button {
   margin: 10px auto;
   cursor: pointer;
   border-radius: 6px;
-  width: 90%;
-  max-width: 400px;
 }
 
 button:hover {
@@ -103,12 +107,10 @@ footer {
   color: white;
   text-align: center;
   padding: 10px;
-  margin-top: 20px;
 }
 
 footer a {
   color: #ffeb3b;
-  text-decoration: none;
 }
 
 /* ===== أزرار التواصل ===== */
@@ -134,5 +136,4 @@ footer a {
 
 .floating-buttons img {
   width: 70%;
-  height: 70%;
 }
