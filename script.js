@@ -11,18 +11,18 @@ const pigeonFeed = [
 
 const ornamentalBirds = [
   { name: "دخن", price: 1000, image: "https://www2.0zz0.com/2025/08/03/14/270033331.jpeg" },
-  { name: "خلطة طيور حب", price: 1500, image: "https://www2.0zz0.com/2025/08/03/14/185871672.jpeg" },
-  { name: "خلطة كوكتيل", price: 2000, image: "PUT_IMAGE_URL_HERE" },
+  { name: "خلطة طيور حب", price: 1500, image: "https://www2.0zz0.com/2025/08/03/15/700179324.jpeg" },
+  { name: "خلطة كوكتيل", price: 2000, image: "https://www2.0zz0.com/2025/08/03/14/271367435.jpeg" },
   { name: "خلطة كناري", price: 2500, image: "https://www2.0zz0.com/2025/08/03/14/807076462.jpeg" },
-  { name: "حب اسود ناعم", price: 2000, image: "PUT_IMAGE_URL_HERE" },
+  { name: "حب اسود ناعم", price: 2000, image: "https://www2.0zz0.com/2025/08/03/15/530509867.jpeg" },
   { name: "حب اسود خشن", price: 1500, image: "PUT_IMAGE_URL_HERE" },
-  { name: "خلطة بلبل", price: 8000, image: "PUT_IMAGE_URL_HERE" }
+  { name: "خلطة بلبل", price: 8000, image: "https://www2.0zz0.com/2025/08/03/15/613116872.jpeg" }
 ];
 
 const specialOffer = [
-  { name: "دخن", price: 16000, image: "PUT_IMAGE_URL_HERE" },
+  { name: "دخن", price: 16000, image: "https://www2.0zz0.com/2025/08/03/14/270033331.jpeg" },
   { name: "خلطة كوكتيل 25 كغ توصيل مجاني", price: 45000, image: "https://www2.0zz0.com/2025/08/03/14/271367435.jpeg" },
-  { name: "خلطة طيور حب صيفية 25 كغ توصيل مجاني", price: 35000, image: "PUT_IMAGE_URL_HERE" },
+  { name: "خلطة طيور حب صيفية 25 كغ توصيل مجاني", price: 35000, image: "https://www2.0zz0.com/2025/08/03/15/700179324.jpeg" },
   { name: "خلطة طيور حب شتوية 25 كغ توصيل مجاني", price: 37000, image: "https://www2.0zz0.com/2025/08/03/14/185871672.jpeg" }
 ];
 
