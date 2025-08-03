@@ -1,4 +1,3 @@
-// ===== المنتجات =====
 const pigeonFeed = [
   { name: "حنطة", price: 600, image: "https://www2.0zz0.com/2025/08/03/15/847553061.jpeg" },
   { name: "شعير", price: 800, image: "https://www2.0zz0.com/2025/08/03/15/576922852.jpeg" },
@@ -26,7 +25,6 @@ const specialOffer = [
   { name: "خلطة طيور حب شتوية 25 كغ توصيل مجاني", price: 37000, image: "https://www2.0zz0.com/2025/08/03/15/249540109.jpeg" }
 ];
 
-// ===== عرض المنتجات =====
 function renderProducts(products, containerId) {
   const container = document.getElementById(containerId);
   products.forEach((product, i) => {
@@ -47,7 +45,6 @@ renderProducts(pigeonFeed, "pigeon-feed");
 renderProducts(ornamentalBirds, "ornamental-birds");
 renderProducts(specialOffer, "special-offer");
 
-// ===== السلة =====
 let cart = [];
 const cartItems = document.getElementById("cart-items");
 const cartTotal = document.getElementById("cart-total");
@@ -112,7 +109,6 @@ function removeFromCart(index) {
   renderCart();
 }
 
-// ===== إرسال الطلب =====
 document.getElementById("order-form").addEventListener("submit", function(e) {
   e.preventDefault();
   const name = document.getElementById("customer-name").value;
@@ -144,4 +140,5 @@ document.getElementById("order-form").addEventListener("submit", function(e) {
 
   const whatsappNumber = "9647704159475";
   const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-  window
+  window.open(url, "_blank");
+});
