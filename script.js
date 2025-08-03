@@ -1,4 +1,4 @@
-// ===== بيانات المنتجات =====
+// ===== المنتجات مع أماكن الصور =====
 const pigeonFeed = [
   { name: "حنطة", price: 600, image: "PUT_IMAGE_URL_HERE" },
   { name: "شعير", price: 800, image: "PUT_IMAGE_URL_HERE" },
@@ -26,9 +26,8 @@ const specialOffer = [
   { name: "خلطة طيور حب شتوية 25 كغ توصيل مجاني", price: 37000, image: "PUT_IMAGE_URL_HERE" }
 ];
 
-// ===== عرض المنتجات =====
 function renderProducts(products, containerId) {
-  const container = document.querySelector(`#${containerId} .products`);
+  const container = document.getElementById(containerId);
   products.forEach((product, i) => {
     const card = document.createElement("div");
     card.className = "product-card";
@@ -46,14 +45,6 @@ function renderProducts(products, containerId) {
 renderProducts(pigeonFeed, "pigeon-feed");
 renderProducts(ornamentalBirds, "ornamental-birds");
 renderProducts(specialOffer, "special-offer");
-
-// ===== التبويبات =====
-function openTab(tabId) {
-  document.querySelectorAll(".tab-content").forEach(tab => tab.classList.remove("active"));
-  document.querySelectorAll(".tab-button").forEach(btn => btn.classList.remove("active"));
-  document.getElementById(tabId).classList.add("active");
-  document.querySelector(`.tab-button[onclick="openTab('${tabId}')"]`).classList.add("active");
-}
 
 // ===== السلة =====
 let cart = [];
@@ -81,7 +72,7 @@ function addToCart(category, index) {
 function renderCart() {
   cartItems.innerHTML = "";
   let total = 0;
-  cart.forEach(item => {
+  cart.forEach((item, i) => {
     const subtotal = item.qty * item.price;
     total += subtotal;
     const li = document.createElement("li");
