@@ -1,3 +1,4 @@
+// ===== المنتجات =====
 const pigeonFeed = [
   { name: "حنطة", price: 600, image: "https://www2.0zz0.com/2025/08/03/15/847553061.jpeg" },
   { name: "شعير", price: 800, image: "https://www2.0zz0.com/2025/08/03/15/576922852.jpeg" },
@@ -25,8 +26,10 @@ const specialOffer = [
   { name: "خلطة طيور حب شتوية 25 كغ توصيل مجاني", price: 37000, image: "https://www2.0zz0.com/2025/08/03/15/249540109.jpeg" }
 ];
 
+// ===== عرض المنتجات =====
 function renderProducts(products, containerId) {
   const container = document.getElementById(containerId);
+  container.innerHTML = "";
   products.forEach((product, i) => {
     const card = document.createElement("div");
     card.className = "product-card";
@@ -35,7 +38,7 @@ function renderProducts(products, containerId) {
       <h3>${product.name}</h3>
       <p>${product.price.toLocaleString()} دينار</p>
       <input type="number" id="${containerId}-qty-${i}" value="1" min="1">
-      <button onclick="addToCart('${containerId}', ${i})">➕ أضف إلى السلة</button>
+      <button onclick="addToCart('${containerId}', ${i})">أضف إلى السلة</button>
     `;
     container.appendChild(card);
   });
@@ -45,9 +48,22 @@ renderProducts(pigeonFeed, "pigeon-feed");
 renderProducts(ornamentalBirds, "ornamental-birds");
 renderProducts(specialOffer, "special-offer");
 
+// ===== السلة =====
 let cart = [];
 const cartItems = document.getElementById("cart-items");
 const cartTotal = document.getElementById("cart-total");
+const cartCount = document.getElementById("cart-count");
+
+function updateCartCount() {
+  cartCount.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
+}
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.className = "show";
+  setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+}
 
 function addToCart(category, index) {
   const productsMap = {
@@ -65,6 +81,8 @@ function addToCart(category, index) {
     cart.push({ ...product, qty });
   }
   renderCart();
+  updateCartCount();
+  showToast("✅ تمت الإضافة للسلة");
 }
 
 function renderCart() {
@@ -73,72 +91,34 @@ function renderCart() {
   cart.forEach((item, i) => {
     const subtotal = item.qty * item.price;
     total += subtotal;
-
-    const row = document.createElement("tr");
-    row.innerHTML = `
-      <td class="cart-product">
-        <img src="${item.image}" alt="${item.name}">
-        <span>${item.name}</span>
-      </td>
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td class="cart-product"><img src="${item.image}">${item.name}</td>
       <td>
         <div class="qty-control">
-          <button class="qty-btn minus" onclick="changeQty(${i}, -1)">−</button>
+          <button class="qty-btn minus" onclick="changeQty(${i}, -1)">-</button>
           <span class="qty-value">${item.qty}</span>
           <button class="qty-btn plus" onclick="changeQty(${i}, 1)">+</button>
         </div>
       </td>
-      <td>${item.price}</td>
-      <td>${subtotal}</td>
-      <td><button class="remove-btn" onclick="removeFromCart(${i})">❌</button></td>
+      <td>${item.price.toLocaleString()}</td>
+      <td>${subtotal.toLocaleString()}</td>
+      <td><button class="remove-btn" onclick="removeFromCart(${i})">🗑</button></td>
     `;
-    cartItems.appendChild(row);
+    cartItems.appendChild(tr);
   });
   cartTotal.textContent = `💰 الإجمالي: ${total.toLocaleString()} دينار`;
 }
 
-function changeQty(index, delta) {
-  cart[index].qty += delta;
-  if (cart[index].qty <= 0) {
+function changeQty(index, amount) {
+  if (cart[index].qty + amount > 0) {
+    cart[index].qty += amount;
+  } else {
     cart.splice(index, 1);
   }
   renderCart();
+  updateCartCount();
 }
 
 function removeFromCart(index) {
-  cart.splice(index, 1);
-  renderCart();
-}
-
-document.getElementById("order-form").addEventListener("submit", function(e) {
-  e.preventDefault();
-  const name = document.getElementById("customer-name").value;
-  const phone = document.getElementById("customer-phone").value;
-  const city = document.getElementById("customer-city").value;
-  const location = document.getElementById("customer-location").value;
-
-  if (!name || !phone || !city || !location || cart.length === 0) {
-    alert("⚠️ يرجى تعبئة كافة الحقول وإضافة منتجات.");
-    return;
-  }
-
-  let message = `🛒 *طلب جديد من أعلاف السالم*\n`;
-  message += `👤 *الاسم:* ${name}\n📞 *الهاتف:* ${phone}\n🏙️ *المدينة:* ${city}\n📍 *الموقع:* ${location}\n\n`;
-  message += `📦 *المنتجات:*\n`;
-  let total = 0;
-  cart.forEach((item, i) => {
-    const subtotal = item.qty * item.price;
-    total += subtotal;
-    message += `${i+1}. ${item.name} — ${item.qty} × ${item.price} = ${subtotal} دينار\n`;
-  });
-  message += `\n💰 *الإجمالي:* ${total.toLocaleString()} دينار\n\n`;
-
-  message += `🚚 *ملاحظة التوصيل:*\n`;
-  message += `- تكلفة التوصيل إلى المحافظات: 6000 دينار\n`;
-  message += `- كل 25 كيلو تعتبر طلبية واحدة حسب سياسة شركة التوصيل\n`;
-  message += `- تكلفة التوصيل داخل الموصل: من 2000 إلى 5000 دينار حسب المنطقة\n`;
-  message += `- هذه التكاليف لا تشمل العروض الخاصة بالتوصيل المجاني`;
-
-  const whatsappNumber = "9647704159475";
-  const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-  window.open(url, "_blank");
-});
+  cart
