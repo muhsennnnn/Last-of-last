@@ -37,7 +37,7 @@ function renderProducts(products, containerId) {
       <h3>${product.name}</h3>
       <p>${product.price.toLocaleString()} دينار</p>
       <input type="number" id="${containerId}-qty-${i}" value="1" min="1">
-      <button onclick="addToCart('${containerId}', ${i})">أضف إلى السلة</button>
+      <button onclick="addToCart('${containerId}', ${i})">➕ أضف إلى السلة</button>
     `;
     container.appendChild(card);
   });
@@ -77,10 +77,10 @@ function renderCart() {
     const subtotal = item.qty * item.price;
     total += subtotal;
     const li = document.createElement("li");
-    li.textContent = `${item.name}: ${item.qty} × ${item.price} = ${subtotal} دينار`;
+    li.textContent = `📦 ${item.name}: ${item.qty} × ${item.price} = ${subtotal} دينار`;
     cartItems.appendChild(li);
   });
-  cartTotal.textContent = `الإجمالي: ${total.toLocaleString()} دينار`;
+  cartTotal.textContent = `💰 الإجمالي: ${total.toLocaleString()} دينار`;
 }
 
 // ===== إرسال الطلب =====
@@ -92,20 +92,27 @@ document.getElementById("order-form").addEventListener("submit", function(e) {
   const location = document.getElementById("customer-location").value;
 
   if (!name || !phone || !city || !location || cart.length === 0) {
-    alert("يرجى تعبئة كافة الحقول وإضافة منتجات.");
+    alert("⚠️ يرجى تعبئة كافة الحقول وإضافة منتجات.");
     return;
   }
 
-  let message = `🛒 طلب جديد من أعلاف السالم\n`;
-  message += `👤 الاسم: ${name}\n📞 الهاتف: ${phone}\n🏙️ المدينة: ${city}\n📍 الموقع: ${location}\n\n`;
-  message += `📦 المنتجات:\n`;
+  let message = `🛒 *طلب جديد من أعلاف السالم*\n`;
+  message += `👤 *الاسم:* ${name}\n📞 *الهاتف:* ${phone}\n🏙️ *المدينة:* ${city}\n📍 *الموقع:* ${location}\n\n`;
+  message += `📦 *المنتجات:*\n`;
   let total = 0;
   cart.forEach((item, i) => {
     const subtotal = item.qty * item.price;
     total += subtotal;
     message += `${i+1}. ${item.name} — ${item.qty} × ${item.price} = ${subtotal} دينار\n`;
   });
-  message += `\n💰 الإجمالي: ${total.toLocaleString()} دينار`;
+  message += `\n💰 *الإجمالي:* ${total.toLocaleString()} دينار\n\n`;
+
+  // 🔹 ملاحظة التوصيل
+  message += `🚚 *ملاحظة التوصيل:*\n`;
+  message += `- تكلفة التوصيل إلى المحافظات: 6000 دينار\n`;
+  message += `- كل 25 كيلو تعتبر طلبية واحدة حسب سياسة شركة التوصيل\n`;
+  message += `- تكلفة التوصيل داخل الموصل: من 2000 إلى 5000 دينار حسب المنطقة\n`;
+  message += `- هذه التكاليف لا تشمل العروض الخاصة بالتوصيل المجاني`;
 
   const whatsappNumber = "9647704159475";
   const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
