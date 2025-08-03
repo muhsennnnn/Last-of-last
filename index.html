@@ -14,23 +14,25 @@
     <p>لسنا الوحيدين لكننا الافضل</p>
   </header>
 
-  <!-- ====== المنتجات ====== -->
-  <main>
-    <section>
-      <h2 class="section-title">🕊 قسم علف طيور الحمام</h2>
-      <div class="products" id="pigeon-feed"></div>
-    </section>
+  <!-- ====== التبويبات ====== -->
+  <div class="tabs">
+    <button class="tab-button active" onclick="openTab('pigeon-feed')">🕊 علف طيور الحمام</button>
+    <button class="tab-button" onclick="openTab('ornamental-birds')">🐦 طيور الزينة</button>
+    <button class="tab-button" onclick="openTab('special-offer')">🎯 العرض الخاص</button>
+  </div>
 
-    <section>
-      <h2 class="section-title">🐦 قسم طيور الزينة</h2>
-      <div class="products" id="ornamental-birds"></div>
-    </section>
+  <!-- ====== محتوى التبويبات ====== -->
+  <div id="pigeon-feed" class="tab-content active">
+    <div class="products"></div>
+  </div>
 
-    <section>
-      <h2 class="section-title">🎯 قسم العرض الخاص</h2>
-      <div class="products" id="special-offer"></div>
-    </section>
-  </main>
+  <div id="ornamental-birds" class="tab-content">
+    <div class="products"></div>
+  </div>
+
+  <div id="special-offer" class="tab-content">
+    <div class="products"></div>
+  </div>
 
   <!-- ====== السلة ====== -->
   <section class="cart">
@@ -57,7 +59,7 @@
     📞 للاستفسار: <a href="tel:07704159475">0770 415 9475</a>
   </footer>
 
-  <!-- ====== أزرار التواصل العائمة ====== -->
+  <!-- ====== أزرار التواصل ====== -->
   <div class="floating-buttons">
     <a class="messenger-float" href="https://m.me/a.laf.alsalm" target="_blank">
       <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Facebook_Messenger_4_Logo.svg" alt="مسنجر">
