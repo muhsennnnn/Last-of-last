@@ -84,9 +84,11 @@ function renderCart() {
         <span>${item.name}</span>
       </td>
       <td>
-        <button class="qty-btn" onclick="changeQty(${i}, -1)">➖</button>
-        ${item.qty}
-        <button class="qty-btn" onclick="changeQty(${i}, 1)">➕</button>
+        <div class="qty-control">
+          <button class="qty-btn minus" onclick="changeQty(${i}, -1)">−</button>
+          <span class="qty-value">${item.qty}</span>
+          <button class="qty-btn plus" onclick="changeQty(${i}, 1)">+</button>
+        </div>
       </td>
       <td>${item.price}</td>
       <td>${subtotal}</td>
@@ -142,5 +144,4 @@ document.getElementById("order-form").addEventListener("submit", function(e) {
 
   const whatsappNumber = "9647704159475";
   const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-  window.open(url, "_blank");
-});
+  window
