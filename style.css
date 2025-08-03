@@ -24,11 +24,11 @@ header {
   color: #2e7d32;
 }
 
+/* ===== عرض المنتجات على صفين في الموبايل ===== */
 .products {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 15px;
-  justify-content: center;
   padding: 10px;
 }
 
@@ -38,7 +38,6 @@ header {
   border-radius: 8px;
   box-shadow: 0 3px 8px rgba(0,0,0,0.1);
   text-align: center;
-  width: 220px;
 }
 
 .product-card img {
@@ -128,14 +127,8 @@ footer a {
   border-radius: 6px;
   font-size: 15px;
   line-height: 1.6;
-  direction: rtl;
 }
 
-.delivery-note strong {
-  color: #d35400;
-}
-
-/* جدول السلة */
 .cart-table {
   width: 100%;
   border-collapse: collapse;
@@ -146,6 +139,7 @@ footer a {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: center;
+  vertical-align: middle;
 }
 
 .cart-table th {
@@ -153,24 +147,68 @@ footer a {
   color: white;
 }
 
-/* أزرار صغيرة مربعة */
-.qty-btn, .remove-btn {
-  background: #4CAF50;
-  color: white;
-  border: none;
-  padding: 5px 8px;
-  margin: 0 2px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 12px;
+.cart-product {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.qty-btn:hover {
-  background: #388e3c;
+.cart-product img {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+}
+
+.qty-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.qty-btn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  color: white;
+}
+
+.qty-btn.plus {
+  background-color: #4CAF50;
+}
+
+.qty-btn.plus:hover {
+  background-color: #388e3c;
+}
+
+.qty-btn.minus {
+  background-color: #e53935;
+}
+
+.qty-btn.minus:hover {
+  background-color: #c62828;
+}
+
+.qty-value {
+  width: 30px;
+  text-align: center;
+  font-weight: bold;
+  background: #f0f0f0;
+  border-radius: 4px;
+  padding: 2px;
 }
 
 .remove-btn {
   background: red;
+  color: white;
+  border: none;
+  padding: 5px 8px;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .remove-btn:hover {
