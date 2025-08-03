@@ -1,17 +1,32 @@
+// ===== المنتجات =====
 const pigeonFeed = [
   { name: "حنطة", price: 600, image: "https://www2.0zz0.com/2025/08/03/15/847553061.jpeg" },
   { name: "شعير", price: 800, image: "https://www2.0zz0.com/2025/08/03/15/576922852.jpeg" },
-  { name: "خلطة حنطة خشنة", price: 600, image: "https://www2.0zz0.com/2025/08/03/15/492413115.jpeg" }
+  { name: "خلطة حنطة خشنة", price: 600, image: "https://www2.0zz0.com/2025/08/03/15/492413115.jpeg" },
+  { name: "خلطة حنطة ناعمة", price: 700, image: "PUT_IMAGE_URL" },
+  { name: "خلطة ناعمة بدون حنطة", price: 900, image: "PUT_IMAGE_URL" },
+  { name: "خلطة خشنة بدون حنطة", price: 900, image: "PUT_IMAGE_URL" },
+  { name: "دخن", price: 1000, image: "https://www2.0zz0.com/2025/08/03/15/867668577.jpeg" }
 ];
 
 const ornamentalBirds = [
-  { name: "حب اسود خشن", price: 1500, image: "https://www2.0zz0.com/2025/08/03/16/831250527.jpeg" }
+  { name: "دخن", price: 1000, image: "https://www2.0zz0.com/2025/08/03/15/867668577.jpeg" },
+  { name: "خلطة طيور حب", price: 1500, image: "https://www2.0zz0.com/2025/08/03/15/397332263.jpeg" },
+  { name: "خلطة كوكتيل", price: 2000, image: "https://www2.0zz0.com/2025/08/03/15/629820578.jpeg" },
+  { name: "خلطة كناري", price: 2500, image: "https://www2.0zz0.com/2025/08/03/15/851081915.jpeg" },
+  { name: "حب اسود ناعم", price: 2000, image: "https://www2.0zz0.com/2025/08/03/15/313777410.jpeg" },
+  { name: "حب اسود خشن", price: 1500, image: "https://www2.0zz0.com/2025/08/03/16/831250527.jpeg" },
+  { name: "خلطة بلبل", price: 8000, image: "https://www2.0zz0.com/2025/08/03/15/701115346.jpeg" }
 ];
 
 const specialOffer = [
-  { name: "كيس دخن 25 كيلو", price: 16000, image: "https://www2.0zz0.com/2025/08/03/15/867668577.jpeg" }
+  { name: "كيس دخن 25 كيلو", price: 16000, image: "https://www2.0zz0.com/2025/08/03/15/867668577.jpeg" },
+  { name: "خلطة كوكتيل 25 كغ توصيل مجاني", price: 45000, image: "https://www2.0zz0.com/2025/08/03/15/629820578.jpeg" },
+  { name: "خلطة طيور حب صيفية 25 كغ توصيل مجاني", price: 35000, image: "https://www2.0zz0.com/2025/08/03/15/397332263.jpeg" },
+  { name: "خلطة طيور حب شتوية 25 كغ توصيل مجاني", price: 37000, image: "https://www2.0zz0.com/2025/08/03/15/249540109.jpeg" }
 ];
 
+// ===== عرض المنتجات =====
 function renderProducts(products, containerId) {
   const container = document.getElementById(containerId);
   container.innerHTML = "";
@@ -37,6 +52,7 @@ renderProducts(pigeonFeed, "pigeon-feed");
 renderProducts(ornamentalBirds, "ornamental-birds");
 renderProducts(specialOffer, "special-offer");
 
+// ===== السلة =====
 let cart = [];
 function changeQty(cat, index, delta) {
   const qtyEl = document.getElementById(`${cat}-qty-${index}`);
@@ -84,6 +100,7 @@ function removeFromCart(i) {
   renderCart();
 }
 
+// ===== إرسال الطلب =====
 document.getElementById("order-form").addEventListener("submit", e => {
   e.preventDefault();
   const name = document.getElementById("customer-name").value;
