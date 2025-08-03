@@ -146,11 +146,26 @@ footer a {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: center;
+  vertical-align: middle;
 }
 
 .cart-table th {
   background-color: #4CAF50;
   color: white;
+}
+
+/* صورة مصغرة */
+.cart-product {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cart-product img {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  object-fit: cover;
 }
 
 /* أزرار صغيرة مربعة */
