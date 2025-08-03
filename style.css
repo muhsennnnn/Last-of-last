@@ -6,7 +6,6 @@ body {
   color: #333;
 }
 
-/* ===== الهيدر ===== */
 header {
   background: linear-gradient(135deg, #4CAF50, #2e7d32);
   color: white;
@@ -25,7 +24,6 @@ header {
   color: #2e7d32;
 }
 
-/* ===== المنتجات ===== */
 .products {
   display: flex;
   flex-wrap: wrap;
@@ -50,19 +48,6 @@ header {
   border-radius: 6px;
 }
 
-.product-card h3 {
-  margin: 10px 0;
-  font-size: 16px;
-  color: #2e7d32;
-}
-
-.product-card p {
-  font-size: 14px;
-  font-weight: bold;
-  color: #555;
-}
-
-/* ===== السلة ونموذج الطلب ===== */
 .cart, .order-form {
   background: white;
   margin: 15px;
@@ -97,13 +82,11 @@ button:hover {
   background: #388e3c;
 }
 
-/* ===== الفوتر ===== */
 footer {
   background: #2e7d32;
   color: white;
   text-align: center;
   padding: 10px;
-  margin-top: 20px;
 }
 
 footer a {
@@ -111,7 +94,6 @@ footer a {
   text-decoration: none;
 }
 
-/* ===== أزرار التواصل ===== */
 .floating-buttons {
   position: fixed;
   bottom: 20px;
@@ -126,13 +108,4 @@ footer a {
   height: 55px;
   border-radius: 50%;
   background: white;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.floating-buttons img {
-  width: 70%;
-  height: 70%;
-}
+  box-shadow: 0 4px 8px rgba(0,0
