@@ -1,6 +1,6 @@
 body {
-  font-family: 'Arial', sans-serif;
-  background: #f5f5f5;
+  font-family: 'Cairo', sans-serif;
+  background: #f9f9f9;
   margin: 0;
   padding: 0;
   color: #333;
@@ -24,7 +24,7 @@ header {
   color: #2e7d32;
 }
 
-/* ===== عرض المنتجات على صفين في الموبايل ===== */
+/* ===== المنتجات ===== */
 .products {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -36,8 +36,13 @@ header {
   background: white;
   padding: 10px;
   border-radius: 8px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
 }
 
 .product-card img {
@@ -93,42 +98,7 @@ footer a {
   text-decoration: none;
 }
 
-.floating-buttons {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.floating-buttons a {
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
-  background: white;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.floating-buttons img {
-  width: 70%;
-  height: 70%;
-}
-
-.delivery-note {
-  background: #fff8dc;
-  border: 1px solid #f0c36d;
-  color: #5a4500;
-  padding: 12px;
-  margin-top: 10px;
-  border-radius: 6px;
-  font-size: 15px;
-  line-height: 1.6;
-}
-
+/* ===== السلة ===== */
 .cart-table {
   width: 100%;
   border-collapse: collapse;
@@ -159,19 +129,20 @@ footer a {
   border-radius: 4px;
 }
 
+/* ===== أزرار الكمية ===== */
 .qty-control {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .qty-btn {
-  width: 35px;
-  height: 35px;
+  width: 32px;
+  height: 32px;
   border: none;
   border-radius: 50%;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
   cursor: pointer;
   color: white;
@@ -183,7 +154,6 @@ footer a {
 .qty-btn.plus {
   background-color: #4CAF50;
 }
-
 .qty-btn.plus:hover {
   background-color: #388e3c;
 }
@@ -191,18 +161,17 @@ footer a {
 .qty-btn.minus {
   background-color: #e53935;
 }
-
 .qty-btn.minus:hover {
   background-color: #c62828;
 }
 
 .qty-value {
-  width: 35px;
+  min-width: 30px;
   text-align: center;
   font-weight: bold;
   background: #f0f0f0;
   border-radius: 6px;
-  padding: 5px;
+  padding: 3px;
 }
 
 .remove-btn {
@@ -213,7 +182,74 @@ footer a {
   border-radius: 4px;
   cursor: pointer;
 }
-
 .remove-btn:hover {
   background: darkred;
+}
+
+/* ===== أيقونات التواصل ===== */
+.floating-buttons {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.floating-buttons a {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.floating-buttons img {
+  width: 70%;
+  height: 70%;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 3px 5px;
+  border-radius: 50%;
+}
+
+/* ===== Toast Notification ===== */
+#toast {
+  visibility: hidden;
+  min-width: 200px;
+  background: #4CAF50;
+  color: white;
+  text-align: center;
+  border-radius: 6px;
+  padding: 12px;
+  position: fixed;
+  bottom: 30px;
+  right: 50%;
+  transform: translateX(50%);
+  z-index: 9999;
+  font-weight: bold;
+}
+#toast.show {
+  visibility: visible;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+@keyframes fadein {
+  from { bottom: 20px; opacity: 0; }
+  to { bottom: 30px; opacity: 1; }
+}
+@keyframes fadeout {
+  from { bottom: 30px; opacity: 1; }
+  to { bottom: 20px; opacity: 0; }
 }
