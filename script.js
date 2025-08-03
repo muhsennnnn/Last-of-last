@@ -73,14 +73,35 @@ function addToCart(category, index) {
 function renderCart() {
   cartItems.innerHTML = "";
   let total = 0;
-  cart.forEach(item => {
+  cart.forEach((item, i) => {
     const subtotal = item.qty * item.price;
     total += subtotal;
+
     const li = document.createElement("li");
-    li.textContent = `📦 ${item.name}: ${item.qty} × ${item.price} = ${subtotal} دينار`;
+    li.innerHTML = `
+      📦 ${item.name}: 
+      <button class="qty-btn" onclick="changeQty(${i}, -1)">➖</button>
+      <span class="qty-value">${item.qty}</span>
+      <button class="qty-btn" onclick="changeQty(${i}, 1)">➕</button>
+      × ${item.price} = ${subtotal} دينار
+      <button class="remove-btn" onclick="removeFromCart(${i})">❌</button>
+    `;
     cartItems.appendChild(li);
   });
   cartTotal.textContent = `💰 الإجمالي: ${total.toLocaleString()} دينار`;
+}
+
+function changeQty(index, delta) {
+  cart[index].qty += delta;
+  if (cart[index].qty <= 0) {
+    cart.splice(index, 1);
+  }
+  renderCart();
+}
+
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  renderCart();
 }
 
 // ===== إرسال الطلب =====
@@ -107,7 +128,6 @@ document.getElementById("order-form").addEventListener("submit", function(e) {
   });
   message += `\n💰 *الإجمالي:* ${total.toLocaleString()} دينار\n\n`;
 
-  // 🔹 ملاحظة التوصيل
   message += `🚚 *ملاحظة التوصيل:*\n`;
   message += `- تكلفة التوصيل إلى المحافظات: 6000 دينار\n`;
   message += `- كل 25 كيلو تعتبر طلبية واحدة حسب سياسة شركة التوصيل\n`;
