@@ -135,29 +135,31 @@ footer a {
   color: #d35400;
 }
 
-/* زر حذف المنتج */
-.remove-btn {
-  background: red;
+/* جدول السلة */
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+}
+
+.cart-table th, .cart-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.cart-table th {
+  background-color: #4CAF50;
   color: white;
-  border: none;
-  padding: 3px 8px;
-  margin-right: 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 12px;
 }
 
-.remove-btn:hover {
-  background: darkred;
-}
-
-/* أزرار تعديل الكمية */
-.qty-btn {
+/* أزرار صغيرة مربعة */
+.qty-btn, .remove-btn {
   background: #4CAF50;
   color: white;
   border: none;
-  padding: 3px 8px;
-  margin: 0 3px;
+  padding: 5px 8px;
+  margin: 0 2px;
   border-radius: 4px;
   cursor: pointer;
   font-size: 12px;
@@ -167,7 +169,10 @@ footer a {
   background: #388e3c;
 }
 
-.qty-value {
-  font-weight: bold;
-  margin: 0 5px;
+.remove-btn {
+  background: red;
+}
+
+.remove-btn:hover {
+  background: darkred;
 }
