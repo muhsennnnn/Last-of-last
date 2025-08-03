@@ -92,12 +92,15 @@ header .contact-links {
 }
 
 .qty-btn {
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   border: none;
   color: white;
   font-size: 18px;
+  font-weight: bold;
+  line-height: 30px;
+  text-align: center;
   cursor: pointer;
 }
 
