@@ -128,14 +128,8 @@ footer a {
   border-radius: 6px;
   font-size: 15px;
   line-height: 1.6;
-  direction: rtl;
 }
 
-.delivery-note strong {
-  color: #d35400;
-}
-
-/* جدول السلة */
 .cart-table {
   width: 100%;
   border-collapse: collapse;
@@ -154,7 +148,6 @@ footer a {
   color: white;
 }
 
-/* صورة مصغرة */
 .cart-product {
   display: flex;
   align-items: center;
@@ -165,10 +158,8 @@ footer a {
   width: 40px;
   height: 40px;
   border-radius: 4px;
-  object-fit: cover;
 }
 
-/* أزرار كمية احترافية */
 .qty-control {
   display: flex;
   align-items: center;
@@ -184,7 +175,6 @@ footer a {
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  transition: 0.2s;
   color: white;
 }
 
@@ -204,7 +194,6 @@ footer a {
   background-color: #c62828;
 }
 
-/* مربع الكمية */
 .qty-value {
   width: 30px;
   text-align: center;
@@ -214,7 +203,6 @@ footer a {
   padding: 2px;
 }
 
-/* زر الحذف */
 .remove-btn {
   background: red;
   color: white;
@@ -222,7 +210,6 @@ footer a {
   padding: 5px 8px;
   border-radius: 4px;
   cursor: pointer;
-  transition: 0.2s;
 }
 
 .remove-btn:hover {
