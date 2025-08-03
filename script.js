@@ -77,16 +77,22 @@ function renderCart() {
     const subtotal = item.qty * item.price;
     total += subtotal;
 
-    const li = document.createElement("li");
-    li.innerHTML = `
-      📦 ${item.name}: 
-      <button class="qty-btn" onclick="changeQty(${i}, -1)">➖</button>
-      <span class="qty-value">${item.qty}</span>
-      <button class="qty-btn" onclick="changeQty(${i}, 1)">➕</button>
-      × ${item.price} = ${subtotal} دينار
-      <button class="remove-btn" onclick="removeFromCart(${i})">❌</button>
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td class="cart-product">
+        <img src="${item.image}" alt="${item.name}">
+        <span>${item.name}</span>
+      </td>
+      <td>
+        <button class="qty-btn" onclick="changeQty(${i}, -1)">➖</button>
+        ${item.qty}
+        <button class="qty-btn" onclick="changeQty(${i}, 1)">➕</button>
+      </td>
+      <td>${item.price}</td>
+      <td>${subtotal}</td>
+      <td><button class="remove-btn" onclick="removeFromCart(${i})">❌</button></td>
     `;
-    cartItems.appendChild(li);
+    cartItems.appendChild(row);
   });
   cartTotal.textContent = `💰 الإجمالي: ${total.toLocaleString()} دينار`;
 }
