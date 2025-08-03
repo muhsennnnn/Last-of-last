@@ -90,7 +90,6 @@ document.getElementById("order-form").addEventListener("submit", function(e) {
   const phone = document.getElementById("customer-phone").value;
   const city = document.getElementById("customer-city").value;
   const location = document.getElementById("customer-location").value;
-  const note = document.getElementById("customer-note").value.trim();
 
   if (!name || !phone || !city || !location || cart.length === 0) {
     alert("يرجى تعبئة كافة الحقول وإضافة منتجات.");
@@ -107,10 +106,6 @@ document.getElementById("order-form").addEventListener("submit", function(e) {
     message += `${i+1}. ${item.name} — ${item.qty} × ${item.price} = ${subtotal} دينار\n`;
   });
   message += `\n💰 الإجمالي: ${total.toLocaleString()} دينار`;
-
-  if (note) {
-    message += `\n📝 ملاحظة: ${note}`;
-  }
 
   const whatsappNumber = "9647704159475";
   const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
