@@ -134,3 +134,40 @@ footer a {
 .delivery-note strong {
   color: #d35400;
 }
+
+/* زر حذف المنتج */
+.remove-btn {
+  background: red;
+  color: white;
+  border: none;
+  padding: 3px 8px;
+  margin-right: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.remove-btn:hover {
+  background: darkred;
+}
+
+/* أزرار تعديل الكمية */
+.qty-btn {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 3px 8px;
+  margin: 0 3px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.qty-btn:hover {
+  background: #388e3c;
+}
+
+.qty-value {
+  font-weight: bold;
+  margin: 0 5px;
+}
