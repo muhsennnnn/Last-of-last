@@ -35,7 +35,18 @@
   <!-- ====== السلة ====== -->
   <section class="cart">
     <h2>🛒 سلة التسوق</h2>
-    <ul id="cart-items"></ul>
+    <table class="cart-table">
+      <thead>
+        <tr>
+          <th>📦 المنتج</th>
+          <th>⚖️ الكمية</th>
+          <th>💵 السعر</th>
+          <th>💰 الإجمالي</th>
+          <th>❌ حذف</th>
+        </tr>
+      </thead>
+      <tbody id="cart-items"></tbody>
+    </table>
     <p id="cart-total">💰 الإجمالي: 0 دينار</p>
 
     <p class="delivery-note">
