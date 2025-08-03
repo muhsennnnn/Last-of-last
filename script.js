@@ -15,7 +15,7 @@ const ornamentalBirds = [
   { name: "خلطة كوكتيل", price: 2000, image: "https://www2.0zz0.com/2025/08/03/14/271367435.jpeg" },
   { name: "خلطة كناري", price: 2500, image: "https://www2.0zz0.com/2025/08/03/14/807076462.jpeg" },
   { name: "حب اسود ناعم", price: 2000, image: "https://www2.0zz0.com/2025/08/03/15/530509867.jpeg" },
-  { name: "حب اسود خشن", price: 1500, image: "PUT_IMAGE_URL_HERE" },
+  { name: "حب اسود خشن", price: 2000, image: "PUT_IMAGE_URL_HERE" },
   { name: "خلطة بلبل", price: 8000, image: "https://www2.0zz0.com/2025/08/03/15/613116872.jpeg" }
 ];
 
