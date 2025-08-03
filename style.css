@@ -168,24 +168,61 @@ footer a {
   object-fit: cover;
 }
 
-/* أزرار صغيرة مربعة */
-.qty-btn, .remove-btn {
-  background: #4CAF50;
+/* أزرار كمية احترافية */
+.qty-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.qty-btn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+  color: white;
+}
+
+.qty-btn.plus {
+  background-color: #4CAF50;
+}
+
+.qty-btn.plus:hover {
+  background-color: #388e3c;
+}
+
+.qty-btn.minus {
+  background-color: #e53935;
+}
+
+.qty-btn.minus:hover {
+  background-color: #c62828;
+}
+
+/* مربع الكمية */
+.qty-value {
+  width: 30px;
+  text-align: center;
+  font-weight: bold;
+  background: #f0f0f0;
+  border-radius: 4px;
+  padding: 2px;
+}
+
+/* زر الحذف */
+.remove-btn {
+  background: red;
   color: white;
   border: none;
   padding: 5px 8px;
-  margin: 0 2px;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 12px;
-}
-
-.qty-btn:hover {
-  background: #388e3c;
-}
-
-.remove-btn {
-  background: red;
+  transition: 0.2s;
 }
 
 .remove-btn:hover {
