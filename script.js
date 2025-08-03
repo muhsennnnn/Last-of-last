@@ -61,7 +61,6 @@ function addToCart(cat, index) {
 
 function renderCart() {
   const cartItems = document.getElementById("cart-items");
-  const cartCount = document.getElementById("cart-count");
   cartItems.innerHTML = "";
   let total = 0;
   cart.forEach((item, idx) => {
@@ -78,7 +77,6 @@ function renderCart() {
     cartItems.appendChild(row);
   });
   document.getElementById("cart-total").textContent = `💰 الإجمالي: ${total} دينار`;
-  cartCount.textContent = cart.length;
 }
 
 function removeFromCart(i) {
