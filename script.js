@@ -1,17 +1,17 @@
 // ===== المنتجات مع أماكن الصور =====
 const pigeonFeed = [
-  { name: "حنطة", price: 600, image: "PUT_IMAGE_URL_HERE" },
-  { name: "شعير", price: 800, image: "PUT_IMAGE_URL_HERE" },
-  { name: "خلطة حنطة خشنة", price: 600, image: "PUT_IMAGE_URL_HERE" },
+  { name: "حنطة", price: 600, image: "https://www2.0zz0.com/2025/08/03/14/511679825.jpeg" },
+  { name: "شعير", price: 800, image: "https://www2.0zz0.com/2025/08/03/14/735542040.jpeg" },
+  { name: "خلطة حنطة خشنة", price: 600, image: "https://www2.0zz0.com/2025/08/03/14/331574489.jpeg" },
   { name: "خلطة حنطة ناعمة", price: 700, image: "PUT_IMAGE_URL_HERE" },
   { name: "خلطة ناعمة بدون حنطة", price: 900, image: "PUT_IMAGE_URL_HERE" },
   { name: "خلطة خشنة بدون حنطة", price: 900, image: "PUT_IMAGE_URL_HERE" },
-  { name: "دخن", price: 1000, image: "PUT_IMAGE_URL_HERE" }
+  { name: "دخن", price: 1000, image: "https://www2.0zz0.com/2025/08/03/14/270033331.jpeg" }
 ];
 
 const ornamentalBirds = [
-  { name: "دخن", price: 1000, image: "PUT_IMAGE_URL_HERE" },
-  { name: "خلطة طيور حب", price: 1500, image: "PUT_IMAGE_URL_HERE" },
+  { name: "دخن", price: 1000, image: "https://www2.0zz0.com/2025/08/03/14/270033331.jpeg" },
+  { name: "خلطة طيور حب", price: 1500, image: "https://www2.0zz0.com/2025/08/03/14/185871672.jpeg" },
   { name: "خلطة كوكتيل", price: 2000, image: "PUT_IMAGE_URL_HERE" },
   { name: "خلطة كناري", price: 2500, image: "PUT_IMAGE_URL_HERE" },
   { name: "حب اسود ناعم", price: 2000, image: "PUT_IMAGE_URL_HERE" },
@@ -23,7 +23,7 @@ const specialOffer = [
   { name: "دخن", price: 16000, image: "PUT_IMAGE_URL_HERE" },
   { name: "خلطة كوكتيل 25 كغ توصيل مجاني", price: 45000, image: "PUT_IMAGE_URL_HERE" },
   { name: "خلطة طيور حب صيفية 25 كغ توصيل مجاني", price: 35000, image: "PUT_IMAGE_URL_HERE" },
-  { name: "خلطة طيور حب شتوية 25 كغ توصيل مجاني", price: 37000, image: "PUT_IMAGE_URL_HERE" }
+  { name: "خلطة طيور حب شتوية 25 كغ توصيل مجاني", price: 37000, image: "https://www2.0zz0.com/2025/08/03/14/185871672.jpeg" }
 ];
 
 function renderProducts(products, containerId) {
