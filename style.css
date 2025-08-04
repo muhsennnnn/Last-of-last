@@ -395,11 +395,11 @@ footer a:hover {
 }
 .modal-content {
     background-color: var(--card-bg);
-    padding: 15px;
+    padding: 12px; /* تم تصغير الهوامش الداخلية */
     border-radius: 15px;
     box-shadow: 0 10px 30px var(--shadow-heavy);
     width: 90%;
-    max-width: 280px; /* تم تصغير الحجم هنا */
+    max-width: 250px; /* تم تصغير الحجم هنا لجعله مربعاً أكثر */
     text-align: center;
     position: relative;
     animation: fadeIn 0.4s ease-out;
@@ -413,9 +413,9 @@ footer a:hover {
     color: #e74c3c;
     border: none;
     position: absolute;
-    top: 15px;
-    left: 15px;
-    font-size: 1.8em;
+    top: 10px;
+    left: 10px; /* تم تعديل الموضع ليناسب الحجم الجديد */
+    font-size: 1.5em; /* تم تصغير حجم الزر */
     font-weight: bold;
     cursor: pointer;
     transition: color 0.3s, transform 0.2s;
@@ -430,22 +430,22 @@ footer a:hover {
     max-width: 100%;
     height: auto;
     border-radius: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 .modal-content h2 {
-    font-size: 1.6em;
+    font-size: 1.4em; /* تم تصغير حجم الخط */
     color: var(--primary-color);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 .modal-content .product-price {
-    font-size: 1.2em;
+    font-size: 1.1em; /* تم تصغير حجم الخط */
     font-weight: bold;
     color: var(--accent-color);
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 .modal-content .product-description {
-    font-size: 0.9em;
+    font-size: 0.8em; /* تم تصغير حجم الخط */
     text-align: center;
-    line-height: 1.6;
+    line-height: 1.5;
     color: var(--light-text);
 }
