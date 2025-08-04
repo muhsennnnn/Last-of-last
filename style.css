@@ -141,40 +141,29 @@ header .contact-links {
   cursor: pointer;
 }
 
-input {
-  display: block;
-  margin: 10px auto;
-  padding: 12px;
-  width: 90%;
-  max-width: 400px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+.cart-qty-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 }
 
-button {
-  padding: 12px;
-  background: #4CAF50;
-  color: white;
+.cart-qty-controls button {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
   border: none;
-  margin: 10px auto;
-  cursor: pointer;
-  border-radius: 6px;
-  width: 90%;
-  max-width: 400px;
-}
-
-button:hover {
-  background: #388e3c;
-}
-
-footer {
-  background: #2e7d32;
   color: white;
-  text-align: center;
-  padding: 10px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-footer a {
-  color: #ffeb3b;
-  text-decoration: none;
+.cart-qty-controls .plus {
+  background: green;
+}
+
+.cart-qty-controls .minus {
+  background: red;
 }
