@@ -25,23 +25,33 @@
     </div>
   </header>
 
-  <main>
-    <section>
-      <h2 class="section-title">🕊 قسم علف طيور الحمام</h2>
-      <div class="products" id="pigeonFeed"></div>
-    </section>
+  <div id="main-page">
+    <main>
+      <section>
+        <h2 class="section-title">🕊 قسم علف طيور الحمام</h2>
+        <div class="products" id="pigeonFeed"></div>
+      </section>
 
-    <section>
-      <h2 class="section-title">🐦 قسم طيور الزينة</h2>
-      <div class="products" id="ornamentalBirds"></div>
-    </section>
+      <section>
+        <h2 class="section-title">🐦 قسم طيور الزينة</h2>
+        <div class="products" id="ornamentalBirds"></div>
+      </section>
 
-    <section>
-      <h2 class="section-title">🎯 قسم العرض الخاص</h2>
-      <div class="products" id="specialOffer"></div>
-    </section>
-  </main>
+      <section>
+        <h2 class="section-title">🎯 قسم العرض الخاص</h2>
+        <div class="products" id="specialOffer"></div>
+      </section>
+    </main>
+  </div>
 
+  <div id="product-details-page" style="display: none;">
+    <main class="product-details-container">
+      <a href="#" class="back-btn" onclick="showMainPage()">← عودة إلى المتجر</a>
+      <div id="product-details-card" class="product-details-card">
+        </div>
+    </main>
+  </div>
+  
   <section class="cart">
     <h2>🛒 سلة التسوق</h2>
     <table class="cart-table">
@@ -86,4 +96,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-
