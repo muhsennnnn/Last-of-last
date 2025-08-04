@@ -1,7 +1,7 @@
 // ===== المنتجات (بيانات منفصلة) مع إضافة وصف تفصيلي =====
 const productsData = {
   pigeonFeed: [
-    { name: "حنطة", price: 600, image: "https://www2.0zz0.com/2025/08/03/15/847553061.jpeg", description: "(ضع وصف للمنتج)" },
+    { name: "حنطة", price: 600, image: "https://www2.0zz0.com/2025/08/03/15/847553061.jpeg", description: "(منتج مليء بالبروتينات)" },
     { name: "شعير", price: 800, image: "https://www2.0zz0.com/2025/08/03/15/576922852.jpeg", description: "(ضع وصف للمنتج)" },
     { name: "خلطة حنطة خشنة", price: 600, image: "https://www2.0zz0.com/2025/08/03/15/492413115.jpeg", description: "(ضع وصف للمنتج)" },
     { name: "خلطة حنطة ناعمة", price: 700, image: "PUT_IMAGE_URL", description: "(ضع وصف للمنتج)" },
