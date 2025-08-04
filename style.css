@@ -83,34 +83,29 @@ header .contact-links {
   border-radius: 6px;
 }
 
-.qty-controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 5px 0;
-  gap: 5px;
+.product-card input {
+  width: 60px;
+  padding: 6px;
+  text-align: center;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
-.qty-btn {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: none;
+.product-card button {
+  padding: 10px;
+  background: #4CAF50;
   color: white;
-  font-size: 18px;
-  font-weight: bold;
+  border: none;
+  margin: 10px auto;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border-radius: 6px;
+  width: 100%;
+  font-size: 14px;
 }
 
-.qty-btn.plus {
-  background: green;
-}
-
-.qty-btn.minus {
-  background: red;
+.product-card button:hover {
+  background: #388e3c;
 }
 
 .cart, .order-form {
@@ -166,4 +161,32 @@ header .contact-links {
 
 .cart-qty-controls .minus {
   background: red;
+}
+
+.order-form input {
+  display: block;
+  margin: 10px auto;
+  padding: 12px;
+  width: 90%;
+  max-width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.order-form button {
+  padding: 12px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  margin: 10px auto;
+  cursor: pointer;
+  border-radius: 6px;
+  width: 90%;
+  max-width: 400px;
+  font-size: 16px;
+}
+
+.order-form button:hover {
+  background: #388e3c;
 }
