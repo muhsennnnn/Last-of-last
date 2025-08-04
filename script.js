@@ -38,7 +38,7 @@ function renderProducts(products, containerId) {
       <h3>${product.name}</h3>
       <p>${product.price} دينار</p>
       <div class="qty-controls">
-        <button class="qty-btn minus" onclick="changeQty('${containerId}',${i},-1)">-</button>
+        <button class="qty-btn minus" onclick="changeQty('${containerId}',${i},-1)">−</button>
         <span id="${containerId}-qty-${i}">1</span>
         <button class="qty-btn plus" onclick="changeQty('${containerId}',${i},1)">+</button>
       </div>
