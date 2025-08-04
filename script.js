@@ -4,24 +4,24 @@ const productsData = {
     { name: "حنطة", price: 600, image: "https://www2.0zz0.com/2025/08/03/15/847553061.jpeg", description: "(منتج مليء بالبروتينات)" },
     { name: "شعير", price: 800, image: "https://www2.0zz0.com/2025/08/03/15/576922852.jpeg", description: "(ضع وصف للمنتج)" },
     { name: "خلطة حنطة خشنة", price: 600, image: "https://www2.0zz0.com/2025/08/03/15/492413115.jpeg", description: "(ضع وصف للمنتج)" },
-    { name: "خلطة حنطة ناعمة", price: 700, image: "PUT_IMAGE_URL", description: "(ضع وصف للمنتج)" },
-    { name: "خلطة ناعمة بدون حنطة", price: 900, image: "PUT_IMAGE_URL", description: "(ضع وصف للمنتج)" },
+    { name: "خلطة حنطة ناعمة", price: 700, image: "https://www2.0zz0.com/2025/08/04/15/366166799.jpeg", description: "(ضع وصف للمنتج)" },
+    { name: "خلطة ناعمة بدون حنطة", price: 900, image: "https://www2.0zz0.com/2025/08/04/15/579533397.jpeg", description: "(ضع وصف للمنتج)" },
     { name: "خلطة خشنة بدون حنطة", price: 900, image: "PUT_IMAGE_URL", description: "(ضع وصف للمنتج)" },
     { name: "دخن", price: 1000, image: "https://www2.0zz0.com/2025/08/03/15/867668577.jpeg", description: "(ضع وصف للمنتج)" },
     // المنتجات الجديدة لقسم علف طيور الحمام
-    { name: "الدخن الاحمر", price: 1000, image: "(مكان رابط الصورة هنا)", description: "(أضف وصف المنتج هنا)" },
-    { name: "الحب الابيض (قرطم)", price: 1250, image: "(مكان رابط الصورة هنا)", description: "(أضف وصف المنتج هنا)" },
-    { name: "بيقيا (عدس اسود)", price: 1000, image: "(مكان رابط الصورة هنا)", description: "(أضف وصف المنتج هنا)" },
-    { name: "ماش", price: 1000, image: "(مكان رابط الصورة هنا)", description: "(أضف وصف المنتج هنا)" },
-    { name: "ذرة بيضاء ناعمة", price: 1000, image: "(مكان رابط الصورة هنا)", description: "(أضف وصف المنتج هنا)" },
-    { name: "ذرة حمراء ناعمة", price: 1000, image: "(مكان رابط الصورة هنا)", description: "(أضف وصف المنتج هنا)" },
+    { name: "الدخن الاحمر", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/751932495.jpeg", description: "(أضف وصف المنتج هنا)" },
+    { name: "الحب الابيض (قرطم)", price: 1250, image: "https://www2.0zz0.com/2025/08/04/15/800095310.jpeg", description: "(أضف وصف المنتج هنا)" },
+    { name: "بيقيا (عدس اسود)", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/753346524.jpeg", description: "(أضف وصف المنتج هنا)" },
+    { name: "ماش", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/100415770.jpeg", description: "(أضف وصف المنتج هنا)" },
+    { name: "ذرة بيضاء ناعمة", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/215269401.jpeg", description: "(أضف وصف المنتج هنا)" },
+    { name: "ذرة حمراء ناعمة", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/943792580.jpeg", description: "(أضف وصف المنتج هنا)" },
     { name: "حب المكانس", price: 1000, image: "(مكان رابط الصورة هنا)", description: "(أضف وصف المنتج هنا)" },
-    { name: "ذرة صفراء ناعمة", price: 1000, image: "(مكان رابط الصورة هنا)", description: "(أضف وصف المنتج هنا)" },
-    { name: "ذرة صفراء مجروشة", price: 1000, image: "(مكان رابط الصورة هنا)", description: "(أضف وصف المنتج هنا)" },
-    { name: "بزاليا صفراء", price: 1000, image: "(مكان رابط الصورة هنا)", description: "(أضف وصف المنتج هنا)" },
+    { name: "ذرة صفراء ناعمة", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/187482526.jpeg", description: "(أضف وصف المنتج هنا)" },
+    { name: "ذرة صفراء مجروشة", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/584620940.jpeg", description: "(أضف وصف المنتج هنا)" },
+    { name: "بزاليا صفراء", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/561545617.jpeg", description: "(أضف وصف المنتج هنا)" },
     { name: "بروتين رقم 1", price: 1000, image: "(مكان رابط الصورة هنا)", description: "(أضف وصف المنتج هنا)" },
     { name: "بروتين رقم 2", price: 1000, image: "(مكان رابط الصورة هنا)", description: "(أضف وصف المنتج هنا)" },
-    { name: "كالسيوم", price: 1500, image: "(مكان رابط الصورة هنا)", description: "(أضف وصف المنتج هنا)" }
+    { name: "كالسيوم", price: 1500, image: "https://www2.0zz0.com/2025/08/04/15/190721986.jpeg", description: "(أضف وصف المنتج هنا)" }
   ],
   ornamentalBirds: [
     { name: "دخن", price: 1000, image: "https://www2.0zz0.com/2025/08/03/15/867668577.jpeg", description: "(ضع وصف للمنتج)" },
@@ -34,7 +34,7 @@ const productsData = {
     // المنتجات الجديدة لقسم طيور الزينة
     { name: "كتان", price: 2500, image: "(مكان رابط الصورة هنا)", description: "(أضف وصف المنتج هنا)" },
     { name: "شوفان", price: 1500, image: "(مكان رابط الصورة هنا)", description: "(أضف وصف المنتج هنا)" },
-    { name: "الدخن الاحمر", price: 1000, image: "(مكان رابط الصورة هنا)", description: "(أضف وصف المنتج هنا)" }
+    { name: "الدخن الاحمر", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/751932495.jpeg", description: "(أضف وصف المنتج هنا)" }
   ],
   specialOffer: [
     { name: "كيس دخن 25 كيلو", price: 16000, image: "https://www2.0zz0.com/2025/08/03/15/867668577.jpeg", description: "(ضع وصف للمنتج)" },
