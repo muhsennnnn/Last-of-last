@@ -26,163 +26,178 @@ const productsData = {
   ]
 };
 
+// ===== السلة =====
+let cart = [];
+const cartTableBody = document.getElementById("cart-items");
+const cartTotalElement = document.getElementById("cart-total");
+const productModal = document.getElementById('productModal');
+const productDetailsContent = document.getElementById('product-details-modal-content');
+const closeButton = document.querySelector('.close-button');
+
 // ===== عرض المنتجات في الصفحة الرئيسية =====
 function renderProducts(products, containerId) {
-  const container = document.getElementById(containerId);
-  container.innerHTML = "";
-  products.forEach((product, i) => {
-    const card = document.createElement("a");
-    card.href = "#"; // تغيير الرابط
-    card.className = "product-card";
-    card.onclick = () => showProductDetails(containerId, i); // استخدام دالة لعرض التفاصيل
-    card.innerHTML = `
-      <img src="${product.image}" alt="${product.name}">
-      <h3>${product.name}</h3>
-      <p>${product.price} دينار</p>
-    `;
-    container.appendChild(card);
-  });
+    const container = document.getElementById(containerId);
+    container.innerHTML = "";
+    products.forEach((product, i) => {
+        const card = document.createElement("div"); // تغيير إلى div بدلاً من a
+        card.className = "product-card";
+        card.innerHTML = `
+            <a href="#" class="details-link" onclick="showProductDetails('${containerId}', ${i}); return false;">
+                <img src="${product.image}" alt="${product.name}">
+                <h3>${product.name}</h3>
+                <p>${product.price} دينار</p>
+            </a>
+            <div class="quantity-control">
+                <button class="quantity-btn minus-btn" onclick="changeQuantity(this, -1)">-</button>
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="quantity-btn plus-btn" onclick="changeQuantity(this, 1)">+</button>
+            </div>
+            <button class="add-to-cart-home" onclick="addToCartFromHome('${containerId}', ${i}, this)">أضف إلى السلة</button>
+        `;
+        container.appendChild(card);
+    });
 }
 
 // ===== تهيئة الواجهة الرئيسية =====
 Object.keys(productsData).forEach(key => {
-  renderProducts(productsData[key], key);
+    renderProducts(productsData[key], key);
 });
 
-// ===== التحكم في عرض الصفحات =====
-function showMainPage() {
-  document.getElementById('main-page').style.display = 'block';
-  document.getElementById('product-details-page').style.display = 'none';
-  renderCart(); // للتأكد من تحديث السلة عند العودة
-  window.scrollTo(0, 0); // العودة لأعلى الصفحة
-}
-
+// ===== دوال التحكم في النافذة المنبثقة =====
 function showProductDetails(category, index) {
-  const product = productsData[category][index];
-  const detailsCard = document.getElementById('product-details-card');
-  
-  detailsCard.innerHTML = `
-    <img src="${product.image}" alt="${product.name}" class="product-image">
-    <h2>${product.name}</h2>
-    <p class="product-price">${product.price} دينار</p>
-    <p class="product-description">${product.description}</p>
-    <div class="qty-container">
-      <input type="number" id="product-qty" value="1" min="1">
-    </div>
-    <button class="add-to-cart-btn" onclick="addToCartFromDetails('${category}', ${index})">أضف إلى السلة</button>
-  `;
+    const product = productsData[category][index];
+    
+    productDetailsContent.innerHTML = `
+        <img src="${product.image}" alt="${product.name}">
+        <h2>${product.name}</h2>
+        <p class="product-price">${product.price} دينار</p>
+        <p class="product-description">${product.description}</p>
+    `;
 
-  document.getElementById('main-page').style.display = 'none';
-  document.getElementById('product-details-page').style.display = 'block';
-  window.scrollTo(0, 0); // العودة لأعلى الصفحة
+    productModal.classList.add('show');
 }
 
-// ===== دالة لإضافة المنتج إلى السلة من صفحة التفاصيل =====
-function addToCartFromDetails(category, index) {
-  const product = productsData[category][index];
-  const qty = parseInt(document.getElementById('product-qty').value);
-  if (isNaN(qty) || qty < 1) {
-    alert("الرجاء إدخال كمية صحيحة.");
-    return;
-  }
-  addToCart(product, qty);
-  alert(`تم إضافة ${qty} قطعة من ${product.name} إلى السلة!`);
+closeButton.addEventListener('click', () => {
+    productModal.classList.remove('show');
+});
+
+window.addEventListener('click', (event) => {
+    if (event.target === productModal) {
+        productModal.classList.remove('show');
+    }
+});
+
+// ===== دوال التحكم بالكمية والإضافة من الصفحة الرئيسية =====
+function changeQuantity(button, change) {
+    const input = button.parentNode.querySelector('.quantity-input');
+    let value = parseInt(input.value);
+    value = value + change;
+    if (value < 1) {
+        value = 1;
+    }
+    input.value = value;
 }
 
-// ===== السلة (تم تعديلها لتكون مستقلة) =====
-let cart = [];
-const cartTableBody = document.getElementById("cart-items");
-const cartTotalElement = document.getElementById("cart-total");
+function addToCartFromHome(category, index, button) {
+    const product = productsData[category][index];
+    const input = button.parentNode.querySelector('.quantity-input');
+    const qty = parseInt(input.value);
+    if (isNaN(qty) || qty < 1) {
+        alert("الرجاء إدخال كمية صحيحة.");
+        return;
+    }
+    addToCart(product, qty);
+    alert(`تم إضافة ${qty} قطعة من ${product.name} إلى السلة!`);
+}
 
 function addToCart(product, qty) {
-  const existingItem = cart.find(item => item.name === product.name);
-  if (existingItem) {
-    existingItem.qty += qty;
-  } else {
-    cart.push({ ...product, qty });
-  }
-  renderCart();
+    const existingItem = cart.find(item => item.name === product.name);
+    if (existingItem) {
+        existingItem.qty += qty;
+    } else {
+        cart.push({ ...product, qty });
+    }
+    renderCart();
 }
 
 function updateCartQty(index, delta) {
-  const item = cart[index];
-  item.qty = Math.max(1, item.qty + delta);
-  if (item.qty === 0) {
-    removeFromCart(index);
-  } else {
-    renderCart();
-  }
+    const item = cart[index];
+    item.qty = Math.max(1, item.qty + delta);
+    if (item.qty === 0) {
+        removeFromCart(index);
+    } else {
+        renderCart();
+    }
 }
 
 function removeFromCart(index) {
-  cart.splice(index, 1);
-  renderCart();
+    cart.splice(index, 1);
+    renderCart();
 }
 
 function renderCart() {
-  if (!cartTableBody) return;
-  cartTableBody.innerHTML = "";
-  let total = 0;
-  cart.forEach((item, index) => {
-    const subtotal = item.qty * item.price;
-    total += subtotal;
-    const row = document.createElement("tr");
-    row.innerHTML = `
-      <td>${item.name}</td>
-      <td>
-        <div class="cart-qty-controls">
-          <button class="minus" onclick="updateCartQty(${index}, -1)">−</button>
-          <span>${item.qty}</span>
-          <button class="plus" onclick="updateCartQty(${index}, 1)">+</button>
-        </div>
-      </td>
-      <td>${item.price}</td>
-      <td>${subtotal}</td>
-      <td><button class="remove-btn" onclick="removeFromCart(${index})">حذف</button></td>
-    `;
-    cartTableBody.appendChild(row);
-  });
-  cartTotalElement.textContent = `💰 الإجمالي: ${total} دينار`;
+    if (!cartTableBody) return;
+    cartTableBody.innerHTML = "";
+    let total = 0;
+    cart.forEach((item, index) => {
+        const subtotal = item.qty * item.price;
+        total += subtotal;
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${item.name}</td>
+            <td>
+                <div class="cart-qty-controls">
+                    <button class="minus" onclick="updateCartQty(${index}, -1)">−</button>
+                    <span>${item.qty}</span>
+                    <button class="plus" onclick="updateCartQty(${index}, 1)">+</button>
+                </div>
+            </td>
+            <td>${item.price}</td>
+            <td>${subtotal}</td>
+            <td><button class="remove-btn" onclick="removeFromCart(${index})">حذف</button></td>
+        `;
+        cartTableBody.appendChild(row);
+    });
+    cartTotalElement.textContent = `💰 الإجمالي: ${total} دينار`;
 }
 
 // ===== إرسال الطلب =====
 document.getElementById("order-form").addEventListener("submit", e => {
-  e.preventDefault();
-  const name = document.getElementById("customer-name").value;
-  const phone = document.getElementById("customer-phone").value;
-  const city = document.getElementById("customer-city").value;
-  const location = document.getElementById("customer-location").value;
+    e.preventDefault();
+    const name = document.getElementById("customer-name").value;
+    const phone = document.getElementById("customer-phone").value;
+    const city = document.getElementById("customer-city").value;
+    const location = document.getElementById("customer-location").value;
 
-  if (cart.length === 0) {
-    alert("سلة التسوق فارغة، يرجى إضافة منتجات قبل إرسال الطلب.");
-    return;
-  }
+    if (cart.length === 0) {
+        alert("سلة التسوق فارغة، يرجى إضافة منتجات قبل إرسال الطلب.");
+        return;
+    }
 
-  let orderDetails = [
-    `🛒 طلب جديد`,
-    `👤 الاسم: ${name}`,
-    `📞 الهاتف: ${phone}`,
-    `🏙️ المدينة: ${city}`,
-    `📍 الموقع: ${location}`,
-    `\n📦 المنتجات:`
-  ];
+    let orderDetails = [
+        `🛒 طلب جديد`,
+        `👤 الاسم: ${name}`,
+        `📞 الهاتف: ${phone}`,
+        `🏙️ المدينة: ${city}`,
+        `📍 الموقع: ${location}`,
+        `\n📦 المنتجات:`
+    ];
 
-  let total = 0;
-  cart.forEach((item, i) => {
-    const subtotal = item.qty * item.price;
-    total += subtotal;
-    orderDetails.push(`${i + 1}. ${item.name} — ${item.qty} × ${item.price} = ${subtotal} دينار`);
-  });
+    let total = 0;
+    cart.forEach((item, i) => {
+        const subtotal = item.qty * item.price;
+        total += subtotal;
+        orderDetails.push(`${i + 1}. ${item.name} — ${item.qty} × ${item.price} = ${subtotal} دينار`);
+    });
 
-  orderDetails.push(`\n💰 الإجمالي: ${total} دينار`);
-  orderDetails.push(`\n━━━━━━━━━━━━━━\n🚚 *ملاحظة التوصيل:*`);
-  orderDetails.push(`- تكلفة التوصيل إلى المحافظات: 6000 دينار`);
-  orderDetails.push(`- كل ٢٥ كيلو تعتبر طلبية واحدة الى المحافظات بسبب سياسة شركة التوصيل`);
-  orderDetails.push(`- تكلفة التوصيل داخل الموصل: من 2000 إلى 5000 دينار حسب المنطقة`);
-  orderDetails.push(`- هذه التكاليف لا تشمل العروض الخاصة بالتوصيل المجاني`);
-  
-  const message = orderDetails.join('\n');
-  const whatsappUrl = `https://wa.me/9647704159475?text=${encodeURIComponent(message)}`;
-  window.open(whatsappUrl, "_blank");
+    orderDetails.push(`\n💰 الإجمالي: ${total} دينار`);
+    orderDetails.push(`\n━━━━━━━━━━━━━━\n🚚 *ملاحظة التوصيل:*`);
+    orderDetails.push(`- تكلفة التوصيل إلى المحافظات: 6000 دينار`);
+    orderDetails.push(`- كل ٢٥ كيلو تعتبر طلبية واحدة الى المحافظات بسبب سياسة شركة التوصيل`);
+    orderDetails.push(`- تكلفة التوصيل داخل الموصل: من 2000 إلى 5000 دينار حسب المنطقة`);
+    orderDetails.push(`- هذه التكاليف لا تشمل العروض الخاصة بالتوصيل المجاني`);
+    
+    const message = orderDetails.join('\n');
+    const whatsappUrl = `https://wa.me/9647704159475?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, "_blank");
 });
-
