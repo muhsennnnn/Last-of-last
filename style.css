@@ -395,11 +395,11 @@ footer a:hover {
 }
 .modal-content {
     background-color: var(--card-bg);
-    padding: 20px;
+    padding: 15px;
     border-radius: 15px;
     box-shadow: 0 10px 30px var(--shadow-heavy);
     width: 90%;
-    max-width: 380px;
+    max-width: 280px; /* تم تصغير الحجم هنا */
     text-align: center;
     position: relative;
     animation: fadeIn 0.4s ease-out;
@@ -433,18 +433,18 @@ footer a:hover {
     margin-bottom: 15px;
 }
 .modal-content h2 {
-    font-size: 1.8em;
+    font-size: 1.6em;
     color: var(--primary-color);
     margin-bottom: 8px;
 }
 .modal-content .product-price {
-    font-size: 1.3em;
+    font-size: 1.2em;
     font-weight: bold;
     color: var(--accent-color);
     margin-bottom: 15px;
 }
 .modal-content .product-description {
-    font-size: 1em;
+    font-size: 0.9em;
     text-align: center;
     line-height: 1.6;
     color: var(--light-text);
