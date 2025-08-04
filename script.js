@@ -85,11 +85,18 @@ Object.keys(productsData).forEach(key => {
 function showProductDetails(category, index) {
     const product = productsData[category][index];
     
+    // ** التعديل هنا: إضافة زر "أضف إلى السلة" داخل النافذة المنبثقة **
     productDetailsContent.innerHTML = `
         <img src="${product.image}" alt="${product.name}">
         <h2>${product.name}</h2>
         <p class="product-price">${product.price} دينار</p>
         <p class="product-description">${product.description}</p>
+        <div class="quantity-control">
+            <button class="quantity-btn minus-btn" onclick="changeQuantity(this, -1)">-</button>
+            <input type="number" class="quantity-input" value="1" min="1">
+            <button class="quantity-btn plus-btn" onclick="changeQuantity(this, 1)">+</button>
+        </div>
+        <button class="add-to-cart-home" onclick="addToCartFromModal('${category}', ${index}, this)">أضف إلى السلة</button>
     `;
 
     productModal.classList.add('show');
@@ -99,14 +106,27 @@ closeButton.addEventListener('click', () => {
     productModal.classList.remove('show');
 });
 
-// ** التعديل الجديد هنا **
 window.addEventListener('click', (event) => {
     if (event.target === productModal) {
         productModal.classList.remove('show');
     }
 });
 
-// ===== دوال التحكم بالكمية والإضافة من الصفحة الرئيسية =====
+// ** دالة جديدة للإضافة من النافذة المنبثقة **
+function addToCartFromModal(category, index, button) {
+    const product = productsData[category][index];
+    const input = button.parentNode.querySelector('.quantity-input');
+    const qty = parseInt(input.value);
+    if (isNaN(qty) || qty < 1) {
+        alert("الرجاء إدخال كمية صحيحة.");
+        return;
+    }
+    addToCart(product, qty);
+    productModal.classList.remove('show'); // إغلاق النافذة بعد الإضافة
+    alert(`تم إضافة ${qty} قطعة من ${product.name} إلى السلة!`);
+}
+
+// ===== دوال التحكم بالكمية والإضافة من الصفحة الرئيسية (تم تحديثها) =====
 function changeQuantity(button, change) {
     const input = button.parentNode.querySelector('.quantity-input');
     let value = parseInt(input.value);
