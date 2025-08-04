@@ -44,14 +44,6 @@
     </main>
   </div>
 
-  <div id="product-details-page" style="display: none;">
-    <main class="product-details-container">
-      <a href="#" class="back-btn" onclick="showMainPage()">← عودة إلى المتجر</a>
-      <div id="product-details-card" class="product-details-card">
-        </div>
-    </main>
-  </div>
-  
   <section class="cart">
     <h2>🛒 سلة التسوق</h2>
     <table class="cart-table">
@@ -92,6 +84,14 @@
     📍 العنوان: موصل - حي البلديات قرب جامع صلة الأرحام  
     📞 للاستفسار: <a href="tel:07704159475">0770 415 9475</a>
   </footer>
+
+  <div id="productModal" class="modal">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <div id="product-details-modal-content">
+        </div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
