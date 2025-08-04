@@ -334,11 +334,11 @@ footer a:hover {
 }
 .modal-content {
     background-color: #fefefe;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
     width: 90%;
-    max-width: 350px; /* جعلها أصغر */
+    max-width: 300px; /* جعلها أصغر */
     text-align: center;
     position: relative;
     animation: fadeIn 0.3s ease-out;
@@ -351,15 +351,16 @@ footer a:hover {
     background: #e74c3c;
     color: white;
     border: none;
-    padding: 5px 10px;
+    padding: 4px 8px;
     border-radius: 5px;
     position: absolute;
     top: 10px;
-    left: 10px; /* نقل الزر إلى اليسار */
-    font-size: 18px;
+    left: 10px;
+    font-size: 14px;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
+    line-height: 1; /* لتحسين محاذاة الايموجي */
 }
 .close-button:hover {
     background-color: #c0392b;
@@ -368,22 +369,23 @@ footer a:hover {
 .modal-content img {
     max-width: 100%;
     height: auto;
-    border-radius: 8px;
-    margin-bottom: 15px;
-}
-.modal-content h2 {
-    font-size: 1.6em;
-    color: var(--primary-color);
-    margin-bottom: 8px;
-}
-.modal-content .product-price {
-    font-size: 1.3em;
-    font-weight: bold;
-    color: var(--accent-color);
+    border-radius: 6px;
     margin-bottom: 12px;
 }
+.modal-content h2 {
+    font-size: 1.4em;
+    color: var(--primary-color);
+    margin-bottom: 6px;
+}
+.modal-content .product-price {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: var(--accent-color);
+    margin-bottom: 10px;
+}
 .modal-content .product-description {
-    font-size: 0.9em;
+    font-size: 0.85em;
     text-align: justify;
-    line-height: 1.5;
+    line-height: 1.4;
+    color: #666;
 }
