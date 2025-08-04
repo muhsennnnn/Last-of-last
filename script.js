@@ -99,6 +99,7 @@ closeButton.addEventListener('click', () => {
     productModal.classList.remove('show');
 });
 
+// ** التعديل الجديد هنا **
 window.addEventListener('click', (event) => {
     if (event.target === productModal) {
         productModal.classList.remove('show');
