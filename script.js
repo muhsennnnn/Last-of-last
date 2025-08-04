@@ -37,11 +37,7 @@ function renderProducts(products, containerId) {
       <img src="${product.image}" alt="${product.name}">
       <h3>${product.name}</h3>
       <p>${product.price} دينار</p>
-      <div class="qty-controls">
-        <button class="qty-btn minus" onclick="changeQty('${containerId}',${i},-1)">−</button>
-        <span id="${containerId}-qty-${i}">1</span>
-        <button class="qty-btn plus" onclick="changeQty('${containerId}',${i},1)">+</button>
-      </div>
+      <input type="number" id="${containerId}-qty-${i}" value="1" min="1">
       <button onclick="addToCart('${containerId}',${i})">أضف إلى السلة</button>
     `;
     container.appendChild(card);
@@ -54,17 +50,11 @@ renderProducts(specialOffer, "special-offer");
 
 // ===== السلة =====
 let cart = [];
-function changeQty(cat, index, delta) {
-  const qtyEl = document.getElementById(`${cat}-qty-${index}`);
-  let qty = parseInt(qtyEl.textContent);
-  qty = Math.max(1, qty + delta);
-  qtyEl.textContent = qty;
-}
 
 function addToCart(cat, index) {
   const productsMap = { "pigeon-feed": pigeonFeed, "ornamental-birds": ornamentalBirds, "special-offer": specialOffer };
   const product = productsMap[cat][index];
-  const qty = parseInt(document.getElementById(`${cat}-qty-${index}`).textContent);
+  const qty = parseInt(document.getElementById(`${cat}-qty-${index}`).value);
 
   const existing = cart.find(p => p.name === product.name);
   if (existing) {
