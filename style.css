@@ -109,6 +109,9 @@ header p {
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
 
 .product-card:hover {
@@ -136,34 +139,6 @@ header p {
   font-weight: 700;
   font-size: 1.1em;
   margin-bottom: 10px;
-}
-
-.product-card input {
-  width: 70px;
-  padding: 8px;
-  text-align: center;
-  margin: 8px 0;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 15px;
-}
-
-.product-card button {
-  padding: 12px;
-  background: var(--primary-color);
-  color: white;
-  border: none;
-  margin: 10px auto;
-  cursor: pointer;
-  border-radius: 8px;
-  width: 100%;
-  font-size: 15px;
-  font-weight: 600;
-  transition: background 0.3s;
-}
-
-.product-card button:hover {
-  background: #388e3c;
 }
 
 .cart, .order-form {
@@ -300,4 +275,93 @@ footer a {
 
 footer a:hover {
   text-decoration: underline;
+}
+
+/* تنسيقات صفحة تفاصيل المنتج */
+.product-details-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.product-details-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.product-details-card .product-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.product-details-card h2 {
+  font-size: 2.5em;
+  color: var(--primary-color);
+  margin: 10px 0;
+}
+
+.product-details-card .product-price {
+  font-size: 1.8em;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin: 10px 0;
+}
+
+.product-details-card .product-description {
+  font-size: 1.1em;
+  color: var(--text-color);
+  text-align: justify;
+  line-height: 1.8;
+  margin: 20px 0;
+}
+
+.product-details-card .qty-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.product-details-card .qty-container input {
+  width: 60px;
+  text-align: center;
+}
+
+.product-details-card .add-to-cart-btn {
+  width: 100%;
+  max-width: 300px;
+  padding: 15px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.product-details-card .add-to-cart-btn:hover {
+  background-color: #388e3c;
+}
+
+.back-btn {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.back-btn:hover {
+  color: #2e7d32;
 }
