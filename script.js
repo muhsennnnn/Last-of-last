@@ -85,7 +85,13 @@ function renderCart() {
     const row = document.createElement("tr");
     row.innerHTML = `
       <td>${item.name}</td>
-      <td>${item.qty}</td>
+      <td>
+        <div class="cart-qty-controls">
+          <button class="minus" onclick="updateCartQty(${idx},-1)">−</button>
+          <span>${item.qty}</span>
+          <button class="plus" onclick="updateCartQty(${idx},1)">+</button>
+        </div>
+      </td>
       <td>${item.price}</td>
       <td>${subtotal}</td>
       <td><button class="remove-btn" onclick="removeFromCart(${idx})">حذف</button></td>
@@ -93,6 +99,11 @@ function renderCart() {
     cartItems.appendChild(row);
   });
   document.getElementById("cart-total").textContent = `💰 الإجمالي: ${total} دينار`;
+}
+
+function updateCartQty(index, delta) {
+  cart[index].qty = Math.max(1, cart[index].qty + delta);
+  renderCart();
 }
 
 function removeFromCart(i) {
