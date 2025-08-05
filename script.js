@@ -85,31 +85,20 @@ function renderProducts(products, containerId) {
         const card = document.createElement("div"); 
         card.className = "product-card";
         
-        let cardContent;
-        // تعديل هنا: إذا كان القسم "customMix"، نعرض الرابط فقط
-        if (containerId === 'customMix') {
-            cardContent = `
-                <a href="#" class="details-link" onclick="showProductDetails('${containerId}', ${i}); return false;">
-                    <img src="${product.image}" alt="${product.name}">
-                    <h3>${product.name}</h3>
-                    <p>${product.price} دينار</p>
-                </a>
-            `;
-        } else { // لبقية الأقسام، نعرض أدوات التحكم بالكمية وزر الإضافة
-            cardContent = `
-                <a href="#" class="details-link" onclick="showProductDetails('${containerId}', ${i}); return false;">
-                    <img src="${product.image}" alt="${product.name}">
-                    <h3>${product.name}</h3>
-                    <p>${product.price} دينار</p>
-                </a>
-                <div class="quantity-control">
-                    <button class="quantity-btn minus-btn" onclick="changeQuantity(this, -1)">-</button>
-                    <input type="number" class="quantity-input" value="1" min="1">
-                    <button class="quantity-btn plus-btn" onclick="changeQuantity(this, 1)">+</button>
-                </div>
-                <button class="add-to-cart-home" onclick="addToCartFromHome('${containerId}', ${i}, this)">أضف إلى السلة</button>
-            `;
-        }
+        // الكود الموحد لجميع الأقسام
+        const cardContent = `
+            <a href="#" class="details-link" onclick="showProductDetails('${containerId}', ${i}); return false;">
+                <img src="${product.image}" alt="${product.name}">
+                <h3>${product.name}</h3>
+                <p>${product.price} دينار</p>
+            </a>
+            <div class="quantity-control">
+                <button class="quantity-btn minus-btn" onclick="changeQuantity(this, -1)">-</button>
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="quantity-btn plus-btn" onclick="changeQuantity(this, 1)">+</button>
+            </div>
+            <button class="add-to-cart-home" onclick="addToCartFromHome('${containerId}', ${i}, this)">أضف إلى السلة</button>
+        `;
         
         card.innerHTML = cardContent;
         container.appendChild(card);
