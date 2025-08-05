@@ -44,8 +44,10 @@ const productsData = {
   ]
 };
 
-// ** دمج جميع المنتجات في قائمة واحدة لسهولة التعامل مع قسم الخلط **
-const allProducts = [...productsData.pigeonFeed, ...productsData.ornamentalBirds, ...productsData.specialOffer];
+// ** قائمة المنتجات للخلطة المخصصة فقط **
+const productsForMix = productsData.pigeonFeed.filter(product => 
+    !product.name.includes("خلطة")
+);
 
 // ===== السلة =====
 let cart = [];
@@ -112,7 +114,8 @@ function initializeProducts() {
   Object.keys(productsData).forEach(key => {
     renderProducts(productsData[key], key);
   });
-  renderMixProducts(allProducts); // تهيئة قسم الخلطة
+  // استخدام القائمة الجديدة للخلطة فقط
+  renderMixProducts(productsForMix); 
 }
 initializeProducts(); 
 
@@ -204,7 +207,7 @@ function updateMixSummary() {
     let totalMixPrice = 0;
     const mixItems = Object.values(customMix);
     mixItems.forEach(item => {
-        const product = allProducts.find(p => p.name === item.name);
+        const product = productsForMix.find(p => p.name === item.name);
         if (product) {
             totalMixPrice += product.price * item.qty;
         }
@@ -249,7 +252,7 @@ addMixToCartBtn.addEventListener('click', () => {
     let mixTotalPrice = 0;
 
     mixDetails.forEach(item => {
-        const product = allProducts.find(p => p.name === item.name);
+        const product = productsForMix.find(p => p.name === item.name);
         if (product) {
             const subtotal = item.qty * product.price;
             mixTotalPrice += subtotal;
@@ -269,7 +272,7 @@ addMixToCartBtn.addEventListener('click', () => {
     
     // إعادة ضبط الخلطة بعد إضافتها للسلة
     customMix = {};
-    renderMixProducts(allProducts);
+    renderMixProducts(productsForMix);
     updateMixSummary();
 
     alert("تم إضافة الخلطة المخصصة إلى السلة!");
