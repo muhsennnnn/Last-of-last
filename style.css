@@ -1,10 +1,10 @@
 :root {
   /* لوحة ألوان محسّنة */
   --primary-color: #388E3C;
-  --secondary-color: #8BC34A; /* لون أخضر أكثر حيوية */
-  --accent-color: #FFC107; /* لون أصفر مميز */
-  --bg-color: #F4F6F8; /* خلفية فاتحة ومريحة */
-  --card-bg: #FFFFFF; /* خلفية البطاقات بيضاء */
+  --secondary-color: #8BC34A;
+  --accent-color: #FFC107;
+  --bg-color: #F4F6F8;
+  --card-bg: #FFFFFF;
   --text-color: #333333;
   --light-text: #666666;
   --shadow-light: rgba(0, 0, 0, 0.05);
@@ -131,7 +131,6 @@ body {
     color: var(--accent-color);
 }
 
-
 /* فاصل بين الأقسام */
 .section-divider {
   border: 0;
@@ -141,11 +140,9 @@ body {
   width: 80%;
 }
 
-/* تنسيقات جديدة للأقسام القابلة للطي (Accordion) */
+/* تنسيقات الأقسام القابلة للطي (Accordion) */
 .accordion-section {
-    background: none;
     margin: 30px 15px;
-    padding: 0;
 }
 
 .accordion-toggle {
@@ -169,16 +166,11 @@ body {
 }
 
 .section-title {
-  text-align: center;
   margin: 0;
   padding: 0;
   font-size: 24px;
   font-weight: 700;
   color: var(--primary-color);
-  background: none;
-  box-shadow: none;
-  border: none;
-  border-right: none;
 }
 
 .accordion-icon {
@@ -195,20 +187,18 @@ body {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.5s ease-out;
-    padding: 0 15px;
 }
 
 .accordion-content.open {
-    max-height: 2000px;
+    max-height: 2000px; /* قيمة كبيرة تسمح للمحتوى بالظهور */
     padding-top: 25px;
-    padding-bottom: 0;
 }
 
 .products {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 25px;
-  padding: 0; /* Changed from 15px to 0 to fit inside accordion content padding */
+  padding: 0;
 }
 
 .product-card {
@@ -628,15 +618,16 @@ body {
     vertical-align: middle;
 }
 
-
 /* ==========================================
   تعديل التصميم على شاشات الموبايل
   ==========================================
 */
 @media (max-width: 768px) {
-  /* جعل عرض المنتجات يتكون من عمودين على شاشات الموبايل */
   .products {
     grid-template-columns: repeat(2, 1fr);
     gap: 15px;
+  }
+  .accordion-toggle .section-title {
+    font-size: 20px;
   }
 }
