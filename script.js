@@ -44,6 +44,9 @@ const productsData = {
   ]
 };
 
+// ** دمج جميع المنتجات في قائمة واحدة لسهولة التعامل مع قسم الخلط **
+const allProducts = [...productsData.pigeonFeed, ...productsData.ornamentalBirds, ...productsData.specialOffer];
+
 // ===== السلة =====
 let cart = [];
 const cartTableBody = document.getElementById("cart-items");
@@ -51,7 +54,14 @@ const cartTotalElement = document.getElementById("cart-total");
 const productModal = document.getElementById('productModal');
 const productDetailsContent = document.getElementById('product-details-modal-content');
 const closeButton = document.querySelector('.close-button');
-const searchInput = document.getElementById('search-input'); // إضافة حقل البحث
+const searchInput = document.getElementById('search-input'); 
+
+// ===== قسم الخلطة المخصصة =====
+let customMix = {};
+const mixProductsContainer = document.getElementById('mixProductsContainer');
+const mixTotalPriceElement = document.getElementById('mix-total-price');
+const addMixToCartBtn = document.getElementById('add-mix-to-cart-btn');
+
 
 // ===== عرض المنتجات في الصفحة الرئيسية =====
 function renderProducts(products, containerId) {
@@ -77,11 +87,32 @@ function renderProducts(products, containerId) {
     });
 }
 
+// ===== دالة عرض المنتجات في قسم الخلطة =====
+function renderMixProducts(products) {
+    mixProductsContainer.innerHTML = "";
+    products.forEach((product) => {
+        const card = document.createElement("div");
+        card.className = "mix-product-card";
+        card.innerHTML = `
+            <img src="${product.image}" alt="${product.name}">
+            <h4>${product.name}</h4>
+            <p>${product.price} دينار</p>
+            <div class="quantity-control">
+                <button class="quantity-btn minus-btn" onclick="updateMixItem('${product.name}', -1, this)">-</button>
+                <input type="number" class="quantity-input" value="0" min="0" oninput="updateMixItemFromInput('${product.name}', this)">
+                <button class="quantity-btn plus-btn" onclick="updateMixItem('${product.name}', 1, this)">+</button>
+            </div>
+        `;
+        mixProductsContainer.appendChild(card);
+    });
+}
+
 // ===== تهيئة الواجهة الرئيسية =====
 function initializeProducts() {
   Object.keys(productsData).forEach(key => {
     renderProducts(productsData[key], key);
   });
+  renderMixProducts(allProducts); // تهيئة قسم الخلطة
 }
 initializeProducts(); 
 
@@ -91,13 +122,10 @@ searchInput.addEventListener('input', () => {
 
     Object.keys(productsData).forEach(key => {
         const container = document.getElementById(key);
-        // تصفية المنتجات من البيانات الأصلية
         const filteredProducts = productsData[key].filter(product =>
             product.name.toLowerCase().includes(searchTerm)
         );
-        // إعادة عرض المنتجات المصفاة
         renderProducts(filteredProducts, key);
-        // إخفاء عنوان القسم إذا لم يكن هناك منتجات مطابقة
         const sectionTitle = container.previousElementSibling;
         if (sectionTitle && sectionTitle.classList.contains('section-title')) {
             sectionTitle.style.display = filteredProducts.length > 0 ? 'block' : 'none';
@@ -148,7 +176,7 @@ function addToCartFromModal(category, index, button) {
     alert(`تم إضافة ${qty} قطعة من ${product.name} إلى السلة!`);
 }
 
-// ===== دوال التحكم بالكمية والإضافة من الصفحة الرئيسية (تم تحديثها) =====
+// ===== دوال التحكم بالكمية والإضافة من الصفحة الرئيسية =====
 function changeQuantity(button, change) {
     const input = button.parentNode.querySelector('.quantity-input');
     let value = parseInt(input.value);
@@ -171,10 +199,93 @@ function addToCartFromHome(category, index, button) {
     alert(`تم إضافة ${qty} قطعة من ${product.name} إلى السلة!`);
 }
 
+// ===== دوال التحكم بقسم الخلطة المخصصة =====
+function updateMixSummary() {
+    let totalMixPrice = 0;
+    const mixItems = Object.values(customMix);
+    mixItems.forEach(item => {
+        const product = allProducts.find(p => p.name === item.name);
+        if (product) {
+            totalMixPrice += product.price * item.qty;
+        }
+    });
+
+    mixTotalPriceElement.textContent = totalMixPrice;
+    addMixToCartBtn.disabled = totalMixPrice === 0;
+}
+
+function updateMixItem(productName, change, button) {
+    const input = button.parentNode.querySelector('.quantity-input');
+    let value = parseInt(input.value);
+    value = value + change;
+    if (value < 0) {
+        value = 0;
+    }
+    input.value = value;
+    updateMixItemFromInput(productName, input);
+}
+
+function updateMixItemFromInput(productName, input) {
+    const card = input.closest('.mix-product-card');
+    const qty = parseInt(input.value);
+    if (qty > 0) {
+        customMix[productName] = { name: productName, qty: qty };
+        card.classList.add('selected');
+    } else {
+        delete customMix[productName];
+        card.classList.remove('selected');
+    }
+    updateMixSummary();
+}
+
+addMixToCartBtn.addEventListener('click', () => {
+    const mixDetails = Object.values(customMix);
+    if (mixDetails.length === 0) {
+        alert("الرجاء إضافة منتجات إلى الخلطة أولاً.");
+        return;
+    }
+
+    let mixDescription = "مكونات الخلطة:\n";
+    let mixTotalPrice = 0;
+
+    mixDetails.forEach(item => {
+        const product = allProducts.find(p => p.name === item.name);
+        if (product) {
+            const subtotal = item.qty * product.price;
+            mixTotalPrice += subtotal;
+            mixDescription += `- ${item.name}: ${item.qty} كغم (${subtotal} دينار)\n`;
+        }
+    });
+    
+    // إنشاء منتج جديد يمثل الخلطة
+    const customMixProduct = {
+        name: "خلطة مخصصة",
+        price: mixTotalPrice,
+        qty: 1,
+        description: mixDescription
+    };
+
+    addToCart(customMixProduct, 1);
+    
+    // إعادة ضبط الخلطة بعد إضافتها للسلة
+    customMix = {};
+    renderMixProducts(allProducts);
+    updateMixSummary();
+
+    alert("تم إضافة الخلطة المخصصة إلى السلة!");
+});
+
+
+// ===== دوال السلة الرئيسية (لم يتم تغييرها) =====
 function addToCart(product, qty) {
     const existingItem = cart.find(item => item.name === product.name);
     if (existingItem) {
-        existingItem.qty += qty;
+        if (product.name === "خلطة مخصصة") {
+            // إضافة الخلطة المخصصة كبند جديد حتى لو كان اسمها مكرر
+            cart.push({ ...product, qty });
+        } else {
+            existingItem.qty += qty;
+        }
     } else {
         cart.push({ ...product, qty });
     }
@@ -184,7 +295,8 @@ function addToCart(product, qty) {
 function updateCartQty(index, delta) {
     const item = cart[index];
     item.qty = Math.max(1, item.qty + delta);
-    if (item.qty === 0) {
+    // إذا كانت الكمية صفر نحذف العنصر، مع استثناء الخلطة المخصصة التي يجب حذفها مباشرة
+    if (item.qty === 0 || item.name === "خلطة مخصصة") {
         removeFromCart(index);
     } else {
         renderCart();
@@ -222,7 +334,7 @@ function renderCart() {
     cartTotalElement.textContent = `💰 الإجمالي: ${total} دينار`;
 }
 
-// ===== إرسال الطلب =====
+// ===== إرسال الطلب (تم تعديلها لدمج الخلطة في الرسالة) =====
 document.getElementById("order-form").addEventListener("submit", e => {
     e.preventDefault();
     const name = document.getElementById("customer-name").value;
@@ -246,9 +358,14 @@ document.getElementById("order-form").addEventListener("submit", e => {
 
     let total = 0;
     cart.forEach((item, i) => {
-        const subtotal = item.qty * item.price;
-        total += subtotal;
-        orderDetails.push(`${i + 1}. ${item.name} — ${item.qty} × ${item.price} = ${subtotal} دينار`);
+        total += item.qty * item.price;
+        if (item.name === "خلطة مخصصة") {
+            orderDetails.push(`\n- ${item.name} (${item.price} دينار)`);
+            orderDetails.push(item.description.trim());
+        } else {
+            const subtotal = item.qty * item.price;
+            orderDetails.push(`${i + 1}. ${item.name} — ${item.qty} قطعة × ${item.price} = ${subtotal} دينار`);
+        }
     });
 
     orderDetails.push(`\n💰 الإجمالي: ${total} دينار`);
