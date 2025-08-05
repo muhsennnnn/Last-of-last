@@ -123,14 +123,32 @@ searchInput.addEventListener('input', () => {
         const content = section.querySelector('.accordion-content');
         const containerId = content.id;
         
-        const filteredProducts = productsData[containerId].filter(product =>
-            product.name.toLowerCase().includes(searchTerm)
-        );
-        
-        renderProducts(filteredProducts, containerId);
+        let productsToRender = [];
+        let anyProductFound = false;
+
+        if (containerId === 'customMix') {
+            productsToRender = productsForMix.filter(product =>
+                product.name.toLowerCase().includes(searchTerm)
+            );
+            // إعادة عرض منتجات الخلطة المخصصة المفلترة
+            renderMixProducts(productsToRender);
+
+            if (productsToRender.length > 0) {
+                anyProductFound = true;
+            }
+        } else {
+            productsToRender = productsData[containerId].filter(product =>
+                product.name.toLowerCase().includes(searchTerm)
+            );
+            renderProducts(productsToRender, containerId);
+
+            if (productsToRender.length > 0) {
+                anyProductFound = true;
+            }
+        }
 
         if (searchTerm !== '') {
-            if (filteredProducts.length > 0) {
+            if (anyProductFound) {
                 button.style.display = 'flex';
                 content.classList.add('open');
                 button.setAttribute('aria-expanded', 'true');
@@ -143,9 +161,16 @@ searchInput.addEventListener('input', () => {
             button.style.display = 'flex';
             content.classList.remove('open');
             button.setAttribute('aria-expanded', 'false');
+            // إعادة عرض المنتجات الأصلية عند مسح البحث
+            if (containerId !== 'customMix') {
+                renderProducts(productsData[containerId], containerId);
+            } else {
+                renderMixProducts(productsForMix);
+            }
         }
     });
 });
+
 
 document.querySelectorAll('.accordion-toggle').forEach(button => {
     button.addEventListener('click', () => {
