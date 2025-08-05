@@ -117,7 +117,7 @@ body {
 }
 
 .contact-btn.phone {
-  background: #3498db; /* لون جديد */
+  background: #3498db;
 }
 
 .contact-btn.phone:hover {
@@ -143,17 +143,48 @@ body {
     color: var(--accent-color);
 }
 
-/* فاصل بين الأقسام */
-.section-divider {
-  border: 0;
-  height: 1px;
-  background-image: linear-gradient(to left, rgba(0, 0, 0, 0), var(--primary-color), rgba(0, 0, 0, 0));
-  margin: 40px auto;
-  width: 80%;
+/* شريط علامات التبويب */
+.tab-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 20px 15px;
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 4px 10px var(--shadow-light);
+}
+
+.tab-button {
+  flex: 1;
+  background-color: transparent;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-family: 'Cairo', sans-serif;
+  font-size: 1em;
+  font-weight: 600;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.tab-button:hover {
+  background-color: #eee;
+}
+
+.tab-button.active {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+  box-shadow: 0 2px 5px rgba(56, 142, 60, 0.3);
 }
 
 .products-section {
     margin: 30px 15px;
+    display: block; /* افتراضيًا يتم عرض جميع الأقسام */
 }
 
 .section-title {
