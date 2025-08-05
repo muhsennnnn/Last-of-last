@@ -69,16 +69,21 @@
 
       <hr class="section-divider">
 
-      <section class="custom-mix">
-        <h2 class="section-title">🧪 قسم الخلطة المخصصة</h2>
-        <div class="mix-products-container" id="mixProductsContainer"></div>
-        <div class="mix-controls">
-          <div class="mix-summary">
-            <h3>💰 إجمالي سعر الخلطة: <span id="mix-total-price">0</span> دينار</h3>
-          </div>
-          <button id="add-mix-to-cart-btn" class="add-mix-to-cart-btn" disabled>
-            ➕ أضف الخلطة إلى السلة
-          </button>
+      <section class="accordion-section">
+        <button class="accordion-toggle" data-target="customMix" aria-expanded="false">
+          <h2 class="section-title">🧪 قسم الخلطة المخصصة</h2>
+          <i class="ri-arrow-down-s-line accordion-icon"></i>
+        </button>
+        <div class="accordion-content custom-mix" id="customMix">
+            <div class="mix-products-container" id="mixProductsContainer"></div>
+            <div class="mix-controls">
+                <div class="mix-summary">
+                    <h3>💰 إجمالي سعر الخلطة: <span id="mix-total-price">0</span> دينار</h3>
+                </div>
+                <button id="add-mix-to-cart-btn" class="add-mix-to-cart-btn" disabled>
+                    ➕ أضف الخلطة إلى السلة
+                </button>
+            </div>
         </div>
       </section>
     </main>
