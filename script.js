@@ -101,22 +101,34 @@ function renderProducts(products, containerId) {
     });
 }
 
+// دالة تهيئة جميع المنتجات عند تحميل الصفحة
+function initializeAllProducts() {
+    Object.keys(productsData).forEach(key => {
+        renderProducts(productsData[key], key);
+    });
+}
+
 // دالة للتبديل بين علامات التبويب
 function switchTab(tabId) {
-    // إخفاء جميع الأقسام
-    productSections.forEach(section => {
-        section.style.display = 'none';
-        section.nextElementSibling.style.display = 'none'; // لإخفاء الفاصل بين الأقسام
-    });
-
     // إزالة حالة التفعيل من جميع الأزرار
     tabButtons.forEach(button => button.classList.remove('active'));
 
-    // عرض القسم المحدد أو جميع الأقسام إذا كان tabId هو "all"
+    // إخفاء جميع الأقسام
+    productSections.forEach(section => {
+        section.style.display = 'none';
+        // إخفاء الفاصل بين الأقسام
+        if (section.nextElementSibling && section.nextElementSibling.classList.contains('section-divider')) {
+            section.nextElementSibling.style.display = 'none';
+        }
+    });
+
+    // عرض القسم المحدد أو جميع الأقسام
     if (tabId === 'all') {
         productSections.forEach(section => {
             section.style.display = 'block';
-            section.nextElementSibling.style.display = 'block';
+            if (section.nextElementSibling && section.nextElementSibling.classList.contains('section-divider')) {
+                section.nextElementSibling.style.display = 'block';
+            }
         });
         document.querySelector(`[data-tab="all"]`).classList.add('active');
     } else {
@@ -126,10 +138,6 @@ function switchTab(tabId) {
             document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
         }
     }
-    // إعادة عرض جميع المنتجات داخل الأقسام عند تبديل التبويب
-    Object.keys(productsData).forEach(key => {
-        renderProducts(productsData[key], key);
-    });
     // مسح حقل البحث عند التبديل
     searchInput.value = '';
 }
@@ -142,9 +150,10 @@ tabButtons.forEach(button => {
     });
 });
 
-// عند تحميل الصفحة، اعرض تبويب "الرئيسية"
+// عند تحميل الصفحة، تهيئة المنتجات وعرض تبويب "الرئيسية"
 document.addEventListener('DOMContentLoaded', () => {
-    switchTab('all');
+    initializeAllProducts(); // عرض جميع المنتجات لأول مرة
+    switchTab('all'); // تفعيل تبويب الرئيسية
 });
 
 // دالة البحث المحدثة
@@ -160,6 +169,7 @@ searchInput.addEventListener('input', () => {
                 product.name.toLowerCase().includes(searchTerm)
             );
             renderProducts(productsToRender, containerId);
+            // إظهار أو إخفاء القسم بناءً على وجود منتجات مطابقة
             section.style.display = productsToRender.length > 0 ? 'block' : 'none';
         });
     } else {
@@ -171,7 +181,8 @@ searchInput.addEventListener('input', () => {
             product.name.toLowerCase().includes(searchTerm)
         );
         renderProducts(productsToRender, containerId);
-        section.style.display = 'block'; // يجب أن يكون القسم مرئياً حتى لو لا يوجد نتائج
+        // يجب أن يبقى القسم مرئياً حتى لو لا توجد نتائج لتظهر رسالة "لا توجد منتجات مطابقة"
+        section.style.display = 'block';
     }
 });
 
