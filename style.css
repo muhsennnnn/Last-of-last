@@ -360,7 +360,7 @@ header {
     cursor: pointer;
 }
 
-/* --- New Custom Mix Styles --- */
+/* Custom Mix Styles */
 .custom-mix-layout {
     display: flex;
     gap: 20px;
@@ -440,7 +440,7 @@ header {
     font-weight: bold;
 }
 
-.add-to-cart-btn:disabled {
+#add-custom-mix-to-cart:disabled {
     background-color: #ccc;
     cursor: not-allowed;
 }
