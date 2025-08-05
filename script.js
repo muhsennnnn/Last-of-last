@@ -1,66 +1,68 @@
 // ===== المنتجات (بيانات منفصلة) مع إضافة وصف تفصيلي =====
 const productsData = {
-  pigeonFeed: [
-    { name: "حنطة", price: 600, image: "https://www2.0zz0.com/2025/08/03/15/847553061.jpeg", description: "(منتج مليء بالبروتينات)" },
-    { name: "شعير", price: 800, image: "https://www2.0zz0.com/2025/08/03/15/576922852.jpeg", description: "(ضع وصف للمنتج)" },
-    { name: "خلطة حنطة خشنة", price: 600, image: "https://www2.0zz0.com/2025/08/03/15/492413115.jpeg", description: "(ضع وصف للمنتج)" },
-    { name: "خلطة حنطة ناعمة", price: 700, image: "https://www2.0zz0.com/2025/08/04/15/366166799.jpeg", description: "(ضع وصف للمنتج)" },
-    { name: "خلطة ناعمة بدون حنطة", price: 900, image: "https://www2.0zz0.com/2025/08/04/15/579533397.jpeg", description: "(ضع وصف للمنتج)" },
-    { name: "خلطة خشنة بدون حنطة", price: 900, image: "PUT_IMAGE_URL", description: "(ضع وصف للمنتج)" },
-    { name: "دخن", price: 1000, image: "https://www2.0zz0.com/2025/08/03/15/867668577.jpeg", description: "(ضع وصف للمنتج)" },
-    { name: "الدخن الاحمر", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/751932495.jpeg", description: "(أضف وصف المنتج هنا)" },
-    { name: "الحب الابيض (قرطم)", price: 1250, image: "https://www2.0zz0.com/2025/08/04/15/800095310.jpeg", description: "(أضف وصف المنتج هنا)" },
-    { name: "بيقيا (عدس اسود)", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/753346524.jpeg", description: "(أضف وصف المنتج هنا)" },
-    { name: "ماش", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/100415770.jpeg", description: "(أضف وصف المنتج هنا)" },
-    { name: "ذرة بيضاء ناعمة", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/215269401.jpeg", description: "(أضف وصف المنتج هنا)" },
-    { name: "ذرة حمراء ناعمة", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/943792580.jpeg", description: "(أضف وصف المنتج هنا)" },
-    { name: "حب المكانس", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/480869427.jpeg", description: "(أضف وصف المنتج هنا)" },
-    { name: "ذرة صفراء ناعمة", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/187482526.jpeg", description: "(أضف وصف المنتج هنا)" },
-    { name: "ذرة صفراء مجروشة", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/584620940.jpeg", description: "(أضف وصف المنتج هنا)" },
-    { name: "بزاليا صفراء", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/561545617.jpeg", description: "(أضف وصف المنتج هنا)" },
-    { name: "بروتين رقم 1", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/302508892.jpeg", description: "(أضف وصف المنتج هنا)" },
-    { name: "بروتين رقم 2", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/840757522.jpeg", description: "(أضف وصف المنتج هنا)" },
-    { name: "كالسيوم", price: 1500, image: "https://www2.0zz0.com/2025/08/04/15/190721986.jpeg", description: "(أضف وصف المنتج هنا)" }
-  ],
-  ornamentalBirds: [
-    { name: "دخن", price: 1000, image: "https://www2.0zz0.com/2025/08/03/15/867668577.jpeg", description: "(ضع وصف للمنتج)" },
-    { name: "خلطة طيور حب", price: 1500, image: "https://www2.0zz0.com/2025/08/03/15/397332263.jpeg", description: "(ضع وصف للمنتج)" },
-    { name: "خلطة كوكتيل", price: 2000, image: "https://www2.0zz0.com/2025/08/03/15/629820578.jpeg", description: "(ضع وصف للمنتج)" },
-    { name: "خلطة كناري", price: 2500, image: "https://www2.0zz0.com/2025/08/03/15/851081915.jpeg", description: "(ضع وصف للمنتج)" },
-    { name: "حب اسود ناعم", price: 2000, image: "https://www2.0zz0.com/2025/08/03/15/313777410.jpeg", description: "(ضع وصف للمنتج)" },
-    { name: "حب اسود خشن", price: 1500, image: "https://www2.0zz0.com/2025/08/03/16/831250527.jpeg", description: "(ضع وصف للمنتج)" },
-    { name: "خلطة بلبل", price: 8000, image: "https://www2.0zz0.com/2025/08/03/15/701115346.jpeg", description: "(ضع وصف للمنتج)" },
-    { name: "كتان", price: 2500, image: "https://www2.0zz0.com/2025/08/04/15/919785351.jpeg", description: "(أضف وصف المنتج هنا)" },
-    { name: "شوفان", price: 1500, image: "https://www2.0zz0.com/2025/08/04/15/989250662.jpeg", description: "(أضف وصف المنتج هنا)" },
-    { name: "الدخن الاحمر", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/751932495.jpeg", description: "(أضف وصف المنتج هنا)" }
-  ],
-  specialOffer: [
-    { name: "كيس دخن 25 كيلو", price: 16000, image: "https://www2.0zz0.com/2025/08/03/15/867668577.jpeg", description: "(ضع وصف للمنتج)" },
-    { name: "خلطة كوكتيل 25 كغ توصيل مجاني", price: 45000, image: "https://www2.0zz0.com/2025/08/03/15/629820578.jpeg", description: "(ضع وصف للمنتج)" },
-    { name: "خلطة طيور حب صيفية 25 كغ توصيل مجاني", price: 35000, image: "https://www2.0zz0.com/2025/08/03/15/397332263.jpeg", description: "(ضع وصف للمنتج)" },
-    { name: "خلطة طيور حب شتوية 25 كغ توصيل مجاني", price: 37000, image: "https://www2.0zz0.com/2025/08/03/15/249540109.jpeg", description: "(ضع وصف للمنتج)" }
-  ],
-  customMix: [
-    { name: "حنطة", price: 600, image: "https://www2.0zz0.com/2025/08/03/15/847553061.jpeg", description: "وصف حنطة" },
-    { name: "شعير", price: 800, image: "https://www2.0zz0.com/2025/08/03/15/576922852.jpeg", description: "وصف شعير" },
-    { name: "دخن", price: 1000, image: "https://www2.0zz0.com/2025/08/03/15/867668577.jpeg", description: "وصف دخن" },
-    { name: "الدخن الاحمر", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/751932495.jpeg", description: "وصف الدخن الاحمر" },
-    { name: "حب ابيض", price: 1250, image: "https://www2.0zz0.com/2025/08/04/15/800095310.jpeg", description: "وصف الحب الابيض" },
-    { name: "بيقيا (عدس اسود)", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/753346524.jpeg", description: "وصف بيقيا" },
-    { name: "ماش", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/100415770.jpeg", description: "وصف ماش" },
-    { name: "ذرة بيضاء ناعمة", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/215269401.jpeg", description: "وصف ذرة بيضاء" },
-    { name: "ذرة حمراء ناعمة", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/943792580.jpeg", description: "وصف ذرة حمراء" },
-    { name: "حب المكانس", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/480869427.jpeg", description: "وصف حب المكانس" },
-    { name: "ذرة صفراء ناعمة", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/187482526.jpeg", description: "وصف ذرة صفراء ناعمة" },
-    { name: "ذرة صفراء مجروشة", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/584620940.jpeg", description: "وصف ذرة صفراء مجروشة" },
-    { name: "بزاليا صفراء", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/561545617.jpeg", description: "وصف بزاليا صفراء" },
-    { name: "بروتين رقم 1", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/302508892.jpeg", description: "وصف بروتين رقم 1" },
-    { name: "بروتين رقم 2", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/840757522.jpeg", description: "وصف بروتين رقم 2" },
-    { name: "كالسيوم", price: 1500, image: "https://www2.0zz0.com/2025/08/04/15/190721986.jpeg", description: "وصف كالسيوم" }
-  ]
+    pigeonFeed: [
+      { name: "حنطة", price: 600, image: "https://www2.0zz0.com/2025/08/03/15/847553061.jpeg", description: "(منتج مليء بالبروتينات)" },
+      { name: "شعير", price: 800, image: "https://www2.0zz0.com/2025/08/03/15/576922852.jpeg", description: "(ضع وصف للمنتج)" },
+      { name: "خلطة حنطة خشنة", price: 600, image: "https://www2.0zz0.com/2025/08/03/15/492413115.jpeg", description: "(ضع وصف للمنتج)" },
+      { name: "خلطة حنطة ناعمة", price: 700, image: "https://www2.0zz0.com/2025/08/04/15/366166799.jpeg", description: "(ضع وصف للمنتج)" },
+      { name: "خلطة ناعمة بدون حنطة", price: 900, image: "https://www2.0zz0.com/2025/08/04/15/579533397.jpeg", description: "(ضع وصف للمنتج)" },
+      { name: "خلطة خشنة بدون حنطة", price: 900, image: "PUT_IMAGE_URL", description: "(ضع وصف للمنتج)" },
+      { name: "دخن", price: 1000, image: "https://www2.0zz0.com/2025/08/03/15/867668577.jpeg", description: "(ضع وصف للمنتج)" },
+      { name: "الدخن الاحمر", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/751932495.jpeg", description: "(أضف وصف المنتج هنا)" },
+      { name: "الحب الابيض (قرطم)", price: 1250, image: "https://www2.0zz0.com/2025/08/04/15/800095310.jpeg", description: "(أضف وصف المنتج هنا)" },
+      { name: "بيقيا (عدس اسود)", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/753346524.jpeg", description: "(أضف وصف المنتج هنا)" },
+      { name: "ماش", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/100415770.jpeg", description: "(أضف وصف المنتج هنا)" },
+      { name: "ذرة بيضاء ناعمة", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/215269401.jpeg", description: "(أضف وصف المنتج هنا)" },
+      { name: "ذرة حمراء ناعمة", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/943792580.jpeg", description: "(أضف وصف المنتج هنا)" },
+      { name: "حب المكانس", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/480869427.jpeg", description: "(أضف وصف المنتج هنا)" },
+      { name: "ذرة صفراء ناعمة", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/187482526.jpeg", description: "(أضف وصف المنتج هنا)" },
+      { name: "ذرة صفراء مجروشة", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/584620940.jpeg", description: "(أضف وصف المنتج هنا)" },
+      { name: "بزاليا صفراء", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/561545617.jpeg", description: "(أضف وصف المنتج هنا)" },
+      { name: "بروتين رقم 1", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/302508892.jpeg", description: "(أضف وصف المنتج هنا)" },
+      { name: "بروتين رقم 2", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/840757522.jpeg", description: "(أضف وصف المنتج هنا)" },
+      { name: "كالسيوم", price: 1500, image: "https://www2.0zz0.com/2025/08/04/15/190721986.jpeg", description: "(أضف وصف المنتج هنا)" }
+    ],
+    ornamentalBirds: [
+      { name: "دخن", price: 1000, image: "https://www2.0zz0.com/2025/08/03/15/867668577.jpeg", description: "(ضع وصف للمنتج)" },
+      { name: "خلطة طيور حب", price: 1500, image: "https://www2.0zz0.com/2025/08/03/15/397332263.jpeg", description: "(ضع وصف للمنتج)" },
+      { name: "خلطة كوكتيل", price: 2000, image: "https://www2.0zz0.com/2025/08/03/15/629820578.jpeg", description: "(ضع وصف للمنتج)" },
+      { name: "خلطة كناري", price: 2500, image: "https://www2.0zz0.com/2025/08/03/15/851081915.jpeg", description: "(ضع وصف للمنتج)" },
+      { name: "حب اسود ناعم", price: 2000, image: "https://www2.0zz0.com/2025/08/03/15/313777410.jpeg", description: "(ضع وصف للمنتج)" },
+      { name: "حب اسود خشن", price: 1500, image: "https://www2.0zz0.com/2025/08/03/16/831250527.jpeg", description: "(ضع وصف للمنتج)" },
+      { name: "خلطة بلبل", price: 8000, image: "https://www2.0zz0.com/2025/08/03/15/701115346.jpeg", description: "(ضع وصف للمنتج)" },
+      { name: "كتان", price: 2500, image: "https://www2.0zz0.com/2025/08/04/15/919785351.jpeg", description: "(أضف وصف المنتج هنا)" },
+      { name: "شوفان", price: 1500, image: "https://www2.0zz0.com/2025/08/04/15/989250662.jpeg", description: "(أضف وصف المنتج هنا)" },
+      { name: "الدخن الاحمر", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/751932495.jpeg", description: "(أضف وصف المنتج هنا)" }
+    ],
+    specialOffer: [
+      { name: "كيس دخن 25 كيلو", price: 16000, image: "https://www2.0zz0.com/2025/08/03/15/867668577.jpeg", description: "(ضع وصف للمنتج)" },
+      { name: "خلطة كوكتيل 25 كغ توصيل مجاني", price: 45000, image: "https://www2.0zz0.com/2025/08/03/15/629820578.jpeg", description: "(ضع وصف للمنتج)" },
+      { name: "خلطة طيور حب صيفية 25 كغ توصيل مجاني", price: 35000, image: "https://www2.0zz0.com/2025/08/03/15/397332263.jpeg", description: "(ضع وصف للمنتج)" },
+      { name: "خلطة طيور حب شتوية 25 كغ توصيل مجاني", price: 37000, image: "https://www2.0zz0.com/2025/08/03/15/249540109.jpeg", description: "(ضع وصف للمنتج)" }
+    ],
+    customMix: [
+      { name: "حنطة", price: 600, image: "https://www2.0zz0.com/2025/08/03/15/847553061.jpeg", description: "وصف حنطة" },
+      { name: "شعير", price: 800, image: "https://www2.0zz0.com/2025/08/03/15/576922852.jpeg", description: "وصف شعير" },
+      { name: "دخن", price: 1000, image: "https://www2.0zz0.com/2025/08/03/15/867668577.jpeg", description: "وصف دخن" },
+      { name: "الدخن الاحمر", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/751932495.jpeg", description: "وصف الدخن الاحمر" },
+      { name: "حب ابيض", price: 1250, image: "https://www2.0zz0.com/2025/08/04/15/800095310.jpeg", description: "وصف الحب الابيض" },
+      { name: "بيقيا (عدس اسود)", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/753346524.jpeg", description: "وصف بيقيا" },
+      { name: "ماش", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/100415770.jpeg", description: "وصف ماش" },
+      { name: "ذرة بيضاء ناعمة", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/215269401.jpeg", description: "وصف ذرة بيضاء" },
+      { name: "ذرة حمراء ناعمة", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/943792580.jpeg", description: "وصف ذرة حمراء" },
+      { name: "حب المكانس", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/480869427.jpeg", description: "وصف حب المكانس" },
+      { name: "ذرة صفراء ناعمة", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/187482526.jpeg", description: "وصف ذرة صفراء ناعمة" },
+      { name: "ذرة صفراء مجروشة", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/584620940.jpeg", description: "وصف ذرة صفراء مجروشة" },
+      { name: "بزاليا صفراء", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/561545617.jpeg", description: "وصف بزاليا صفراء" },
+      { name: "بروتين رقم 1", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/302508892.jpeg", description: "وصف بروتين رقم 1" },
+      { name: "بروتين رقم 2", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/840757522.jpeg", description: "وصف بروتين رقم 2" },
+      { name: "كالسيوم", price: 1500, image: "https://www2.0zz0.com/2025/08/04/15/190721986.jpeg", description: "وصف كالسيوم" }
+    ]
 };
 
 let cart = [];
+let customMixItems = [];
+
 const cartTableBody = document.getElementById("cart-items");
 const cartTotalElement = document.getElementById("cart-total");
 const productModal = document.getElementById('productModal');
@@ -68,12 +70,17 @@ const productDetailsContent = document.getElementById('product-details-modal-con
 const closeButton = document.querySelector('.close-button');
 const searchInput = document.getElementById('search-input'); 
 
-// العناصر الجديدة للتحكم بعلامات التبويب
 const tabButtons = document.querySelectorAll('.tab-button');
 const productSections = document.querySelectorAll('.products-section');
 
-// دالة لعرض المنتجات
-function renderProducts(products, containerId) {
+// عناصر سلة الخلط المخصصة
+const customMixListContainer = document.getElementById('customMix-list');
+const customMixCartElement = document.getElementById('custom-mix-items');
+const customMixWeightElement = document.getElementById('custom-mix-weight');
+const customMixPriceElement = document.getElementById('custom-mix-price');
+const addCustomMixToCartButton = document.getElementById('add-custom-mix-to-cart');
+
+function renderProducts(products, containerId, isCustomMix = false) {
     const container = document.getElementById(containerId);
     if (!container) return;
     container.innerHTML = "";
@@ -81,13 +88,20 @@ function renderProducts(products, containerId) {
         container.innerHTML = "<p style='text-align: center; margin-top: 20px;'>لا توجد منتجات مطابقة.</p>";
         return;
     }
+
     products.forEach((product, i) => {
         const card = document.createElement("div"); 
         card.className = "product-card";
         
-        // الكود الموحد لجميع الأقسام
+        let buttonAction = '';
+        if (isCustomMix) {
+            buttonAction = `handleAddToCart('customMix', ${i}, this)`;
+        } else {
+            buttonAction = `addToCartFromHome('${containerId}', ${i}, this)`;
+        }
+        
         const cardContent = `
-            <a href="#" class="details-link" onclick="showProductDetails('${containerId}', ${i}); return false;">
+            <a href="#" class="details-link" onclick="showProductDetails('${containerId}', ${i}, ${isCustomMix}); return false;">
                 <img src="${product.image}" alt="${product.name}">
                 <h3>${product.name}</h3>
                 <p>${product.price} دينار</p>
@@ -97,7 +111,7 @@ function renderProducts(products, containerId) {
                 <input type="number" class="quantity-input" value="1" min="1">
                 <button class="quantity-btn plus-btn" onclick="changeQuantity(this, 1)">+</button>
             </div>
-            <button class="add-to-cart-home" onclick="addToCartFromHome('${containerId}', ${i}, this)">أضف إلى السلة</button>
+            <button class="add-to-cart-home" onclick="${buttonAction}">أضف إلى السلة</button>
         `;
         
         card.innerHTML = cardContent;
@@ -107,46 +121,42 @@ function renderProducts(products, containerId) {
 
 // دالة تهيئة جميع المنتجات عند تحميل الصفحة
 function initializeAllProducts() {
-    Object.keys(productsData).forEach(key => {
-        renderProducts(productsData[key], key);
-    });
+    renderProducts(productsData.pigeonFeed, 'pigeonFeed');
+    renderProducts(productsData.ornamentalBirds, 'ornamentalBirds');
+    renderProducts(productsData.specialOffer, 'specialOffer');
+    renderProducts(productsData.customMix, 'customMix-list', true); // عرض منتجات الخلطة المخصصة
+    
 }
 
-// دالة للتبديل بين علامات التبويب
 function switchTab(tabId) {
-    // إزالة حالة التفعيل من جميع الأزرار
     tabButtons.forEach(button => button.classList.remove('active'));
-
-    // إخفاء جميع الأقسام
     productSections.forEach(section => {
         section.style.display = 'none';
-        // إخفاء الفاصل بين الأقسام
-        if (section.nextElementSibling && section.nextElementSibling.classList.contains('section-divider')) {
-            section.nextElementSibling.style.display = 'none';
-        }
     });
 
-    // عرض القسم المحدد أو جميع الأقسام
-    if (tabId === 'all') {
-        productSections.forEach(section => {
-            section.style.display = 'block';
-            if (section.nextElementSibling && section.nextElementSibling.classList.contains('section-divider')) {
-                section.nextElementSibling.style.display = 'block';
-            }
-        });
-        document.querySelector(`[data-tab="all"]`).classList.add('active');
-    } else {
-        const selectedSection = document.getElementById(`${tabId}-section`);
-        if (selectedSection) {
-            selectedSection.style.display = 'block';
-            document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
-        }
+    const selectedSection = document.getElementById(`${tabId}-section`);
+    if (selectedSection) {
+        selectedSection.style.display = 'block';
+        document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
     }
-    // مسح حقل البحث عند التبديل
+
+    if (tabId === 'all') {
+        document.getElementById('pigeonFeed-section').style.display = 'block';
+        document.getElementById('ornamentalBirds-section').style.display = 'block';
+        document.getElementById('specialOffer-section').style.display = 'block';
+        renderProducts(productsData.pigeonFeed, 'pigeonFeed');
+        renderProducts(productsData.ornamentalBirds, 'ornamentalBirds');
+        renderProducts(productsData.specialOffer, 'specialOffer');
+    } else if (tabId === 'customMix') {
+        renderProducts(productsData.customMix, 'customMix-list', true);
+        renderCustomMixCart();
+    } else {
+        renderProducts(productsData[tabId], `${tabId}-tab`);
+    }
+
     searchInput.value = '';
 }
 
-// إضافة مستمعي الأحداث لأزرار علامات التبويب
 tabButtons.forEach(button => {
     button.addEventListener('click', () => {
         const tabId = button.dataset.tab;
@@ -154,47 +164,41 @@ tabButtons.forEach(button => {
     });
 });
 
-// عند تحميل الصفحة، تهيئة المنتجات وعرض تبويب "الرئيسية"
 document.addEventListener('DOMContentLoaded', () => {
-    initializeAllProducts(); // عرض جميع المنتجات لأول مرة
-    switchTab('all'); // تفعيل تبويب الرئيسية
+    initializeAllProducts();
+    switchTab('all');
 });
 
-// دالة البحث المحدثة
 searchInput.addEventListener('input', () => {
     const searchTerm = searchInput.value.trim().toLowerCase();
     const activeTab = document.querySelector('.tab-button.active').dataset.tab;
-    
+
     if (activeTab === 'all') {
-        // إذا كان التبويب "الرئيسية" نشطًا، ابحث في جميع الأقسام
-        productSections.forEach(section => {
-            const containerId = section.dataset.category;
-            let productsToRender = productsData[containerId].filter(product =>
-                product.name.toLowerCase().includes(searchTerm)
-            );
-            renderProducts(productsToRender, containerId);
-            // إظهار أو إخفاء القسم بناءً على وجود منتجات مطابقة
-            section.style.display = productsToRender.length > 0 ? 'block' : 'none';
+        const categories = ['pigeonFeed', 'ornamentalBirds', 'specialOffer'];
+        categories.forEach(category => {
+            const filteredProducts = productsData[category].filter(p => p.name.toLowerCase().includes(searchTerm));
+            renderProducts(filteredProducts, category);
         });
+    } else if (activeTab === 'customMix') {
+        const filteredProducts = productsData.customMix.filter(p => p.name.toLowerCase().includes(searchTerm));
+        renderProducts(filteredProducts, 'customMix-list', true);
     } else {
-        // إذا كان تبويب معين نشطًا، ابحث فقط في منتجاته
-        const containerId = activeTab;
-        const section = document.getElementById(`${containerId}-section`);
-        
-        let productsToRender = productsData[containerId].filter(product =>
-            product.name.toLowerCase().includes(searchTerm)
-        );
-        renderProducts(productsToRender, containerId);
-        // يجب أن يبقى القسم مرئياً حتى لو لا توجد نتائج لتظهر رسالة "لا توجد منتجات مطابقة"
-        section.style.display = 'block';
+        const filteredProducts = productsData[activeTab].filter(p => p.name.toLowerCase().includes(searchTerm));
+        renderProducts(filteredProducts, `${activeTab}-tab`);
     }
 });
 
-function showProductDetails(category, index) {
+function showProductDetails(category, index, isCustomMix) {
     const product = productsData[category][index];
     if (!product) return;
     
-    // بناء محتوى النافذة المنبثقة
+    let buttonAction = '';
+    if (isCustomMix) {
+        buttonAction = `handleAddToCart('customMix', ${index}, this)`;
+    } else {
+        buttonAction = `addToCartFromModal('${category}', ${index}, this)`;
+    }
+    
     productDetailsContent.innerHTML = `
         <img src="${product.image}" alt="${product.name}">
         <h2>${product.name}</h2>
@@ -205,7 +209,7 @@ function showProductDetails(category, index) {
             <input type="number" class="quantity-input" value="1" min="1">
             <button class="quantity-btn plus-btn" onclick="changeQuantity(this, 1)">+</button>
         </div>
-        <button class="add-to-cart-home" onclick="addToCartFromModal('${category}', ${index}, this)">أضف إلى السلة</button>
+        <button class="add-to-cart-home" onclick="${buttonAction}">أضف إلى السلة</button>
     `;
 
     productModal.classList.add('show');
@@ -220,6 +224,22 @@ window.addEventListener('click', (event) => {
         productModal.classList.remove('show');
     }
 });
+
+function handleAddToCart(category, index, button) {
+    if (category === 'customMix') {
+        const product = productsData[category][index];
+        const input = button.parentNode.querySelector('.quantity-input');
+        const qty = parseFloat(input.value);
+        if (isNaN(qty) || qty < 1) {
+            alert("الرجاء إدخال كمية صحيحة.");
+            return;
+        }
+        addToCustomMix(product, qty);
+        alert(`تم إضافة ${qty} كغم من ${product.name} إلى سلة الخلط.`);
+    } else {
+        addToCartFromHome(category, index, button);
+    }
+}
 
 function addToCartFromModal(category, index, button) {
     const product = productsData[category][index];
@@ -306,6 +326,94 @@ function renderCart() {
     });
     cartTotalElement.textContent = `💰 الإجمالي: ${total} دينار`;
 }
+
+function addToCustomMix(product, qty) {
+    const existingItem = customMixItems.find(item => item.name === product.name);
+    if (existingItem) {
+        existingItem.qty = qty;
+    } else {
+        customMixItems.push({ ...product, qty });
+    }
+    renderCustomMixCart();
+}
+
+function removeFromCustomMix(index) {
+    customMixItems.splice(index, 1);
+    renderCustomMixCart();
+}
+
+function updateCustomMixQty(index, delta) {
+    const item = customMixItems[index];
+    item.qty += delta;
+    if (item.qty <= 0) {
+        removeFromCustomMix(index);
+    } else {
+        renderCustomMixCart();
+    }
+}
+
+function renderCustomMixCart() {
+    if (!customMixCartElement) return;
+    customMixCartElement.innerHTML = "";
+    let totalWeight = 0;
+    let totalPrice = 0;
+
+    if (customMixItems.length === 0) {
+        customMixCartElement.innerHTML = `<p class="empty-message">لم يتم اختيار أي مكونات بعد.</p>`;
+        addCustomMixToCartButton.disabled = true;
+    } else {
+        customMixItems.forEach((item, index) => {
+            const subtotal = item.qty * item.price;
+            totalWeight += item.qty;
+            totalPrice += subtotal;
+
+            const itemDiv = document.createElement("div");
+            itemDiv.className = "custom-mix-item";
+            itemDiv.innerHTML = `
+                <div class="custom-mix-item-details">
+                    <h4>${item.name}</h4>
+                    <p>${item.qty} كغم × ${item.price} د.ع</p>
+                </div>
+                <div class="custom-mix-item-controls">
+                    <button class="minus" onclick="updateCustomMixQty(${index}, -1)">-</button>
+                    <span>${item.qty}</span>
+                    <button class="plus" onclick="updateCustomMixQty(${index}, 1)">+</button>
+                    <button class="remove-btn" onclick="removeFromCustomMix(${index})">حذف</button>
+                </div>
+            `;
+            customMixCartElement.appendChild(itemDiv);
+        });
+        addCustomMixToCartButton.disabled = false;
+    }
+
+    customMixWeightElement.textContent = `${totalWeight} كغ`;
+    customMixPriceElement.textContent = `${totalPrice} دينار`;
+}
+
+addCustomMixToCartButton.addEventListener('click', () => {
+    if (customMixItems.length > 0) {
+        let totalWeight = 0;
+        let totalPrice = 0;
+        const mixDetails = customMixItems.map(item => `${item.name}: ${item.qty} كغ`).join(', ');
+        
+        customMixItems.forEach(item => {
+            totalWeight += item.qty;
+            totalPrice += item.qty * item.price;
+        });
+
+        const customMixProduct = {
+            name: `خلطة مخصصة (${totalWeight} كغ)`,
+            price: totalPrice,
+            qty: 1,
+            description: mixDetails
+        };
+
+        addToCart(customMixProduct, 1);
+        alert('تم إضافة الخلطة المخصصة إلى سلة التسوق!');
+        customMixItems = []; 
+        renderCustomMixCart();
+    }
+});
 
 document.getElementById("order-form").addEventListener("submit", e => {
     e.preventDefault();
