@@ -106,61 +106,25 @@ initializeProducts();
 searchInput.addEventListener('input', () => {
     const searchTerm = searchInput.value.trim().toLowerCase();
     
-    document.querySelectorAll('.accordion-section').forEach(section => {
-        const button = section.querySelector('.accordion-toggle');
-        const content = section.querySelector('.accordion-content');
+    document.querySelectorAll('.products-section').forEach(section => {
+        const title = section.querySelector('.section-title');
+        const content = section.querySelector('.products');
         const containerId = content.id;
         
-        let productsToRender = [];
-        let anyProductFound = false;
-
-        productsToRender = productsData[containerId].filter(product =>
+        let productsToRender = productsData[containerId].filter(product =>
             product.name.toLowerCase().includes(searchTerm)
         );
         renderProducts(productsToRender, containerId);
 
-        if (productsToRender.length > 0) {
-            anyProductFound = true;
-        }
-
         if (searchTerm !== '') {
-            if (anyProductFound) {
-                button.style.display = 'flex';
-                content.classList.add('open');
-                button.setAttribute('aria-expanded', 'true');
+            if (productsToRender.length > 0) {
+                section.style.display = 'block';
             } else {
-                button.style.display = 'none';
-                content.classList.remove('open');
-                button.setAttribute('aria-expanded', 'false');
+                section.style.display = 'none';
             }
         } else {
-            button.style.display = 'flex';
-            content.classList.remove('open');
-            button.setAttribute('aria-expanded', 'false');
-            
+            section.style.display = 'block';
             renderProducts(productsData[containerId], containerId);
-        }
-    });
-});
-
-document.querySelectorAll('.accordion-toggle').forEach(button => {
-    button.addEventListener('click', () => {
-        const content = document.getElementById(button.dataset.target);
-        const isExpanded = button.getAttribute('aria-expanded') === 'true';
-        
-        document.querySelectorAll('.accordion-content.open').forEach(openContent => {
-            if (openContent !== content) {
-                openContent.classList.remove('open');
-                openContent.previousElementSibling.setAttribute('aria-expanded', 'false');
-            }
-        });
-
-        if (isExpanded) {
-            content.classList.remove('open');
-            button.setAttribute('aria-expanded', 'false');
-        } else {
-            content.classList.add('open');
-            button.setAttribute('aria-expanded', 'true');
         }
     });
 });
