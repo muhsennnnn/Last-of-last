@@ -64,11 +64,15 @@ const mixProductsContainer = document.getElementById('mixProductsContainer');
 const mixTotalPriceElement = document.getElementById('mix-total-price');
 const addMixToCartBtn = document.getElementById('add-mix-to-cart-btn');
 
-
 // ===== عرض المنتجات في الصفحة الرئيسية =====
 function renderProducts(products, containerId) {
     const container = document.getElementById(containerId);
+    if (!container) return; // Handle cases where the container might not exist
     container.innerHTML = "";
+    if (products.length === 0) {
+        container.innerHTML = "<p style='text-align: center; margin-top: 20px;'>لا توجد منتجات مطابقة.</p>";
+        return;
+    }
     products.forEach((product, i) => {
         const card = document.createElement("div"); 
         card.className = "product-card";
@@ -91,6 +95,7 @@ function renderProducts(products, containerId) {
 
 // ===== دالة عرض المنتجات في قسم الخلطة =====
 function renderMixProducts(products) {
+    if (!mixProductsContainer) return;
     mixProductsContainer.innerHTML = "";
     products.forEach((product) => {
         const card = document.createElement("div");
@@ -122,23 +127,73 @@ initializeProducts();
 // ===== وظيفة البحث الجديدة =====
 searchInput.addEventListener('input', () => {
     const searchTerm = searchInput.value.trim().toLowerCase();
+    let anyProductFound = false;
 
     Object.keys(productsData).forEach(key => {
         const container = document.getElementById(key);
+        const toggleButton = container.previousElementSibling;
         const filteredProducts = productsData[key].filter(product =>
             product.name.toLowerCase().includes(searchTerm)
         );
         renderProducts(filteredProducts, key);
-        const sectionTitle = container.previousElementSibling;
-        if (sectionTitle && sectionTitle.classList.contains('section-title')) {
-            sectionTitle.style.display = filteredProducts.length > 0 ? 'block' : 'none';
+
+        if (filteredProducts.length > 0) {
+            anyProductFound = true;
+            // Show the accordion if products are found
+            if (toggleButton) {
+                toggleButton.style.display = 'flex';
+                toggleButton.setAttribute('aria-expanded', 'true');
+                container.classList.add('open');
+            }
+        } else {
+            // Hide the accordion if no products are found for that section
+            if (toggleButton) {
+                toggleButton.style.display = 'none';
+                toggleButton.setAttribute('aria-expanded', 'false');
+                container.classList.remove('open');
+            }
+        }
+    });
+
+    if (searchTerm === '') {
+      // Show all accordions if search is cleared
+      document.querySelectorAll('.accordion-toggle').forEach(button => {
+        button.style.display = 'flex';
+        button.setAttribute('aria-expanded', 'false');
+        document.getElementById(button.dataset.target).classList.remove('open');
+      });
+    }
+});
+
+// ===== دوال التحكم في الأقسام القابلة للطي =====
+document.querySelectorAll('.accordion-toggle').forEach(button => {
+    button.addEventListener('click', () => {
+        const content = document.getElementById(button.dataset.target);
+        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+        
+        // إغلاق كل الأقسام الأخرى أولاً
+        document.querySelectorAll('.accordion-content.open').forEach(openContent => {
+            if (openContent !== content) {
+                openContent.classList.remove('open');
+                openContent.previousElementSibling.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // فتح أو إغلاق القسم الحالي
+        if (isExpanded) {
+            content.classList.remove('open');
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            content.classList.add('open');
+            button.setAttribute('aria-expanded', 'true');
         }
     });
 });
 
-// ===== دوال التحكم في النافذة المنبثقة =====
+// ===== دوال التحكم في النافذة المنبثقة (Modal) =====
 function showProductDetails(category, index) {
     const product = productsData[category][index];
+    if (!product) return;
     
     productDetailsContent.innerHTML = `
         <img src="${product.image}" alt="${product.name}">
@@ -278,17 +333,11 @@ addMixToCartBtn.addEventListener('click', () => {
     alert("تم إضافة الخلطة المخصصة إلى السلة!");
 });
 
-
 // ===== دوال السلة الرئيسية (لم يتم تغييرها) =====
 function addToCart(product, qty) {
     const existingItem = cart.find(item => item.name === product.name);
-    if (existingItem) {
-        if (product.name === "خلطة مخصصة") {
-            // إضافة الخلطة المخصصة كبند جديد حتى لو كان اسمها مكرر
-            cart.push({ ...product, qty });
-        } else {
-            existingItem.qty += qty;
-        }
+    if (existingItem && product.name !== "خلطة مخصصة") {
+        existingItem.qty += qty;
     } else {
         cart.push({ ...product, qty });
     }
@@ -297,9 +346,8 @@ function addToCart(product, qty) {
 
 function updateCartQty(index, delta) {
     const item = cart[index];
-    item.qty = Math.max(1, item.qty + delta);
-    // إذا كانت الكمية صفر نحذف العنصر، مع استثناء الخلطة المخصصة التي يجب حذفها مباشرة
-    if (item.qty === 0 || item.name === "خلطة مخصصة") {
+    item.qty += delta;
+    if (item.qty <= 0) {
         removeFromCart(index);
     } else {
         renderCart();
@@ -382,3 +430,4 @@ document.getElementById("order-form").addEventListener("submit", e => {
     const whatsappUrl = `https://wa.me/9647704159475?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank");
 });
+
