@@ -184,7 +184,10 @@ body {
 
 .products-section {
     margin: 30px 15px;
-    display: block; /* افتراضيًا يتم عرض جميع الأقسام */
+    display: none;
+}
+.products-section.active {
+    display: block;
 }
 
 .section-title {
@@ -532,6 +535,99 @@ body {
     vertical-align: middle;
 }
 
+/* تنسيقات الخلطة المخصصة */
+.custom-mix-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-top: 25px;
+}
+
+.custom-mix-products-grid {
+    flex: 2;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+}
+
+.custom-mix-cart-container {
+    flex: 1;
+    min-width: 300px;
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+}
+
+.custom-mix-cart {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px var(--shadow-light);
+}
+
+.custom-mix-cart h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+.custom-mix-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dashed #ccc;
+}
+
+.custom-mix-item:last-child {
+    border-bottom: none;
+}
+
+.custom-mix-item-details h4 {
+    margin: 0;
+    font-size: 1em;
+    color: var(--text-color);
+}
+.custom-mix-item-details p {
+    margin: 0;
+    font-size: 0.9em;
+    color: var(--light-text);
+}
+
+.custom-mix-item-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.custom-mix-totals {
+    border-top: 2px solid var(--primary-color);
+    padding-top: 15px;
+    margin-top: 15px;
+    text-align: right;
+}
+
+.custom-mix-totals p {
+    margin: 5px 0;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+#add-custom-mix-to-cart:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.empty-message {
+    text-align: center;
+    color: #888;
+    font-style: italic;
+    font-size: 1em;
+}
+
 /* ==========================================
   تعديل التصميم على شاشات الموبايل
   ==========================================
@@ -547,5 +643,11 @@ body {
   .contact-links {
       flex-direction: column;
       gap: 12px;
+  }
+  .custom-mix-layout {
+      flex-direction: column;
+  }
+  .custom-mix-cart-container {
+      position: static;
   }
 }
