@@ -51,13 +51,14 @@ const cartTotalElement = document.getElementById("cart-total");
 const productModal = document.getElementById('productModal');
 const productDetailsContent = document.getElementById('product-details-modal-content');
 const closeButton = document.querySelector('.close-button');
+const searchInput = document.getElementById('search-input'); // إضافة حقل البحث
 
 // ===== عرض المنتجات في الصفحة الرئيسية =====
 function renderProducts(products, containerId) {
     const container = document.getElementById(containerId);
     container.innerHTML = "";
     products.forEach((product, i) => {
-        const card = document.createElement("div"); // تغيير إلى div بدلاً من a
+        const card = document.createElement("div"); 
         card.className = "product-card";
         card.innerHTML = `
             <a href="#" class="details-link" onclick="showProductDetails('${containerId}', ${i}); return false;">
@@ -77,15 +78,37 @@ function renderProducts(products, containerId) {
 }
 
 // ===== تهيئة الواجهة الرئيسية =====
-Object.keys(productsData).forEach(key => {
+function initializeProducts() {
+  Object.keys(productsData).forEach(key => {
     renderProducts(productsData[key], key);
+  });
+}
+initializeProducts(); 
+
+// ===== وظيفة البحث الجديدة =====
+searchInput.addEventListener('input', () => {
+    const searchTerm = searchInput.value.trim().toLowerCase();
+
+    Object.keys(productsData).forEach(key => {
+        const container = document.getElementById(key);
+        // تصفية المنتجات من البيانات الأصلية
+        const filteredProducts = productsData[key].filter(product =>
+            product.name.toLowerCase().includes(searchTerm)
+        );
+        // إعادة عرض المنتجات المصفاة
+        renderProducts(filteredProducts, key);
+        // إخفاء عنوان القسم إذا لم يكن هناك منتجات مطابقة
+        const sectionTitle = container.previousElementSibling;
+        if (sectionTitle && sectionTitle.classList.contains('section-title')) {
+            sectionTitle.style.display = filteredProducts.length > 0 ? 'block' : 'none';
+        }
+    });
 });
 
 // ===== دوال التحكم في النافذة المنبثقة =====
 function showProductDetails(category, index) {
     const product = productsData[category][index];
     
-    // ** التعديل هنا: إضافة زر "أضف إلى السلة" داخل النافذة المنبثقة **
     productDetailsContent.innerHTML = `
         <img src="${product.image}" alt="${product.name}">
         <h2>${product.name}</h2>
@@ -112,7 +135,6 @@ window.addEventListener('click', (event) => {
     }
 });
 
-// ** دالة جديدة للإضافة من النافذة المنبثقة **
 function addToCartFromModal(category, index, button) {
     const product = productsData[category][index];
     const input = button.parentNode.querySelector('.quantity-input');
@@ -122,7 +144,7 @@ function addToCartFromModal(category, index, button) {
         return;
     }
     addToCart(product, qty);
-    productModal.classList.remove('show'); // إغلاق النافذة بعد الإضافة
+    productModal.classList.remove('show'); 
     alert(`تم إضافة ${qty} قطعة من ${product.name} إلى السلة!`);
 }
 
