@@ -295,7 +295,7 @@ body {
     transform: translateY(-2px);
 }
 
-.cart, .order-form, .custom-mix {
+.cart, .order-form {
   background: var(--card-bg);
   margin: 30px 15px;
   padding: 25px;
@@ -303,7 +303,7 @@ body {
   box-shadow: 0 6px 15px var(--shadow-light);
 }
 
-.cart h2, .order-form h2, .custom-mix h2 {
+.cart h2, .order-form h2 {
   font-size: 28px;
   font-weight: 700;
   color: var(--primary-color);
@@ -421,7 +421,12 @@ body {
 }
 
 /* تنسيقات قسم الخلطة المخصصة */
-.custom-mix .mix-products-container {
+.custom-mix {
+    background: none;
+    margin: 0;
+    padding: 0;
+}
+.mix-products-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 20px;
