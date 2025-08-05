@@ -8,7 +8,6 @@ const productsData = {
     { name: "خلطة ناعمة بدون حنطة", price: 900, image: "https://www2.0zz0.com/2025/08/04/15/579533397.jpeg", description: "(ضع وصف للمنتج)" },
     { name: "خلطة خشنة بدون حنطة", price: 900, image: "PUT_IMAGE_URL", description: "(ضع وصف للمنتج)" },
     { name: "دخن", price: 1000, image: "https://www2.0zz0.com/2025/08/03/15/867668577.jpeg", description: "(ضع وصف للمنتج)" },
-    // المنتجات الجديدة لقسم علف طيور الحمام
     { name: "الدخن الاحمر", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/751932495.jpeg", description: "(أضف وصف المنتج هنا)" },
     { name: "الحب الابيض (قرطم)", price: 1250, image: "https://www2.0zz0.com/2025/08/04/15/800095310.jpeg", description: "(أضف وصف المنتج هنا)" },
     { name: "بيقيا (عدس اسود)", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/753346524.jpeg", description: "(أضف وصف المنتج هنا)" },
@@ -31,7 +30,6 @@ const productsData = {
     { name: "حب اسود ناعم", price: 2000, image: "https://www2.0zz0.com/2025/08/03/15/313777410.jpeg", description: "(ضع وصف للمنتج)" },
     { name: "حب اسود خشن", price: 1500, image: "https://www2.0zz0.com/2025/08/03/16/831250527.jpeg", description: "(ضع وصف للمنتج)" },
     { name: "خلطة بلبل", price: 8000, image: "https://www2.0zz0.com/2025/08/03/15/701115346.jpeg", description: "(ضع وصف للمنتج)" },
-    // المنتجات الجديدة لقسم طيور الزينة
     { name: "كتان", price: 2500, image: "https://www2.0zz0.com/2025/08/04/15/919785351.jpeg", description: "(أضف وصف المنتج هنا)" },
     { name: "شوفان", price: 1500, image: "https://www2.0zz0.com/2025/08/04/15/989250662.jpeg", description: "(أضف وصف المنتج هنا)" },
     { name: "الدخن الاحمر", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/751932495.jpeg", description: "(أضف وصف المنتج هنا)" }
@@ -44,12 +42,10 @@ const productsData = {
   ]
 };
 
-// ** قائمة المنتجات للخلطة المخصصة فقط **
 const productsForMix = productsData.pigeonFeed.filter(product => 
     !product.name.includes("خلطة")
 );
 
-// ===== السلة =====
 let cart = [];
 const cartTableBody = document.getElementById("cart-items");
 const cartTotalElement = document.getElementById("cart-total");
@@ -58,16 +54,14 @@ const productDetailsContent = document.getElementById('product-details-modal-con
 const closeButton = document.querySelector('.close-button');
 const searchInput = document.getElementById('search-input'); 
 
-// ===== قسم الخلطة المخصصة =====
 let customMix = {};
 const mixProductsContainer = document.getElementById('mixProductsContainer');
 const mixTotalPriceElement = document.getElementById('mix-total-price');
 const addMixToCartBtn = document.getElementById('add-mix-to-cart-btn');
 
-// ===== عرض المنتجات في الصفحة الرئيسية =====
 function renderProducts(products, containerId) {
     const container = document.getElementById(containerId);
-    if (!container) return; // Handle cases where the container might not exist
+    if (!container) return;
     container.innerHTML = "";
     if (products.length === 0) {
         container.innerHTML = "<p style='text-align: center; margin-top: 20px;'>لا توجد منتجات مطابقة.</p>";
@@ -93,7 +87,6 @@ function renderProducts(products, containerId) {
     });
 }
 
-// ===== دالة عرض المنتجات في قسم الخلطة =====
 function renderMixProducts(products) {
     if (!mixProductsContainer) return;
     mixProductsContainer.innerHTML = "";
@@ -114,64 +107,51 @@ function renderMixProducts(products) {
     });
 }
 
-// ===== تهيئة الواجهة الرئيسية =====
 function initializeProducts() {
   Object.keys(productsData).forEach(key => {
     renderProducts(productsData[key], key);
   });
-  // استخدام القائمة الجديدة للخلطة فقط
   renderMixProducts(productsForMix); 
 }
 initializeProducts(); 
 
-// ===== وظيفة البحث الجديدة =====
 searchInput.addEventListener('input', () => {
     const searchTerm = searchInput.value.trim().toLowerCase();
-    let anyProductFound = false;
-
-    Object.keys(productsData).forEach(key => {
-        const container = document.getElementById(key);
-        const toggleButton = container.previousElementSibling;
-        const filteredProducts = productsData[key].filter(product =>
+    
+    document.querySelectorAll('.accordion-section').forEach(section => {
+        const button = section.querySelector('.accordion-toggle');
+        const content = section.querySelector('.accordion-content');
+        const containerId = content.id;
+        
+        const filteredProducts = productsData[containerId].filter(product =>
             product.name.toLowerCase().includes(searchTerm)
         );
-        renderProducts(filteredProducts, key);
+        
+        renderProducts(filteredProducts, containerId);
 
-        if (filteredProducts.length > 0) {
-            anyProductFound = true;
-            // Show the accordion if products are found
-            if (toggleButton) {
-                toggleButton.style.display = 'flex';
-                toggleButton.setAttribute('aria-expanded', 'true');
-                container.classList.add('open');
+        if (searchTerm !== '') {
+            if (filteredProducts.length > 0) {
+                button.style.display = 'flex';
+                content.classList.add('open');
+                button.setAttribute('aria-expanded', 'true');
+            } else {
+                button.style.display = 'none';
+                content.classList.remove('open');
+                button.setAttribute('aria-expanded', 'false');
             }
         } else {
-            // Hide the accordion if no products are found for that section
-            if (toggleButton) {
-                toggleButton.style.display = 'none';
-                toggleButton.setAttribute('aria-expanded', 'false');
-                container.classList.remove('open');
-            }
+            button.style.display = 'flex';
+            content.classList.remove('open');
+            button.setAttribute('aria-expanded', 'false');
         }
     });
-
-    if (searchTerm === '') {
-      // Show all accordions if search is cleared
-      document.querySelectorAll('.accordion-toggle').forEach(button => {
-        button.style.display = 'flex';
-        button.setAttribute('aria-expanded', 'false');
-        document.getElementById(button.dataset.target).classList.remove('open');
-      });
-    }
 });
 
-// ===== دوال التحكم في الأقسام القابلة للطي =====
 document.querySelectorAll('.accordion-toggle').forEach(button => {
     button.addEventListener('click', () => {
         const content = document.getElementById(button.dataset.target);
         const isExpanded = button.getAttribute('aria-expanded') === 'true';
         
-        // إغلاق كل الأقسام الأخرى أولاً
         document.querySelectorAll('.accordion-content.open').forEach(openContent => {
             if (openContent !== content) {
                 openContent.classList.remove('open');
@@ -179,7 +159,6 @@ document.querySelectorAll('.accordion-toggle').forEach(button => {
             }
         });
 
-        // فتح أو إغلاق القسم الحالي
         if (isExpanded) {
             content.classList.remove('open');
             button.setAttribute('aria-expanded', 'false');
@@ -190,7 +169,6 @@ document.querySelectorAll('.accordion-toggle').forEach(button => {
     });
 });
 
-// ===== دوال التحكم في النافذة المنبثقة (Modal) =====
 function showProductDetails(category, index) {
     const product = productsData[category][index];
     if (!product) return;
@@ -234,7 +212,6 @@ function addToCartFromModal(category, index, button) {
     alert(`تم إضافة ${qty} قطعة من ${product.name} إلى السلة!`);
 }
 
-// ===== دوال التحكم بالكمية والإضافة من الصفحة الرئيسية =====
 function changeQuantity(button, change) {
     const input = button.parentNode.querySelector('.quantity-input');
     let value = parseInt(input.value);
@@ -257,7 +234,6 @@ function addToCartFromHome(category, index, button) {
     alert(`تم إضافة ${qty} قطعة من ${product.name} إلى السلة!`);
 }
 
-// ===== دوال التحكم بقسم الخلطة المخصصة =====
 function updateMixSummary() {
     let totalMixPrice = 0;
     const mixItems = Object.values(customMix);
@@ -315,7 +291,6 @@ addMixToCartBtn.addEventListener('click', () => {
         }
     });
     
-    // إنشاء منتج جديد يمثل الخلطة
     const customMixProduct = {
         name: "خلطة مخصصة",
         price: mixTotalPrice,
@@ -325,7 +300,6 @@ addMixToCartBtn.addEventListener('click', () => {
 
     addToCart(customMixProduct, 1);
     
-    // إعادة ضبط الخلطة بعد إضافتها للسلة
     customMix = {};
     renderMixProducts(productsForMix);
     updateMixSummary();
@@ -333,7 +307,6 @@ addMixToCartBtn.addEventListener('click', () => {
     alert("تم إضافة الخلطة المخصصة إلى السلة!");
 });
 
-// ===== دوال السلة الرئيسية (لم يتم تغييرها) =====
 function addToCart(product, qty) {
     const existingItem = cart.find(item => item.name === product.name);
     if (existingItem && product.name !== "خلطة مخصصة") {
@@ -385,7 +358,6 @@ function renderCart() {
     cartTotalElement.textContent = `💰 الإجمالي: ${total} دينار`;
 }
 
-// ===== إرسال الطلب (تم تعديلها لدمج الخلطة في الرسالة) =====
 document.getElementById("order-form").addEventListener("submit", e => {
     e.preventDefault();
     const name = document.getElementById("customer-name").value;
@@ -430,4 +402,3 @@ document.getElementById("order-form").addEventListener("submit", e => {
     const whatsappUrl = `https://wa.me/9647704159475?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank");
 });
-
