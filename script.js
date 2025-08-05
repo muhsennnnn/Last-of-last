@@ -39,12 +39,26 @@ const productsData = {
     { name: "خلطة كوكتيل 25 كغ توصيل مجاني", price: 45000, image: "https://www2.0zz0.com/2025/08/03/15/629820578.jpeg", description: "(ضع وصف للمنتج)" },
     { name: "خلطة طيور حب صيفية 25 كغ توصيل مجاني", price: 35000, image: "https://www2.0zz0.com/2025/08/03/15/397332263.jpeg", description: "(ضع وصف للمنتج)" },
     { name: "خلطة طيور حب شتوية 25 كغ توصيل مجاني", price: 37000, image: "https://www2.0zz0.com/2025/08/03/15/249540109.jpeg", description: "(ضع وصف للمنتج)" }
+  ],
+  customMix: [
+    { name: "حنطة", price: 600, image: "https://www2.0zz0.com/2025/08/03/15/847553061.jpeg", description: "وصف حنطة" },
+    { name: "شعير", price: 800, image: "https://www2.0zz0.com/2025/08/03/15/576922852.jpeg", description: "وصف شعير" },
+    { name: "دخن", price: 1000, image: "https://www2.0zz0.com/2025/08/03/15/867668577.jpeg", description: "وصف دخن" },
+    { name: "الدخن الاحمر", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/751932495.jpeg", description: "وصف الدخن الاحمر" },
+    { name: "حب ابيض", price: 1250, image: "https://www2.0zz0.com/2025/08/04/15/800095310.jpeg", description: "وصف الحب الابيض" },
+    { name: "بيقيا (عدس اسود)", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/753346524.jpeg", description: "وصف بيقيا" },
+    { name: "ماش", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/100415770.jpeg", description: "وصف ماش" },
+    { name: "ذرة بيضاء ناعمة", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/215269401.jpeg", description: "وصف ذرة بيضاء" },
+    { name: "ذرة حمراء ناعمة", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/943792580.jpeg", description: "وصف ذرة حمراء" },
+    { name: "حب المكانس", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/480869427.jpeg", description: "وصف حب المكانس" },
+    { name: "ذرة صفراء ناعمة", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/187482526.jpeg", description: "وصف ذرة صفراء ناعمة" },
+    { name: "ذرة صفراء مجروشة", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/584620940.jpeg", description: "وصف ذرة صفراء مجروشة" },
+    { name: "بزاليا صفراء", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/561545617.jpeg", description: "وصف بزاليا صفراء" },
+    { name: "بروتين رقم 1", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/302508892.jpeg", description: "وصف بروتين رقم 1" },
+    { name: "بروتين رقم 2", price: 1000, image: "https://www2.0zz0.com/2025/08/04/15/840757522.jpeg", description: "وصف بروتين رقم 2" },
+    { name: "كالسيوم", price: 1500, image: "https://www2.0zz0.com/2025/08/04/15/190721986.jpeg", description: "وصف كالسيوم" }
   ]
 };
-
-const productsForMix = productsData.pigeonFeed.filter(product => 
-    !product.name.includes("خلطة")
-);
 
 let cart = [];
 const cartTableBody = document.getElementById("cart-items");
@@ -53,11 +67,6 @@ const productModal = document.getElementById('productModal');
 const productDetailsContent = document.getElementById('product-details-modal-content');
 const closeButton = document.querySelector('.close-button');
 const searchInput = document.getElementById('search-input'); 
-
-let customMix = {};
-const mixProductsContainer = document.getElementById('mixProductsContainer');
-const mixTotalPriceElement = document.getElementById('mix-total-price');
-const addMixToCartBtn = document.getElementById('add-mix-to-cart-btn');
 
 function renderProducts(products, containerId) {
     const container = document.getElementById(containerId);
@@ -87,35 +96,10 @@ function renderProducts(products, containerId) {
     });
 }
 
-function renderMixProducts(products) {
-    if (!mixProductsContainer) return;
-    mixProductsContainer.innerHTML = "";
-    if (products.length === 0) {
-        mixProductsContainer.innerHTML = "<p style='text-align: center; margin-top: 20px;'>لا توجد منتجات مطابقة لخلطة مخصصة.</p>";
-        return;
-    }
-    products.forEach((product) => {
-        const card = document.createElement("div");
-        card.className = "mix-product-card";
-        card.innerHTML = `
-            <img src="${product.image}" alt="${product.name}">
-            <h4>${product.name}</h4>
-            <p>${product.price} دينار</p>
-            <div class="quantity-control">
-                <button class="quantity-btn minus-btn" onclick="updateMixItem('${product.name}', -1, this)">-</button>
-                <input type="number" class="quantity-input" value="0" min="0" oninput="updateMixItemFromInput('${product.name}', this)">
-                <button class="quantity-btn plus-btn" onclick="updateMixItem('${product.name}', 1, this)">+</button>
-            </div>
-        `;
-        mixProductsContainer.appendChild(card);
-    });
-}
-
 function initializeProducts() {
   Object.keys(productsData).forEach(key => {
     renderProducts(productsData[key], key);
   });
-  renderMixProducts(productsForMix); 
 }
 initializeProducts(); 
 
@@ -130,24 +114,13 @@ searchInput.addEventListener('input', () => {
         let productsToRender = [];
         let anyProductFound = false;
 
-        if (containerId === 'customMix') {
-            productsToRender = productsForMix.filter(product =>
-                product.name.toLowerCase().includes(searchTerm)
-            );
-            renderMixProducts(productsToRender);
+        productsToRender = productsData[containerId].filter(product =>
+            product.name.toLowerCase().includes(searchTerm)
+        );
+        renderProducts(productsToRender, containerId);
 
-            if (productsToRender.length > 0) {
-                anyProductFound = true;
-            }
-        } else {
-            productsToRender = productsData[containerId].filter(product =>
-                product.name.toLowerCase().includes(searchTerm)
-            );
-            renderProducts(productsToRender, containerId);
-
-            if (productsToRender.length > 0) {
-                anyProductFound = true;
-            }
+        if (productsToRender.length > 0) {
+            anyProductFound = true;
         }
 
         if (searchTerm !== '') {
@@ -165,12 +138,7 @@ searchInput.addEventListener('input', () => {
             content.classList.remove('open');
             button.setAttribute('aria-expanded', 'false');
             
-            // إعادة عرض المنتجات الأصلية عند مسح البحث
-            if (containerId !== 'customMix') {
-                renderProducts(productsData[containerId], containerId);
-            } else {
-                renderMixProducts(productsForMix);
-            }
+            renderProducts(productsData[containerId], containerId);
         }
     });
 });
@@ -262,82 +230,9 @@ function addToCartFromHome(category, index, button) {
     alert(`تم إضافة ${qty} قطعة من ${product.name} إلى السلة!`);
 }
 
-function updateMixSummary() {
-    let totalMixPrice = 0;
-    const mixItems = Object.values(customMix);
-    mixItems.forEach(item => {
-        const product = productsForMix.find(p => p.name === item.name);
-        if (product) {
-            totalMixPrice += product.price * item.qty;
-        }
-    });
-
-    mixTotalPriceElement.textContent = totalMixPrice;
-    addMixToCartBtn.disabled = totalMixPrice === 0;
-}
-
-function updateMixItem(productName, change, button) {
-    const input = button.parentNode.querySelector('.quantity-input');
-    let value = parseInt(input.value);
-    value = value + change;
-    if (value < 0) {
-        value = 0;
-    }
-    input.value = value;
-    updateMixItemFromInput(productName, input);
-}
-
-function updateMixItemFromInput(productName, input) {
-    const card = input.closest('.mix-product-card');
-    const qty = parseInt(input.value);
-    if (qty > 0) {
-        customMix[productName] = { name: productName, qty: qty };
-        card.classList.add('selected');
-    } else {
-        delete customMix[productName];
-        card.classList.remove('selected');
-    }
-    updateMixSummary();
-}
-
-addMixToCartBtn.addEventListener('click', () => {
-    const mixDetails = Object.values(customMix);
-    if (mixDetails.length === 0) {
-        alert("الرجاء إضافة منتجات إلى الخلطة أولاً.");
-        return;
-    }
-
-    let mixDescription = "مكونات الخلطة:\n";
-    let mixTotalPrice = 0;
-
-    mixDetails.forEach(item => {
-        const product = productsForMix.find(p => p.name === item.name);
-        if (product) {
-            const subtotal = item.qty * product.price;
-            mixTotalPrice += subtotal;
-            mixDescription += `- ${item.name}: ${item.qty} كغم (${subtotal} دينار)\n`;
-        }
-    });
-    
-    const customMixProduct = {
-        name: "خلطة مخصصة",
-        price: mixTotalPrice,
-        qty: 1,
-        description: mixDescription
-    };
-
-    addToCart(customMixProduct, 1);
-    
-    customMix = {};
-    renderMixProducts(productsForMix);
-    updateMixSummary();
-
-    alert("تم إضافة الخلطة المخصصة إلى السلة!");
-});
-
 function addToCart(product, qty) {
     const existingItem = cart.find(item => item.name === product.name);
-    if (existingItem && product.name !== "خلطة مخصصة") {
+    if (existingItem) {
         existingItem.qty += qty;
     } else {
         cart.push({ ...product, qty });
@@ -410,13 +305,8 @@ document.getElementById("order-form").addEventListener("submit", e => {
     let total = 0;
     cart.forEach((item, i) => {
         total += item.qty * item.price;
-        if (item.name === "خلطة مخصصة") {
-            orderDetails.push(`\n- ${item.name} (${item.price} دينار)`);
-            orderDetails.push(item.description.trim());
-        } else {
-            const subtotal = item.qty * item.price;
-            orderDetails.push(`${i + 1}. ${item.name} — ${item.qty} قطعة × ${item.price} = ${subtotal} دينار`);
-        }
+        const subtotal = item.qty * item.price;
+        orderDetails.push(`${i + 1}. ${item.name} — ${item.qty} قطعة × ${item.price} = ${subtotal} دينار`);
     });
 
     orderDetails.push(`\n💰 الإجمالي: ${total} دينار`);
