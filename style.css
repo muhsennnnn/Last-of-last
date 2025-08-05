@@ -108,6 +108,26 @@ body {
   background: #0099dd;
 }
 
+/* تنسيق العنوان ورقم الهاتف في الهيدر */
+.header-address {
+    margin-top: 30px;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    display: inline-block;
+    font-size: 1.1em;
+    font-weight: 600;
+}
+.header-address a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.header-address a:hover {
+    color: var(--accent-color);
+}
+
+
 /* فاصل بين الأقسام */
 .section-divider {
   border: 0;
@@ -231,7 +251,7 @@ body {
     transform: translateY(-2px);
 }
 
-.cart, .order-form {
+.cart, .order-form, .custom-mix {
   background: var(--card-bg);
   margin: 30px 15px;
   padding: 25px;
@@ -239,7 +259,7 @@ body {
   box-shadow: 0 6px 15px var(--shadow-light);
 }
 
-.cart h2, .order-form h2 {
+.cart h2, .order-form h2, .custom-mix h2 {
   font-size: 28px;
   font-weight: 700;
   color: var(--primary-color);
@@ -356,25 +376,91 @@ body {
   transform: translateY(-3px);
 }
 
-footer {
-  text-align: center;
-  padding: 25px;
-  background: #e9ecef;
-  color: #666;
-  border-top: 1px solid #ddd;
-  margin-top: 30px;
+/* تنسيقات قسم الخلطة المخصصة */
+.custom-mix .mix-products-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
 }
 
-footer a {
-  color: var(--primary-color);
-  text-decoration: none;
-  font-weight: 600;
-  transition: color 0.3s;
+.mix-product-card {
+    background: var(--card-bg);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px var(--shadow-light);
+    text-align: center;
+    transition: transform 0.3s ease;
+    border: 2px solid transparent;
 }
 
-footer a:hover {
-  color: #2e7d32;
-  text-decoration: underline;
+.mix-product-card.selected {
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 15px rgba(56, 142, 60, 0.2);
+}
+
+.mix-product-card:hover {
+    transform: translateY(-5px);
+}
+
+.mix-product-card h4 {
+    font-size: 1em;
+    font-weight: 600;
+    margin: 5px 0;
+}
+
+.mix-product-card p {
+    font-size: 0.9em;
+    color: var(--accent-color);
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.mix-product-card img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.mix-controls {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.mix-summary {
+    background: #e8f5e9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.add-mix-to-cart-btn {
+    padding: 15px 30px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    width: 100%;
+    max-width: 400px;
+}
+
+.add-mix-to-cart-btn:hover {
+    background-color: #2e7d32;
+    transform: translateY(-2px);
+}
+
+.add-mix-to-cart-btn:disabled {
+    background-color: #b0c2b0;
+    cursor: not-allowed;
+    transform: none;
 }
 
 /* تنسيقات النافذة المنبثقة (Modal) المحدثة */
@@ -395,11 +481,11 @@ footer a:hover {
 }
 .modal-content {
     background-color: var(--card-bg);
-    padding: 12px; /* تم تصغير الهوامش الداخلية */
+    padding: 12px; 
     border-radius: 15px;
     box-shadow: 0 10px 30px var(--shadow-heavy);
     width: 90%;
-    max-width: 250px; /* تم تصغير الحجم هنا لجعله مربعاً أكثر */
+    max-width: 250px; 
     text-align: center;
     position: relative;
     animation: fadeIn 0.4s ease-out;
@@ -414,8 +500,8 @@ footer a:hover {
     border: none;
     position: absolute;
     top: 10px;
-    left: 10px; /* تم تعديل الموضع ليناسب الحجم الجديد */
-    font-size: 1.5em; /* تم تصغير حجم الزر */
+    left: 10px;
+    font-size: 1.5em; 
     font-weight: bold;
     cursor: pointer;
     transition: color 0.3s, transform 0.2s;
@@ -433,18 +519,18 @@ footer a:hover {
     margin-bottom: 12px;
 }
 .modal-content h2 {
-    font-size: 1.4em; /* تم تصغير حجم الخط */
+    font-size: 1.4em; 
     color: var(--primary-color);
     margin-bottom: 6px;
 }
 .modal-content .product-price {
-    font-size: 1.1em; /* تم تصغير حجم الخط */
+    font-size: 1.1em;
     font-weight: bold;
     color: var(--accent-color);
     margin-bottom: 12px;
 }
 .modal-content .product-description {
-    font-size: 0.8em; /* تم تصغير حجم الخط */
+    font-size: 0.8em;
     text-align: center;
     line-height: 1.5;
     color: var(--light-text);
