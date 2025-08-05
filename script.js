@@ -86,7 +86,7 @@ function renderProducts(products, containerId) {
         card.className = "product-card";
         
         let cardContent;
-        // Logic to check if the category is 'customMix'
+        // تعديل هنا: إذا كان القسم "customMix"، نعرض الرابط فقط
         if (containerId === 'customMix') {
             cardContent = `
                 <a href="#" class="details-link" onclick="showProductDetails('${containerId}', ${i}); return false;">
@@ -95,7 +95,7 @@ function renderProducts(products, containerId) {
                     <p>${product.price} دينار</p>
                 </a>
             `;
-        } else {
+        } else { // لبقية الأقسام، نعرض أدوات التحكم بالكمية وزر الإضافة
             cardContent = `
                 <a href="#" class="details-link" onclick="showProductDetails('${containerId}', ${i}); return false;">
                     <img src="${product.image}" alt="${product.name}">
@@ -205,6 +205,7 @@ function showProductDetails(category, index) {
     const product = productsData[category][index];
     if (!product) return;
     
+    // بناء محتوى النافذة المنبثقة
     productDetailsContent.innerHTML = `
         <img src="${product.image}" alt="${product.name}">
         <h2>${product.name}</h2>
