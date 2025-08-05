@@ -538,24 +538,20 @@ body {
 /* تنسيقات الخلطة المخصصة */
 .custom-mix-layout {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column; /* تم التعديل هنا لترتيب العناصر عمودياً */
     gap: 25px;
     margin-top: 25px;
 }
 
 .custom-mix-products-grid {
-    flex: 2;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 25px;
 }
 
 .custom-mix-cart-container {
-    flex: 1;
-    min-width: 300px;
-    position: sticky;
-    top: 20px;
-    height: fit-content;
+    width: 100%; /* تم التعديل هنا ليأخذ عرضاً كاملاً */
+    position: static; /* تم التعديل هنا لإلغاء التثبيت أثناء التمرير */
 }
 
 .custom-mix-cart {
@@ -650,4 +646,24 @@ body {
   .custom-mix-cart-container {
       position: static;
   }
+}
+
+/* تصميم الإشعار (Notification) */
+.notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #388E3C;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+.notification.show {
+    opacity: 1;
 }
