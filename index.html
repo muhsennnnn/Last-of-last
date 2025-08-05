@@ -6,6 +6,7 @@
   <title>أعلاف السالم</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
 </head>
 <body>
 
@@ -15,7 +16,7 @@
       <h1>أعلاف السالم</h1>
       <p>لسنا الوحيدين لكننا الأفضل</p>
       <div class="contact-links">
-        <span>📞 للتواصل والاستفسار:</span>
+        <span><i class="ri-phone-line contact-text-icon"></i> للتواصل والاستفسار:</span>
         <a class="contact-btn whatsapp" href="https://wa.me/9647704159475" target="_blank">
           <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="واتساب" class="contact-icon">
           واتساب
@@ -26,8 +27,8 @@
         </a>
       </div>
       <div class="header-address">
-          📍 العنوان: موصل - حي البلديات قرب جامع صلة الأرحام  
-          📞 للاستفسار: <a href="tel:07704159475">0770 415 9475</a>
+          <i class="ri-map-pin-line"></i> العنوان: موصل - حي البلديات قرب جامع صلة الأرحام  
+          <i class="ri-phone-line"></i> للاستفسار: <a href="tel:07704159475">0770 415 9475</a>
       </div>
     </div>
   </header>
@@ -38,31 +39,39 @@
         <input type="text" id="search-input" placeholder="🔍 ابحث عن منتج..." />
       </section>
       
-      <section>
-        <h2 class="section-title">🕊 قسم علف طيور الحمام</h2>
-        <div class="products" id="pigeonFeed"></div>
+      <section class="accordion-section">
+        <button class="accordion-toggle" data-target="pigeonFeed">
+            <h2 class="section-title">🕊 قسم علف طيور الحمام</h2>
+            <i class="ri-arrow-down-s-line accordion-icon"></i>
+        </button>
+        <div class="accordion-content products" id="pigeonFeed"></div>
       </section>
 
       <hr class="section-divider">
 
-      <section>
-        <h2 class="section-title">🐦 قسم طيور الزينة</h2>
-        <div class="products" id="ornamentalBirds"></div>
+      <section class="accordion-section">
+        <button class="accordion-toggle" data-target="ornamentalBirds">
+          <h2 class="section-title">🐦 قسم طيور الزينة</h2>
+          <i class="ri-arrow-down-s-line accordion-icon"></i>
+        </button>
+        <div class="accordion-content products" id="ornamentalBirds"></div>
       </section>
 
       <hr class="section-divider">
 
-      <section>
-        <h2 class="section-title">🎯 قسم العرض الخاص</h2>
-        <div class="products" id="specialOffer"></div>
+      <section class="accordion-section">
+        <button class="accordion-toggle" data-target="specialOffer">
+          <h2 class="section-title">🎯 قسم العرض الخاص</h2>
+          <i class="ri-arrow-down-s-line accordion-icon"></i>
+        </button>
+        <div class="accordion-content products" id="specialOffer"></div>
       </section>
 
       <hr class="section-divider">
 
       <section class="custom-mix">
         <h2 class="section-title">🧪 قسم الخلطة المخصصة</h2>
-        <div class="mix-products-container" id="mixProductsContainer">
-          </div>
+        <div class="mix-products-container" id="mixProductsContainer"></div>
         <div class="mix-controls">
           <div class="mix-summary">
             <h3>💰 إجمالي سعر الخلطة: <span id="mix-total-price">0</span> دينار</h3>
@@ -76,7 +85,7 @@
   </div>
 
   <section class="cart">
-    <h2>🛒 سلة التسوق</h2>
+    <h2><i class="ri-shopping-cart-2-line"></i> سلة التسوق</h2>
     <table class="cart-table">
       <thead>
         <tr>
@@ -92,7 +101,7 @@
     <p id="cart-total">💰 الإجمالي: 0 دينار</p>
 
     <p class="delivery-note">
-      🚚 <strong>ملاحظة التوصيل:</strong><br>
+      <i class="ri-truck-line"></i> <strong>ملاحظة التوصيل:</strong><br>
       - تكلفة التوصيل إلى المحافظات: 6000 دينار<br>
       - كل ٢٥ كيلو تعتبر طلبية واحدة الى المحافظات بسبب سياسة شركة التوصيل<br>
       - تكلفة التوصيل داخل الموصل: من 2000 إلى 5000 دينار حسب المنطقة<br>
@@ -101,7 +110,7 @@
   </section>
 
   <section class="order-form">
-    <h2>📩 إرسال الطلب</h2>
+    <h2><i class="ri-mail-send-line"></i> إرسال الطلب</h2>
     <form id="order-form">
       <input type="text" id="customer-name" placeholder="👤 الاسم الكامل" required />
       <input type="tel" id="customer-phone" placeholder="📞 رقم الهاتف" required />
@@ -114,8 +123,7 @@
   <div id="productModal" class="modal">
     <div class="modal-content">
       <button class="close-button">❎</button>
-      <div id="product-details-modal-content">
-        </div>
+      <div id="product-details-modal-content"></div>
     </div>
   </div>
 
