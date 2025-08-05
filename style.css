@@ -450,6 +450,33 @@ footer a:hover {
     color: var(--light-text);
 }
 
+/* تنسيق حقل البحث */
+.search-section {
+  text-align: center;
+  margin: 30px 15px;
+}
+
+#search-input {
+  width: 90%;
+  max-width: 600px;
+  padding: 15px 20px;
+  border: 1px solid #ddd;
+  border-radius: 30px;
+  font-size: 16px;
+  text-align: right;
+  transition: box-shadow 0.3s;
+}
+
+#search-input::placeholder {
+  color: #999;
+}
+
+#search-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 8px rgba(56, 142, 60, 0.3);
+}
+
 /* ==========================================
   تعديل التصميم على شاشات الموبايل 
   ==========================================
