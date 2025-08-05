@@ -90,6 +90,10 @@ function renderProducts(products, containerId) {
 function renderMixProducts(products) {
     if (!mixProductsContainer) return;
     mixProductsContainer.innerHTML = "";
+    if (products.length === 0) {
+        mixProductsContainer.innerHTML = "<p style='text-align: center; margin-top: 20px;'>لا توجد منتجات مطابقة لخلطة مخصصة.</p>";
+        return;
+    }
     products.forEach((product) => {
         const card = document.createElement("div");
         card.className = "mix-product-card";
@@ -130,7 +134,6 @@ searchInput.addEventListener('input', () => {
             productsToRender = productsForMix.filter(product =>
                 product.name.toLowerCase().includes(searchTerm)
             );
-            // إعادة عرض منتجات الخلطة المخصصة المفلترة
             renderMixProducts(productsToRender);
 
             if (productsToRender.length > 0) {
@@ -161,6 +164,7 @@ searchInput.addEventListener('input', () => {
             button.style.display = 'flex';
             content.classList.remove('open');
             button.setAttribute('aria-expanded', 'false');
+            
             // إعادة عرض المنتجات الأصلية عند مسح البحث
             if (containerId !== 'customMix') {
                 renderProducts(productsData[containerId], containerId);
@@ -170,7 +174,6 @@ searchInput.addEventListener('input', () => {
         }
     });
 });
-
 
 document.querySelectorAll('.accordion-toggle').forEach(button => {
     button.addEventListener('click', () => {
