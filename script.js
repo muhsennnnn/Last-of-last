@@ -68,6 +68,11 @@ const productDetailsContent = document.getElementById('product-details-modal-con
 const closeButton = document.querySelector('.close-button');
 const searchInput = document.getElementById('search-input'); 
 
+// العناصر الجديدة للتحكم بعلامات التبويب
+const tabButtons = document.querySelectorAll('.tab-button');
+const productSections = document.querySelectorAll('.products-section');
+
+// دالة لعرض المنتجات
 function renderProducts(products, containerId) {
     const container = document.getElementById(containerId);
     if (!container) return;
@@ -96,37 +101,78 @@ function renderProducts(products, containerId) {
     });
 }
 
-function initializeProducts() {
-  Object.keys(productsData).forEach(key => {
-    renderProducts(productsData[key], key);
-  });
-}
-initializeProducts(); 
+// دالة للتبديل بين علامات التبويب
+function switchTab(tabId) {
+    // إخفاء جميع الأقسام
+    productSections.forEach(section => {
+        section.style.display = 'none';
+        section.nextElementSibling.style.display = 'none'; // لإخفاء الفاصل بين الأقسام
+    });
 
+    // إزالة حالة التفعيل من جميع الأزرار
+    tabButtons.forEach(button => button.classList.remove('active'));
+
+    // عرض القسم المحدد أو جميع الأقسام إذا كان tabId هو "all"
+    if (tabId === 'all') {
+        productSections.forEach(section => {
+            section.style.display = 'block';
+            section.nextElementSibling.style.display = 'block';
+        });
+        document.querySelector(`[data-tab="all"]`).classList.add('active');
+    } else {
+        const selectedSection = document.getElementById(`${tabId}-section`);
+        if (selectedSection) {
+            selectedSection.style.display = 'block';
+            document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+        }
+    }
+    // إعادة عرض جميع المنتجات داخل الأقسام عند تبديل التبويب
+    Object.keys(productsData).forEach(key => {
+        renderProducts(productsData[key], key);
+    });
+    // مسح حقل البحث عند التبديل
+    searchInput.value = '';
+}
+
+// إضافة مستمعي الأحداث لأزرار علامات التبويب
+tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const tabId = button.dataset.tab;
+        switchTab(tabId);
+    });
+});
+
+// عند تحميل الصفحة، اعرض تبويب "الرئيسية"
+document.addEventListener('DOMContentLoaded', () => {
+    switchTab('all');
+});
+
+// دالة البحث المحدثة
 searchInput.addEventListener('input', () => {
     const searchTerm = searchInput.value.trim().toLowerCase();
+    const activeTab = document.querySelector('.tab-button.active').dataset.tab;
     
-    document.querySelectorAll('.products-section').forEach(section => {
-        const title = section.querySelector('.section-title');
-        const content = section.querySelector('.products');
-        const containerId = content.id;
+    if (activeTab === 'all') {
+        // إذا كان التبويب "الرئيسية" نشطًا، ابحث في جميع الأقسام
+        productSections.forEach(section => {
+            const containerId = section.dataset.category;
+            let productsToRender = productsData[containerId].filter(product =>
+                product.name.toLowerCase().includes(searchTerm)
+            );
+            renderProducts(productsToRender, containerId);
+            section.style.display = productsToRender.length > 0 ? 'block' : 'none';
+        });
+    } else {
+        // إذا كان تبويب معين نشطًا، ابحث فقط في منتجاته
+        const containerId = activeTab;
+        const section = document.getElementById(`${containerId}-section`);
         
         let productsToRender = productsData[containerId].filter(product =>
             product.name.toLowerCase().includes(searchTerm)
         );
         renderProducts(productsToRender, containerId);
-
-        if (searchTerm !== '') {
-            if (productsToRender.length > 0) {
-                section.style.display = 'block';
-            } else {
-                section.style.display = 'none';
-            }
-        } else {
-            section.style.display = 'block';
-            renderProducts(productsData[containerId], containerId);
-        }
-    });
+        section.style.display = 'block'; // يجب أن يكون القسم مرئياً حتى لو لا يوجد نتائج
+    }
 });
 
 function showProductDetails(category, index) {
