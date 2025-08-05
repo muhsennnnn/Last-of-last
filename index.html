@@ -1,130 +1,125 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>أعلاف السالم</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر علف</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <header>
+        <div class="header-content">
+            <h1 class="logo">متجر علف</h1>
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="البحث عن منتج...">
+                <button class="search-btn">🔍</button>
+            </div>
+            <a href="#cart" class="cart-btn">🛒 السلة</a>
+        </div>
+        <nav class="tabs">
+            <button class="tab-button active" data-tab="all">الرئيسية</button>
+            <button class="tab-button" data-tab="pigeonFeed">أعلاف الحمام</button>
+            <button class="tab-button" data-tab="ornamentalBirds">طيور الزينة</button>
+            <button class="tab-button" data-tab="specialOffer">عروض خاصة</button>
+            <button class="tab-button" data-tab="customMix">خلطة مخصصة</button>
+        </nav>
+    </header>
 
-  <header class="hero-header">
-    <div class="overlay"></div>
-    <div class="header-content">
-      <h1>أعلاف السالم</h1>
-      <p>لسنا الوحيدين لكننا الأفضل</p>
-      <div class="contact-links">
-        <span>للتواصل والاستفسار:</span>
-        <a class="contact-btn whatsapp" href="https://wa.me/9647704159475" target="_blank">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="واتساب" class="contact-icon">
-          واتساب
-        </a>
-        <a class="contact-btn messenger" href="https://m.me/a.laf.alsalm" target="_blank">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/b/be/Facebook_Messenger_logo_2020.svg" alt="ماسنجر" class="contact-icon">
-          ماسنجر
-        </a>
-        <a class="contact-btn phone" href="tel:07704159475">
-          <i class="ri-phone-line contact-icon"></i>
-          اتصال
-        </a>
-      </div>
-      <div class="header-address">
-          <i class="ri-map-pin-line"></i>
-          <a href="https://maps.app.goo.gl/4hA9PJodsJnFvwfB7" target="_blank">العنوان: موصل - حي البلديات قرب جامع صلة الأرحام</a>
-      </div>
-    </div>
-  </header>
+    <main class="container">
+        <section id="all-section" class="products-container products-section" data-category="all">
+            <div class="products-grid" id="pigeonFeed"></div>
+            <hr class="section-divider">
+            <div class="products-grid" id="ornamentalBirds"></div>
+            <hr class="section-divider">
+            <div class="products-grid" id="specialOffer"></div>
+        </section>
 
-  <div id="main-page">
-    <main>
-      <section class="search-section">
-        <input type="text" id="search-input" placeholder="🔍 ابحث عن منتج..." />
-      </section>
+        <section id="pigeonFeed-section" class="products-container products-section" data-category="pigeonFeed" style="display: none;">
+            <div class="products-grid" id="pigeonFeed-tab"></div>
+        </section>
 
-      <section class="tab-bar">
-        <button class="tab-button active" data-tab="all">الرئيسية</button>
-        <button class="tab-button" data-tab="pigeonFeed">علف حمام</button>
-        <button class="tab-button" data-tab="ornamentalBirds">طيور زينة</button>
-        <button class="tab-button" data-tab="specialOffer">عروض خاصة</button>
-        <button class="tab-button" data-tab="customMix">خلطة مخصصة</button>
-      </section>
-      
-      <div id="products-container">
-        <section class="products-section" id="pigeonFeed-section" data-category="pigeonFeed">
-          <h2 class="section-title">🕊 قسم علف طيور الحمام</h2>
-          <div class="products" id="pigeonFeed"></div>
+        <section id="ornamentalBirds-section" class="products-container products-section" data-category="ornamentalBirds" style="display: none;">
+            <div class="products-grid" id="ornamentalBirds-tab"></div>
         </section>
-  
-        <hr class="section-divider">
-  
-        <section class="products-section" id="ornamentalBirds-section" data-category="ornamentalBirds">
-          <h2 class="section-title">🐦 قسم طيور الزينة</h2>
-          <div class="products" id="ornamentalBirds"></div>
-        </section>
-  
-        <hr class="section-divider">
-  
-        <section class="products-section" id="specialOffer-section" data-category="specialOffer">
-          <h2 class="section-title">🎯 قسم العرض الخاص</h2>
-          <div class="products" id="specialOffer"></div>
-        </section>
-  
-        <hr class="section-divider">
-  
-        <section class="products-section" id="customMix-section" data-category="customMix">
-          <h2 class="section-title">🧪 قسم الخلطة المخصصة</h2>
-          <div class="products" id="customMix"></div>
-        </section>
-      </div>
 
+        <section id="specialOffer-section" class="products-container products-section" data-category="specialOffer" style="display: none;">
+            <div class="products-grid" id="specialOffer-tab"></div>
+        </section>
+
+        <section id="customMix-section" class="products-container products-section" data-category="customMix" style="display: none;">
+            <h2 class="section-title">اختر المكونات لخلطتك المخصصة</h2>
+            <div class="custom-mix-layout">
+                <div class="products-grid custom-mix-products" id="customMix"></div>
+                <div class="custom-mix-cart-container">
+                    <div class="custom-mix-cart" id="custom-mix-cart">
+                        <h3>سلة الخلط المخصصة</h3>
+                        <div id="custom-mix-items">
+                            <p class="empty-message">لم يتم اختيار أي مكونات بعد.</p>
+                        </div>
+                        <div class="custom-mix-totals">
+                            <p>إجمالي الوزن: <span id="custom-mix-weight">0</span> كغ</p>
+                            <p>المبلغ الإجمالي: <span id="custom-mix-price">0</span> دينار</p>
+                        </div>
+                        <button id="add-custom-mix-to-cart" class="add-to-cart-btn" disabled>أضف الخلطة إلى السلة</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="modal" id="productModal">
+            <div class="modal-content" id="product-details-modal-content">
+                <span class="close-button">&times;</span>
+                </div>
+        </div>
+
+        <section id="cart" class="cart-section">
+            <h2 class="section-title">سلة التسوق</h2>
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>المنتج</th>
+                        <th>الكمية</th>
+                        <th>السعر (دينار)</th>
+                        <th>الإجمالي (دينار)</th>
+                        <th>حذف</th>
+                    </tr>
+                </thead>
+                <tbody id="cart-items">
+                    </tbody>
+            </table>
+            <div class="cart-summary">
+                <h3 id="cart-total">💰 الإجمالي: 0 دينار</h3>
+            </div>
+            <form id="order-form" class="order-form">
+                <h3 class="form-title">معلومات الطلب</h3>
+                <input type="text" id="customer-name" placeholder="الاسم الكامل" required>
+                <input type="tel" id="customer-phone" placeholder="رقم الهاتف" required>
+                <select id="customer-city" required>
+                    <option value="">اختر المدينة</option>
+                    <option value="الموصل">الموصل</option>
+                    <option value="بغداد">بغداد</option>
+                    <option value="البصرة">البصرة</option>
+                    <option value="أربيل">أربيل</option>
+                    <option value="السليمانية">السليمانية</option>
+                    <option value="الأنبار">الأنبار</option>
+                    <option value="بابل">بابل</option>
+                    <option value="دهوك">دهوك</option>
+                    <option value="ديالى">ديالى</option>
+                    <option value="ذي قار">ذي قار</option>
+                    <option value="كربلاء">كربلاء</option>
+                    <option value="كركوك">كركوك</option>
+                    <option value="ميسان">ميسان</option>
+                    <option value="النجف">النجف</option>
+                    <option value="القادسية">القادسية</option>
+                    <option value="صلاح الدين">صلاح الدين</option>
+                    <option value="واسط">واسط</option>
+                </select>
+                <input type="text" id="customer-location" placeholder="العنوان بالتفصيل" required>
+                <button type="submit" class="submit-order-btn">إرسال الطلب عبر واتساب</button>
+            </form>
+        </section>
     </main>
-  </div>
-
-  <section class="cart">
-    <h2><i class="ri-shopping-cart-2-line"></i> سلة التسوق</h2>
-    <table class="cart-table">
-      <thead>
-        <tr>
-          <th>📦 المنتج</th>
-          <th>⚖️ الكمية</th>
-          <th>💵 السعر</th>
-          <th>💰 الإجمالي</th>
-          <th>❎ حذف</th>
-        </tr>
-      </thead>
-      <tbody id="cart-items"></tbody>
-    </table>
-    <p id="cart-total">💰 الإجمالي: 0 دينار</p>
-
-    <p class="delivery-note">
-      <i class="ri-truck-line"></i> <strong>ملاحظة التوصيل:</strong><br>
-      - تكلفة التوصيل إلى المحافظات: 6000 دينار<br>
-      - كل ٢٥ كيلو تعتبر طلبية واحدة الى المحافظات بسبب سياسة شركة التوصيل<br>
-      - تكلفة التوصيل داخل الموصل: من 2000 إلى 5000 دينار حسب المنطقة<br>
-      - هذه التكاليف لا تشمل العروض الخاصة بالتوصيل المجاني
-    </p>
-  </section>
-
-  <section class="order-form">
-    <h2><i class="ri-mail-send-line"></i> إرسال الطلب</h2>
-    <form id="order-form">
-      <input type="text" id="customer-name" placeholder="👤 الاسم الكامل" required />
-      <input type="tel" id="customer-phone" placeholder="📞 رقم الهاتف" required />
-      <input type="text" id="customer-city" placeholder="🏙️ المحافظة / المدينة" required />
-      <input type="text" id="customer-location" placeholder="📍 المنطقة وأقرب نقطة دالة" required />
-      <button type="submit">📲 إرسال عبر واتساب</button>
-    </form>
-  </section>
-
-  <div id="productModal" class="modal">
-    <div class="modal-content">
-      <button class="close-button">❎</button>
-      <div id="product-details-modal-content"></div>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
