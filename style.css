@@ -63,18 +63,22 @@ body {
 
 .contact-links {
   margin-top: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 .contact-links span {
   display: block;
-  margin-bottom: 12px;
   font-weight: bold;
+  white-space: nowrap;
 }
 
 .contact-btn {
   display: inline-flex;
   align-items: center;
-  margin: 0 8px;
   padding: 12px 20px;
   border-radius: 30px;
   color: white;
@@ -112,6 +116,14 @@ body {
   background: #0099dd;
 }
 
+.contact-btn.phone {
+  background: #3498db;
+}
+
+.contact-btn.phone:hover {
+  background: #2980b9;
+}
+
 /* تنسيق العنوان ورقم الهاتف في الهيدر */
 .header-address {
     margin-top: 30px;
@@ -140,65 +152,27 @@ body {
   width: 80%;
 }
 
-/* تنسيقات الأقسام القابلة للطي (Accordion) */
-.accordion-section {
+.products-section {
     margin: 30px 15px;
-}
-
-.accordion-toggle {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 15px;
-    background: var(--card-bg);
-    border: none;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px var(--shadow-light);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: right;
-}
-
-.accordion-toggle:hover {
-    box-shadow: 0 6px 15px var(--shadow-heavy);
-    transform: translateY(-2px);
 }
 
 .section-title {
   margin: 0;
-  padding: 0;
+  padding: 15px;
   font-size: 24px;
   font-weight: 700;
-  color: var(--primary-color);
-}
-
-.accordion-icon {
-    font-size: 24px;
-    color: var(--primary-color);
-    transition: transform 0.3s ease;
-}
-
-.accordion-toggle[aria-expanded="true"] .accordion-icon {
-    transform: rotate(180deg);
-}
-
-.accordion-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease-out;
-}
-
-.accordion-content.open {
-    max-height: 2000px; /* قيمة كبيرة تسمح للمحتوى بالظهور */
-    padding-top: 25px;
+  color: white;
+  background-color: var(--primary-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 10px var(--shadow-light);
+  text-align: right;
 }
 
 .products {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 25px;
-  padding: 0;
+  padding: 25px 0 0 0;
 }
 
 .product-card {
@@ -521,7 +495,7 @@ body {
 }
 
 /* Icons from Remixicon */
-.contact-text-icon, .ri-map-pin-line, .ri-truck-line, .ri-shopping-cart-2-line, .ri-mail-send-line {
+.ri-map-pin-line, .ri-truck-line, .ri-shopping-cart-2-line, .ri-mail-send-line {
     font-size: 1.1em;
     margin-left: 5px;
     vertical-align: middle;
@@ -536,7 +510,11 @@ body {
     grid-template-columns: repeat(2, 1fr);
     gap: 15px;
   }
-  .accordion-toggle .section-title {
+  .section-title {
     font-size: 20px;
+  }
+  .contact-links {
+      flex-direction: column;
+      gap: 12px;
   }
 }
