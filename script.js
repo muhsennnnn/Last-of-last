@@ -225,17 +225,33 @@ window.addEventListener('click', (event) => {
     }
 });
 
+// دالة عرض الإشعار بدلاً من alert
+function showNotification(message) {
+    let notification = document.querySelector('.notification');
+    if (!notification) {
+        notification = document.createElement('div');
+        notification.className = 'notification';
+        document.body.appendChild(notification);
+    }
+    notification.textContent = message;
+    notification.classList.add('show');
+
+    setTimeout(() => {
+        notification.classList.remove('show');
+    }, 4000); // يختفي بعد 4 ثواني
+}
+
 function handleAddToCart(category, index, button) {
     if (category === 'customMix') {
         const product = productsData[category][index];
         const input = button.parentNode.querySelector('.quantity-input');
         const qty = parseFloat(input.value);
         if (isNaN(qty) || qty < 1) {
-            alert("الرجاء إدخال كمية صحيحة.");
+            showNotification("الرجاء إدخال كمية صحيحة.");
             return;
         }
         addToCustomMix(product, qty);
-        alert(`تم إضافة ${qty} كغم من ${product.name} إلى سلة الخلط.`);
+        showNotification(`تم إضافة ${qty} كغم من ${product.name} إلى سلة الخلط.`);
     } else {
         addToCartFromHome(category, index, button);
     }
@@ -246,12 +262,12 @@ function addToCartFromModal(category, index, button) {
     const input = button.parentNode.querySelector('.quantity-input');
     const qty = parseInt(input.value);
     if (isNaN(qty) || qty < 1) {
-        alert("الرجاء إدخال كمية صحيحة.");
+        showNotification("الرجاء إدخال كمية صحيحة.");
         return;
     }
     addToCart(product, qty);
     productModal.classList.remove('show'); 
-    alert(`تم إضافة ${qty} قطعة من ${product.name} إلى السلة!`);
+    showNotification(`تم إضافة ${qty} قطعة من ${product.name} إلى السلة!`);
 }
 
 function changeQuantity(button, change) {
@@ -269,11 +285,11 @@ function addToCartFromHome(category, index, button) {
     const input = button.parentNode.querySelector('.quantity-input');
     const qty = parseInt(input.value);
     if (isNaN(qty) || qty < 1) {
-        alert("الرجاء إدخال كمية صحيحة.");
+        showNotification("الرجاء إدخال كمية صحيحة.");
         return;
     }
     addToCart(product, qty);
-    alert(`تم إضافة ${qty} قطعة من ${product.name} إلى السلة!`);
+    showNotification(`تم إضافة ${qty} قطعة من ${product.name} إلى السلة!`);
 }
 
 function addToCart(product, qty) {
@@ -409,7 +425,7 @@ addCustomMixToCartButton.addEventListener('click', () => {
         };
 
         addToCart(customMixProduct, 1);
-        alert('تم إضافة الخلطة المخصصة إلى سلة التسوق!');
+        showNotification('تم إضافة الخلطة المخصصة إلى سلة التسوق!');
         customMixItems = []; 
         renderCustomMixCart();
     }
@@ -423,7 +439,7 @@ document.getElementById("order-form").addEventListener("submit", e => {
     const location = document.getElementById("customer-location").value;
 
     if (cart.length === 0) {
-        alert("سلة التسوق فارغة، يرجى إضافة منتجات قبل إرسال الطلب.");
+        showNotification("سلة التسوق فارغة، يرجى إضافة منتجات قبل إرسال الطلب.");
         return;
     }
 
