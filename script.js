@@ -84,19 +84,34 @@ function renderProducts(products, containerId) {
     products.forEach((product, i) => {
         const card = document.createElement("div"); 
         card.className = "product-card";
-        card.innerHTML = `
-            <a href="#" class="details-link" onclick="showProductDetails('${containerId}', ${i}); return false;">
-                <img src="${product.image}" alt="${product.name}">
-                <h3>${product.name}</h3>
-                <p>${product.price} دينار</p>
-            </a>
-            <div class="quantity-control">
-                <button class="quantity-btn minus-btn" onclick="changeQuantity(this, -1)">-</button>
-                <input type="number" class="quantity-input" value="1" min="1">
-                <button class="quantity-btn plus-btn" onclick="changeQuantity(this, 1)">+</button>
-            </div>
-            <button class="add-to-cart-home" onclick="addToCartFromHome('${containerId}', ${i}, this)">أضف إلى السلة</button>
-        `;
+        
+        let cardContent;
+        // Logic to check if the category is 'customMix'
+        if (containerId === 'customMix') {
+            cardContent = `
+                <a href="#" class="details-link" onclick="showProductDetails('${containerId}', ${i}); return false;">
+                    <img src="${product.image}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p>${product.price} دينار</p>
+                </a>
+            `;
+        } else {
+            cardContent = `
+                <a href="#" class="details-link" onclick="showProductDetails('${containerId}', ${i}); return false;">
+                    <img src="${product.image}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p>${product.price} دينار</p>
+                </a>
+                <div class="quantity-control">
+                    <button class="quantity-btn minus-btn" onclick="changeQuantity(this, -1)">-</button>
+                    <input type="number" class="quantity-input" value="1" min="1">
+                    <button class="quantity-btn plus-btn" onclick="changeQuantity(this, 1)">+</button>
+                </div>
+                <button class="add-to-cart-home" onclick="addToCartFromHome('${containerId}', ${i}, this)">أضف إلى السلة</button>
+            `;
+        }
+        
+        card.innerHTML = cardContent;
         container.appendChild(card);
     });
 }
