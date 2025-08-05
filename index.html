@@ -42,32 +42,43 @@
       <section class="search-section">
         <input type="text" id="search-input" placeholder="🔍 ابحث عن منتج..." />
       </section>
+
+      <section class="tab-bar">
+        <button class="tab-button active" data-tab="all">الرئيسية</button>
+        <button class="tab-button" data-tab="pigeonFeed">علف حمام</button>
+        <button class="tab-button" data-tab="ornamentalBirds">طيور زينة</button>
+        <button class="tab-button" data-tab="specialOffer">عروض خاصة</button>
+        <button class="tab-button" data-tab="customMix">خلطة مخصصة</button>
+      </section>
       
-      <section class="products-section">
-        <h2 class="section-title">🕊 قسم علف طيور الحمام</h2>
-        <div class="products" id="pigeonFeed"></div>
-      </section>
+      <div id="products-container">
+        <section class="products-section" id="pigeonFeed-section" data-category="pigeonFeed">
+          <h2 class="section-title">🕊 قسم علف طيور الحمام</h2>
+          <div class="products" id="pigeonFeed"></div>
+        </section>
+  
+        <hr class="section-divider">
+  
+        <section class="products-section" id="ornamentalBirds-section" data-category="ornamentalBirds">
+          <h2 class="section-title">🐦 قسم طيور الزينة</h2>
+          <div class="products" id="ornamentalBirds"></div>
+        </section>
+  
+        <hr class="section-divider">
+  
+        <section class="products-section" id="specialOffer-section" data-category="specialOffer">
+          <h2 class="section-title">🎯 قسم العرض الخاص</h2>
+          <div class="products" id="specialOffer"></div>
+        </section>
+  
+        <hr class="section-divider">
+  
+        <section class="products-section" id="customMix-section" data-category="customMix">
+          <h2 class="section-title">🧪 قسم الخلطة المخصصة</h2>
+          <div class="products" id="customMix"></div>
+        </section>
+      </div>
 
-      <hr class="section-divider">
-
-      <section class="products-section">
-        <h2 class="section-title">🐦 قسم طيور الزينة</h2>
-        <div class="products" id="ornamentalBirds"></div>
-      </section>
-
-      <hr class="section-divider">
-
-      <section class="products-section">
-        <h2 class="section-title">🎯 قسم العرض الخاص</h2>
-        <div class="products" id="specialOffer"></div>
-      </section>
-
-      <hr class="section-divider">
-
-      <section class="products-section">
-        <h2 class="section-title">🧪 قسم الخلطة المخصصة</h2>
-        <div class="products" id="customMix"></div>
-      </section>
     </main>
   </div>
 
