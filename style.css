@@ -159,7 +159,8 @@ body {
     margin: 0;
     display: inline-block;
     /* تعديل: تغيير اتجاه الحركة من اليمين إلى اليسار */
-    animation: marquee-rtl 30s linear infinite;
+    /* تعديل: زيادة المدة لتصبح الحركة أبطأ */
+    animation: marquee-rtl 50s linear infinite;
 }
 /* تعديل: Keyframes للحركة من اليسار إلى اليمين */
 @keyframes marquee-rtl {
