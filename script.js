@@ -60,6 +60,13 @@ const productsData = {
     ]
 };
 
+// دمج جميع المنتجات لعرضها في قسم "الرئيسية"
+const allProductsData = [
+    ...productsData.pigeonFeed,
+    ...productsData.ornamentalBirds,
+    ...productsData.specialOffer,
+];
+
 let cart = [];
 let customMixItems = [];
 
@@ -80,7 +87,7 @@ const customMixWeightElement = document.getElementById('custom-mix-weight');
 const customMixPriceElement = document.getElementById('custom-mix-price');
 const addCustomMixToCartButton = document.getElementById('add-custom-mix-to-cart');
 
-function renderProducts(products, containerId, isCustomMix = false) {
+function renderProducts(products, containerId, category, isCustomMix = false) {
     const container = document.getElementById(containerId);
     if (!container) return;
     container.innerHTML = "";
@@ -97,11 +104,11 @@ function renderProducts(products, containerId, isCustomMix = false) {
         if (isCustomMix) {
             buttonAction = `handleAddToCart('customMix', ${i}, this)`;
         } else {
-            buttonAction = `addToCartFromHome('${containerId}', ${i}, this)`;
+            buttonAction = `addToCartFromHome('${category}', ${i}, this)`;
         }
         
         const cardContent = `
-            <a href="#" class="details-link" onclick="showProductDetails('${containerId}', ${i}, ${isCustomMix}); return false;">
+            <a href="#" class="details-link" onclick="showProductDetails('${category}', ${i}, ${isCustomMix}); return false;">
                 <img src="${product.image}" alt="${product.name}">
                 <h3>${product.name}</h3>
                 <p>${product.price} دينار</p>
@@ -121,11 +128,11 @@ function renderProducts(products, containerId, isCustomMix = false) {
 
 // دالة تهيئة جميع المنتجات عند تحميل الصفحة
 function initializeAllProducts() {
-    renderProducts(productsData.pigeonFeed, 'pigeonFeed');
-    renderProducts(productsData.ornamentalBirds, 'ornamentalBirds');
-    renderProducts(productsData.specialOffer, 'specialOffer');
-    renderProducts(productsData.customMix, 'customMix-list', true); // عرض منتجات الخلطة المخصصة
-    
+    renderProducts(allProductsData, 'all-products', 'all');
+    renderProducts(productsData.pigeonFeed, 'pigeonFeed-tab', 'pigeonFeed');
+    renderProducts(productsData.ornamentalBirds, 'ornamentalBirds-tab', 'ornamentalBirds');
+    renderProducts(productsData.specialOffer, 'specialOffer-tab', 'specialOffer');
+    renderProducts(productsData.customMix, 'customMix-list', 'customMix', true);
 }
 
 function switchTab(tabId) {
@@ -141,17 +148,12 @@ function switchTab(tabId) {
     }
 
     if (tabId === 'all') {
-        document.getElementById('pigeonFeed-section').style.display = 'block';
-        document.getElementById('ornamentalBirds-section').style.display = 'block';
-        document.getElementById('specialOffer-section').style.display = 'block';
-        renderProducts(productsData.pigeonFeed, 'pigeonFeed');
-        renderProducts(productsData.ornamentalBirds, 'ornamentalBirds');
-        renderProducts(productsData.specialOffer, 'specialOffer');
+        renderProducts(allProductsData, 'all-products', 'all');
     } else if (tabId === 'customMix') {
-        renderProducts(productsData.customMix, 'customMix-list', true);
+        renderProducts(productsData.customMix, 'customMix-list', 'customMix', true);
         renderCustomMixCart();
     } else {
-        renderProducts(productsData[tabId], `${tabId}-tab`);
+        renderProducts(productsData[tabId], `${tabId}-tab`, tabId);
     }
 
     searchInput.value = '';
@@ -174,22 +176,20 @@ searchInput.addEventListener('input', () => {
     const activeTab = document.querySelector('.tab-button.active').dataset.tab;
 
     if (activeTab === 'all') {
-        const categories = ['pigeonFeed', 'ornamentalBirds', 'specialOffer'];
-        categories.forEach(category => {
-            const filteredProducts = productsData[category].filter(p => p.name.toLowerCase().includes(searchTerm));
-            renderProducts(filteredProducts, category);
-        });
+        const filteredProducts = allProductsData.filter(p => p.name.toLowerCase().includes(searchTerm));
+        renderProducts(filteredProducts, 'all-products', 'all');
     } else if (activeTab === 'customMix') {
         const filteredProducts = productsData.customMix.filter(p => p.name.toLowerCase().includes(searchTerm));
-        renderProducts(filteredProducts, 'customMix-list', true);
+        renderProducts(filteredProducts, 'customMix-list', 'customMix', true);
     } else {
         const filteredProducts = productsData[activeTab].filter(p => p.name.toLowerCase().includes(searchTerm));
-        renderProducts(filteredProducts, `${activeTab}-tab`);
+        renderProducts(filteredProducts, `${activeTab}-tab`, activeTab);
     }
 });
 
 function showProductDetails(category, index, isCustomMix) {
-    const product = productsData[category][index];
+    const data = isCustomMix ? productsData[category] : (category === 'all' ? allProductsData : productsData[category]);
+    const product = data[index];
     if (!product) return;
     
     let buttonAction = '';
@@ -258,7 +258,8 @@ function handleAddToCart(category, index, button) {
 }
 
 function addToCartFromModal(category, index, button) {
-    const product = productsData[category][index];
+    const data = category === 'all' ? allProductsData : productsData[category];
+    const product = data[index];
     const input = button.parentNode.querySelector('.quantity-input');
     const qty = parseInt(input.value);
     if (isNaN(qty) || qty < 1) {
@@ -281,7 +282,8 @@ function changeQuantity(button, change) {
 }
 
 function addToCartFromHome(category, index, button) {
-    const product = productsData[category][index];
+    const data = category === 'all' ? allProductsData : productsData[category];
+    const product = data[index];
     const input = button.parentNode.querySelector('.quantity-input');
     const qty = parseInt(input.value);
     if (isNaN(qty) || qty < 1) {
@@ -394,7 +396,7 @@ function renderCustomMixCart() {
                     <button class="minus" onclick="updateCustomMixQty(${index}, -1)">-</button>
                     <span>${item.qty}</span>
                     <button class="plus" onclick="updateCustomMixQty(${index}, 1)">+</button>
-                    <button class="remove-btn" onclick="removeFromCustomMix(${index})">حذف</button>
+                    <button class="remove-btn" onclick="removeFromCustomMix(${index})">❎</button>
                 </div>
             `;
             customMixCartElement.appendChild(itemDiv);
@@ -410,7 +412,7 @@ addCustomMixToCartButton.addEventListener('click', () => {
     if (customMixItems.length > 0) {
         let totalWeight = 0;
         let totalPrice = 0;
-        const mixDetails = customMixItems.map(item => `${item.name}: ${item.qty} كغ`).join(', ');
+        const mixDetails = customMixItems.map(item => `${item.name}: ${item.qty} كغم`).join(', ');
         
         customMixItems.forEach(item => {
             totalWeight += item.qty;
@@ -444,7 +446,7 @@ document.getElementById("order-form").addEventListener("submit", e => {
     }
 
     let orderDetails = [
-        `🛒 طلب جديد`,
+        `🛒 طلب جديد من موقع أعلاف السالم`,
         `👤 الاسم: ${name}`,
         `📞 الهاتف: ${phone}`,
         `🏙️ المدينة: ${city}`,
@@ -454,9 +456,16 @@ document.getElementById("order-form").addEventListener("submit", e => {
 
     let total = 0;
     cart.forEach((item, i) => {
+        // التحقق من أن المنتج هو خلطة مخصصة
+        if (item.name.startsWith('خلطة مخصصة')) {
+            orderDetails.push(`${i + 1}. ${item.name}`);
+            orderDetails.push(`   - *مكونات الخلطة:* ${item.description}`);
+            orderDetails.push(`   - السعر: ${item.price} دينار`);
+        } else {
+            const subtotal = item.qty * item.price;
+            orderDetails.push(`${i + 1}. ${item.name} — ${item.qty} قطعة × ${item.price} = ${subtotal} دينار`);
+        }
         total += item.qty * item.price;
-        const subtotal = item.qty * item.price;
-        orderDetails.push(`${i + 1}. ${item.name} — ${item.qty} قطعة × ${item.price} = ${subtotal} دينار`);
     });
 
     orderDetails.push(`\n💰 الإجمالي: ${total} دينار`);
