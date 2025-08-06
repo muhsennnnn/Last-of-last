@@ -26,12 +26,17 @@ body {
 
 /* تصميم جديد للرأس (Hero Header) */
 .hero-header {
-  background: url('https://images.unsplash.com/photo-1629828555291-5f284758d943?q=80&w=2071&auto=format&fit=crop') no-repeat center center/cover;
+  /* استخدام صورة الشعار كخلفية */
+  background: url('http://googleusercontent.com/file_content/0') no-repeat center center/cover;
   color: white;
   text-align: center;
   padding: 80px 20px;
   position: relative;
   overflow: hidden;
+  height: 500px; /* تحديد ارتفاع ثابت لرؤية الشعار بالكامل */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero-header .overlay {
@@ -40,108 +45,27 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.3); /* جعل الخلفية داكنة قليلاً لجعل المحتوى فوقها واضحاً */
   z-index: 1;
 }
 
 .hero-header .header-content {
   position: relative;
   z-index: 2;
+  width: 100%;
+  max-width: 800px;
+  padding: 20px;
 }
 
-.hero-header h1 {
-  font-weight: 700;
-  font-size: 3em;
-  margin-bottom: 5px;
-}
-
-.hero-header p {
-  font-weight: 400;
-  font-size: 1.2em;
-  opacity: 0.9;
-}
-
-.contact-links {
-  margin-top: 25px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-
-.contact-links span {
+.contact-info-image {
+  max-width: 100%;
+  height: auto;
   display: block;
-  font-weight: bold;
-  white-space: nowrap;
+  margin: 0 auto;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
 
-.contact-btn {
-  display: inline-flex;
-  align-items: center;
-  padding: 12px 20px;
-  border-radius: 30px;
-  color: white;
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
-
-.contact-btn:hover {
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-}
-
-.contact-icon {
-  width: 22px;
-  height: 22px;
-  margin-left: 8px;
-  filter: brightness(0) invert(1);
-}
-
-.contact-btn.whatsapp {
-  background: #25D366;
-}
-
-.contact-btn.whatsapp:hover {
-  background: #1ebe5d;
-}
-
-.contact-btn.messenger {
-  background: #00B2FF;
-}
-
-.contact-btn.messenger:hover {
-  background: #0099dd;
-}
-
-.contact-btn.phone {
-  background: #3498db;
-}
-
-.contact-btn.phone:hover {
-  background: #2980b9;
-}
-
-/* تنسيق العنوان ورقم الهاتف في الهيدر */
-.header-address {
-    margin-top: 30px;
-    padding: 10px 20px;
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 8px;
-    display: inline-block;
-    font-size: 1.1em;
-    font-weight: 600;
-}
-.header-address a {
-    color: #fff;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-.header-address a:hover {
-    color: var(--accent-color);
-}
 
 /* شريط إعلاني متحرك (Marquee) */
 .promo-banner {
@@ -158,11 +82,8 @@ body {
     font-size: 1.1em;
     margin: 0;
     display: inline-block;
-    /* تعديل: تغيير اتجاه الحركة من اليمين إلى اليسار */
-    /* تعديل: زيادة المدة لتصبح الحركة أبطأ */
     animation: marquee-rtl 50s linear infinite;
 }
-/* تعديل: Keyframes للحركة من اليسار إلى اليمين */
 @keyframes marquee-rtl {
     0% { transform: translateX(-100%); }
     100% { transform: translateX(100%); }
@@ -676,10 +597,6 @@ body {
   .section-title {
     font-size: 20px;
   }
-  .contact-links {
-      flex-direction: column;
-      gap: 12px;
-  }
   .custom-mix-layout {
       flex-direction: column;
   }
@@ -696,24 +613,4 @@ body {
   .promo-banner p {
       font-size: 1em;
   }
-}
-
-/* تصميم الإشعار (Notification) */
-.notification {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #388E3C;
-    color: white;
-    padding: 15px 25px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    opacity: 0;
-    transition: opacity 0.4s ease-in-out;
-}
-
-.notification.show {
-    opacity: 1;
 }
