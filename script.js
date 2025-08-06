@@ -87,6 +87,25 @@ const customMixWeightElement = document.getElementById('custom-mix-weight');
 const customMixPriceElement = document.getElementById('custom-mix-price');
 const addCustomMixToCartButton = document.getElementById('add-custom-mix-to-cart');
 
+// إضافة هذا الجزء لتجهيز شريط الإعلانات
+document.addEventListener('DOMContentLoaded', () => {
+    populatePromoBanner();
+});
+
+function populatePromoBanner() {
+    const promoTextElement = document.getElementById('promo-text');
+    if (!promoTextElement) return;
+
+    let promoMessages = productsData.specialOffer.map(product => {
+        return `🔥 عرض خاص: ${product.name} بسعر ${product.price} دينار! 🔥`;
+    });
+    // إضافة رسالة عامة أيضًا
+    promoMessages.unshift('🔥 عروض خاصة وتخفيضات مميزة! 🎯 اغتنم الفرصة الآن! 🔥');
+
+    promoTextElement.textContent = promoMessages.join(' | ');
+}
+
+
 function renderProducts(products, containerId, category, isCustomMix = false) {
     const container = document.getElementById(containerId);
     if (!container) return;
