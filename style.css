@@ -158,12 +158,15 @@ body {
     font-size: 1.1em;
     margin: 0;
     display: inline-block;
-    animation: marquee 30s linear infinite;
+    /* تعديل: تغيير اتجاه الحركة من اليمين إلى اليسار */
+    animation: marquee-rtl 30s linear infinite;
 }
-@keyframes marquee {
-    0% { transform: translateX(100%); }
-    100% { transform: translateX(-100%); }
+/* تعديل: Keyframes للحركة من اليسار إلى اليمين */
+@keyframes marquee-rtl {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
 }
+
 
 /* شريط علامات التبويب */
 .tab-bar {
