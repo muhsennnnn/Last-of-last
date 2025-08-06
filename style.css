@@ -538,7 +538,7 @@ body {
 /* تنسيقات الخلطة المخصصة */
 .custom-mix-layout {
     display: flex;
-    flex-direction: column; /* تم التعديل هنا لترتيب العناصر عمودياً */
+    flex-direction: column;
     gap: 25px;
     margin-top: 25px;
 }
@@ -550,8 +550,8 @@ body {
 }
 
 .custom-mix-cart-container {
-    width: 100%; /* تم التعديل هنا ليأخذ عرضاً كاملاً */
-    position: static; /* تم التعديل هنا لإلغاء التثبيت أثناء التمرير */
+    width: 100%;
+    position: static;
 }
 
 .custom-mix-cart {
@@ -645,6 +645,13 @@ body {
   }
   .custom-mix-cart-container {
       position: static;
+  }
+  .cart-table th, .cart-table td {
+      padding: 10px;
+      font-size: 14px;
+  }
+  .cart-table th:nth-child(4), .cart-table td:nth-child(4) {
+      display: none; /* إخفاء عمود الإجمالي في الموبايل */
   }
 }
 
