@@ -143,6 +143,28 @@ body {
     color: var(--accent-color);
 }
 
+/* شريط إعلاني متحرك (Marquee) */
+.promo-banner {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    padding: 10px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.promo-banner p {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin: 0;
+    display: inline-block;
+    animation: marquee 30s linear infinite;
+}
+@keyframes marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
 /* شريط علامات التبويب */
 .tab-bar {
   display: flex;
@@ -624,6 +646,20 @@ body {
     font-size: 1em;
 }
 
+/* عداد الزوار */
+.visitor-counter-container {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 16px;
+    color: var(--light-text);
+    font-weight: 600;
+}
+#visitor-count {
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 1.2em;
+}
+
 /* ==========================================
   تعديل التصميم على شاشات الموبايل
   ==========================================
@@ -652,6 +688,9 @@ body {
   }
   .cart-table th:nth-child(4), .cart-table td:nth-child(4) {
       display: none; /* إخفاء عمود الإجمالي في الموبايل */
+  }
+  .promo-banner p {
+      font-size: 1em;
   }
 }
 
