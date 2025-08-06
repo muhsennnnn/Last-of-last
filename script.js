@@ -87,9 +87,11 @@ const customMixWeightElement = document.getElementById('custom-mix-weight');
 const customMixPriceElement = document.getElementById('custom-mix-price');
 const addCustomMixToCartButton = document.getElementById('add-custom-mix-to-cart');
 
-// إضافة هذا الجزء لتجهيز شريط الإعلانات
+// تشغيل شريط الإعلانات تلقائيًا عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', () => {
     populatePromoBanner();
+    initializeAllProducts();
+    switchTab('all');
 });
 
 function populatePromoBanner() {
@@ -183,11 +185,6 @@ tabButtons.forEach(button => {
         const tabId = button.dataset.tab;
         switchTab(tabId);
     });
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-    initializeAllProducts();
-    switchTab('all');
 });
 
 searchInput.addEventListener('input', () => {
