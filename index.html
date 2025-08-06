@@ -52,33 +52,27 @@
       </section>
       
       <div id="products-container">
-        <section class="products-section active" id="all-section">
-            <h2 class="section-title">🕊 قسم علف طيور الحمام</h2>
-            <div class="products" id="pigeonFeed"></div>
-            <hr class="section-divider">
-            <h2 class="section-title">🐦 قسم طيور الزينة</h2>
-            <div class="products" id="ornamentalBirds"></div>
-            <hr class="section-divider">
-            <h2 class="section-title">🎯 قسم العرض الخاص</h2>
-            <div class="products" id="specialOffer"></div>
+        <section class="products-section active" id="all-section" data-category="all">
+            <h2 class="section-title">🕊️ جميع المنتجات</h2>
+            <div class="products" id="all-products"></div>
         </section>
 
-        <section class="products-section" id="pigeonFeed-section" data-category="pigeonFeed" style="display: none;">
+        <section class="products-section" id="pigeonFeed-section" data-category="pigeonFeed">
           <h2 class="section-title">🕊 قسم علف طيور الحمام</h2>
           <div class="products" id="pigeonFeed-tab"></div>
         </section>
   
-        <section class="products-section" id="ornamentalBirds-section" data-category="ornamentalBirds" style="display: none;">
+        <section class="products-section" id="ornamentalBirds-section" data-category="ornamentalBirds">
           <h2 class="section-title">🐦 قسم طيور الزينة</h2>
           <div class="products" id="ornamentalBirds-tab"></div>
         </section>
   
-        <section class="products-section" id="specialOffer-section" data-category="specialOffer" style="display: none;">
+        <section class="products-section" id="specialOffer-section" data-category="specialOffer">
           <h2 class="section-title">🎯 قسم العرض الخاص</h2>
           <div class="products" id="specialOffer-tab"></div>
         </section>
   
-        <section class="products-section" id="customMix-section" data-category="customMix" style="display: none;">
+        <section class="products-section" id="customMix-section" data-category="customMix">
           <h2 class="section-title">🧪 قسم الخلطة المخصصة</h2>
           <div class="custom-mix-layout">
             <div class="custom-mix-cart-container">
@@ -144,6 +138,8 @@
       <div id="product-details-modal-content"></div>
     </div>
   </div>
+
+  <div class="notification"></div>
 
   <script src="script.js"></script>
 </body>
