@@ -492,6 +492,6 @@ document.getElementById("order-form").addEventListener("submit", e => {
     orderDetails.push(`- هذه التكاليف لا تشمل العروض الخاصة بالتوصيل المجاني`);
     
     const message = orderDetails.join('\n');
-    const whatsappUrl = `https://wa.me/9647704159475?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/9647506932549text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank");
 });
